@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=recluitment
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+    expose:
+      - "5432"
+    restart: unless-stopped
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=recluitment
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
