@@ -2,6 +2,10 @@
    MÓDULO DE AUTENTICACIÓN LIVERPOOL (Base Fuerte extraída del Login)
    ========================================================================== */
 
+/* ==========================================================================
+   MÓDULO DE AUTENTICACIÓN LIVERPOOL (Tipografía de Alta Fidelidad)
+   ========================================================================== */
+
 :root {
   --liv-pink: #d25894;
   --liv-peach: #e99a82;
@@ -9,6 +13,37 @@
   --liv-purple: #78256f;
   --liv-magenta: #D10074;
   --liv-navy: #4A528A;
+  
+  /* Clon de alta fidelidad para Liverpool Sans */
+  --liv-font: 'Montserrat', sans-serif;
+}
+
+/* --- APLICACIÓN ESTRICTA DE PESOS CORPORATIVOS --- */
+
+/* Base Global del Módulo */
+.auth-wrap, .auth-bg-full, .fctrl, .flbl, .bsub {
+  font-family: var(--liv-font) !important;
+}
+
+/* VARIABLE: Light (Para descripciones y textos secundarios sutiles) */
+.sdesc, .bsub, .form-check-label {
+  font-family: var(--liv-font) !important;
+  font-weight: 300 !important; /* Estilo Light */
+}
+
+/* VARIABLE: Regular (Para inputs, labels y textos comunes) */
+.flbl, .fctrl, .auth-badge, .link-auth {
+  font-family: var(--liv-font) !important;
+  font-weight: 400 !important; /* Estilo Regular */
+}
+
+/* VARIABLE: Bold (Para Títulos principales y Botones fuertes) */
+.auth-form-wrap h1, .auth-form-wrap h2, 
+.auth-card-centered h1, .auth-card-centered h2, 
+.bname, .btn-pink {
+  font-family: var(--liv-font) !important;
+  font-weight: 700 !important; /* Estilo Bold */
+  letter-spacing: -0.02em;     /* Cierra un poco el tracking como en los logos reales */
 }
 
 /* --- ESTILOS DE ESTRUCTURA Y FONDO --- */

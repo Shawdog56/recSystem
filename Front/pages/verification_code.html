@@ -1,54 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Código</title>
-    
-</head>
-<body>
-    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación</title>
+    <title>Verificación de Código | Liver Talent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css"> </head>
+<body class="auth-bg-full">
+    
+    <div class="auth-diamond-overlay"></div>
 
-    <link rel="stylesheet" href="../css/register.css">
-    </head>
-    <body>
-
-    <div class="verificacion">
-
-        <div class="icono">
-            ✉️
+    <div class="auth-card-centered my-4 mx-3 text-center">
+        
+        <div class="d-flex justify-content-center mb-4">
+            <a href="../index.html" class="d-inline-block text-decoration-none">
+                <div class="blogo">
+                    <div class="bico"><i class="fas fa-briefcase"></i></div>
+                    <div class="text-start">
+                        <div class="bname">Liver <span>Talent</span></div>
+                        <div class="bsub">Bolsa de Trabajo</div>
+                    </div>
+                </div>
+            </a>
         </div>
 
-        <h2>Verificación de correo</h2>
+        <div class="icono mb-3" style="font-size: 2.5rem;">✉️</div>
+        <h2 class="mb-3" style="font-weight: 700;">Verificación de correo</h2>
+        <p class="mb-4 text-muted">Hemos enviado un código de verificación de <strong>6 dígitos</strong> a tu correo electrónico.</p>
 
-        <p>Hemos enviado un código de verificación de <strong>6 dígitos</strong> a tu correo electrónico.</p>
-
-        <div class="codigo-box">
-
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-
+        <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
+            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
         </div>
 
-        <small> El código expira en 10 minutos. </small>
+        <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
 
-        <button class="btn"> Verificar código </button>
+        <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
+        Verificar código
+        </button>
 
-        <div class="login"> ¿No recibiste el código?
-            <a href="#">Reenviar código</a>
+        <div class="login mt-4 small text-muted"> ¿No recibiste el código?
+            <a href="#" class="link-auth fw-semibold text-decoration-none">Reenviar código</a>
         </div>
-
     </div>
-
 
 </body>
 </html>
