@@ -1,56 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-
-    <link rel="stylesheet" href="../css/register.css">
-</head>
-<body>
-    <div class="registro">
+<html lang="es">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Registro al portal de talento - Bolsa de Trabajo">
+      <title>Registro | Bolsa de Trabajo</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+      <!-- Bootstrap 5.3 -->
+      <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+      <!-- all min css (Font Awesome) -->
+      <link rel="stylesheet" href="../css/all.min.css"/>
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="../css/style.css"/>
+      <style>
+        :root{
+          --liv-pink:#d25894;
+          --liv-peach:#e99a82;
+          --liv-lavender:#c08fb8;
+          --liv-purple:#78256f;
+          --liv-magenta:#D10074;
+          --liv-navy:#4A528A;
+        }
         
-    <h2>Crear Cuenta</h2>
-    <p>Completa tus datos para registrarte</p>
-
-    <form method="POST">
+        /* Fondo completo con el degradado y patrón de diamantes del login */
+        body { 
+          background: linear-gradient(160deg, var(--liv-purple) 0%, var(--liv-magenta) 55%, var(--liv-pink) 100%);
+          min-height: 100vh;
+          position: relative;
+          overflow-x: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         
+        .diamond-bg {
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%),
+            linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%);
+          background-size: 64px 64px;
+          background-position: 0 0, 32px 32px;
+          opacity: .6;
+          z-index: 0;
+        }
 
-        <div class="grupo">
-            <input type="text" name="username" placeholder="Nombre de usuario" required>
-        </div>
+        /* Contenedor de la tarjeta blanca centrada */
+        .auth-container {
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 520px; /* Un poco más ancho para albergar los campos en parejas */
+          padding: 2.5rem;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .link-auth { color: var(--liv-navy); }
+        .link-auth:hover { color: var(--liv-magenta); }
+        
+        .btn-pink {
+          background: var(--liv-magenta);
+          border-color: var(--liv-magenta);
+          color: #fff;
+        }
+        .btn-pink:hover {
+          background: var(--liv-purple);
+          border-color: var(--liv-purple);
+          color: #fff;
+        }
+        
+        .fctrl:focus {
+          border-color: var(--liv-pink);
+          box-shadow: 0 0 0 .2rem rgba(210,88,148,.25);
+        }
+        
+        .auth-container .bico {
+          background: linear-gradient(135deg, var(--liv-magenta), var(--liv-pink));
+          box-shadow: 0 4px 15px rgba(209,0,116,.35);
+        }
+        .auth-container .bname span { color: var(--liv-magenta); }
+        
+        .flbl { margin-bottom: 0.4rem; font-weight: 500; font-size: 0.9rem; color: var(--liv-navy); }
+        .fctrl { display: block; width: 100%; padding: 0.375rem 0.75rem; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #fff; border: 1px solid #ced4da; border-radius: 0.375rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+      </style>
+   </head>
+   <body>
 
-        <div class="grupo">
-            <input type="password" name="password" placeholder="Contraseña" required>
-        </div>
+      <!-- Capa del patrón geométrico de fondo -->
+      <div class="diamond-bg"></div>
 
-        <div class="grupo">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-        </div>
+      <!-- Tarjeta Blanca Flotante y Centrada -->
+      <div class="auth-container my-4mx-3">
 
-        <div class="grupo">
-            <input type="text" name="apellidos" placeholder="Apellidos">
-        </div>
+         <!-- Logotipo Superior Centrado -->
+         <div class="text-center mb-4">
+            <a href="../index.html" class="d-inline-block text-decoration-none">
+               <div class="blogo mx-auto">
+                  <div class="bico"><i class="fas fa-briefcase"></i></div>
+                  <div class="text-start">
+                     <div class="bname">Bolsa <span>Talento</span></div>
+                     <div class="bsub">Bolsa de Trabajo</div>
+                  </div>
+               </div>
+            </a>
+         </div>
 
-        <div class="grupo">
-            <input type="text" name="telefono" placeholder="Teléfono" required>
-        </div>
+         <!-- Títulos solicitados arriba del formulario -->
+         <h2 class="stitle text-center" style="font-size:1.7rem; font-family:'Poppins', sans-serif; font-weight:700; color: var(--liv-purple);">Únete a Nuestro Equipo</h2>
+         <p class="sdesc text-center mb-4 text-muted">Completa tus datos para registrarte en la plataforma</p>
 
-        <div class="grupo">
-            <input type="email" name="correo" placeholder="Correo electrónico" required>
-        </div>
+         <form action="/reclutamiento/register" method="POST" novalidate>
 
-        <button class="btn" type="submit">
-            Registrarse
-        </button>
-    </form>
+            <!-- Fila para Usuario y Contraseña -->
+            <div class="row">
+               <div class="col-md-6 mb-3">
+                  <label for="username" class="flbl">Nombre de usuario</label>
+                  <input type="text" class="fctrl" id="username" name="username" placeholder="Ej. juan99" required autocomplete="username">
+               </div>
+               <div class="col-md-6 mb-3">
+                  <label for="password" class="flbl">Contraseña</label>
+                  <input type="password" class="fctrl" id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
+               </div>
+            </div>
 
-    <div class="login">
-        ¿Ya tienes una cuenta?
-        <a href="login.html">Iniciar sesión</a>
-    </div>
+            <!-- Fila para Nombre y Apellidos -->
+            <div class="row">
+               <div class="col-md-6 mb-3">
+                  <label for="nombre" class="flbl">Nombre</label>
+                  <input type="text" class="fctrl" id="nombre" name="nombre" placeholder="Tu nombre" required>
+               </div>
+               <div class="col-md-6 mb-3">
+                  <label for="apellidos" class="flbl">Apellidos</label>
+                  <input type="text" class="fctrl" id="apellidos" name="apellidos" placeholder="Tus apellidos">
+               </div>
+            </div>
 
-</div>
+            <!-- Fila para Teléfono y Correo -->
+            <div class="row">
+               <div class="col-md-6 mb-3">
+                  <label for="telefono" class="flbl">Teléfono</label>
+                  <input type="tel" class="fctrl" id="telefono" name="telefono" placeholder="5512345678" required>
+               </div>
+               <div class="col-md-6 mb-3">
+                  <label for="correo" class="flbl">Correo electrónico</label>
+                  <input type="email" class="fctrl" id="correo" name="correo" placeholder="nombre@correo.com" required>
+               </div>
+            </div>
 
-</body>
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn btn-pink w-100 justify-content-center mt-3 py-2 fw-medium">
+               <i class="fas fa-user-plus me-2"></i>Registrarse
+            </button>
+
+         </form>
+
+         <!-- Enlace para volver a Iniciar Sesión -->
+         <p class="text-center text-muted small mt-4 mb-0">
+            ¿Ya tienes una cuenta? <a href="login.html" class="link-auth fw-semibold text-decoration-none">Iniciar sesión</a>
+         </p>
+
+      </div>
+
+      <!-- jQuery -->
+      <script src="../js/jquery-3.7.1.min.js"></script>
+      <!-- Bootstrap 5 -->
+      <script src="../js/bootstrap.bundle.min.js"></script>
+   </body>
 </html>

@@ -1,49 +1,191 @@
+/* ==========================================================================
+   MÓDULO DE AUTENTICACIÓN LIVERPOOL (Base Fuerte extraída del Login)
+   ========================================================================== */
+
 :root {
-  --primary: #e8281a;
-  --secondary: #f6a623;
-  --dark: #1a1a1a;
-  --green: #2d6a4f;
-  --cream: #fff8f0;
-  --cream2: #fef0dc;
-  --light: #f9f5f0;
-  --shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.18);
+  --liv-pink: #d25894;
+  --liv-peach: #e99a82;
+  --liv-lavender: #c08fb8;
+  --liv-purple: #78256f;
+  --liv-magenta: #D10074;
+  --liv-navy: #4A528A;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+/* --- ESTILOS DE ESTRUCTURA Y FONDO --- */
+.auth-wrap { 
+  min-height: 100vh; 
 }
-html {
-  scroll-behavior: smooth;
+
+/* El panel de marca lateral original */
+.auth-brand {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--liv-purple) 0%, var(--liv-magenta) 55%, var(--liv-pink) 100%);
+  position: relative;
+  overflow: hidden;
 }
-body {
-  font-family: "Poppins", sans-serif;
-  color: #444;
-  background: #fff;
+
+/* Versión de fondo completo unificado (Para el Registro centrado que pediste) */
+.auth-bg-full {
+  background: linear-gradient(160deg, var(--liv-purple) 0%, var(--liv-magenta) 55%, var(--liv-pink) 100%);
+  min-height: 100vh;
+  position: relative;
   overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Playfair Display", serif;
-  color: var(--dark);
+
+/* El patrón geométrico de diamantes */
+.diamond-grid, .auth-diamond-overlay {
+  position: absolute; 
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,.10) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.10) 75%),
+    linear-gradient(45deg, rgba(255,255,255,.10) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.10) 75%);
+  background-size: 64px 64px;
+  background-position: 0 0, 32px 32px;
+  opacity: .5;
 }
-a {
-  text-decoration: none;
-  transition: all 0.3s;
+
+.auth-content { 
+  position: relative; 
+  z-index: 1; 
 }
-img {
-  max-width: 100%;
+
+.auth-badge {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
 }
-::-webkit-scrollbar {
-  width: 5px;
+
+/* --- TARJETAS Y CONTENEDORES DE FORMULARIO --- */
+.auth-form-wrap { 
+  max-width: 380px; 
 }
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
+
+/* Tarjeta contenedora blanca para la versión centrada */
+.auth-card-centered {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px; /* Un poco más ancha para los campos dobles de registro */
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* --- ELEMENTOS DEL LOGOTIPO (.blogo) --- */
+.blogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important; /* Evita subrayados intrusos */
+}
+
+/* Forzar que si el logo está dentro de un link, mantenga sus colores reales */
+a .blogo, a:hover .blogo {
+  text-decoration: none !important;
+}
+
+.auth-form-wrap .bico, .auth-card-centered .bico {
+  width: 45px;
+  height: 45px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--liv-magenta), var(--liv-pink));
+  box-shadow: 0 4px 15px rgba(209,0,116,.35);
+}
+
+.bname {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a !important; /* Cambiado a negro/oscuro puro para que no se vea azul */
+  line-height: 1.2;
+}
+
+/* El "Talento" se queda en Rosa Magenta pase lo que pase */
+.bname span { 
+  color: var(--liv-magenta) !important; 
+}
+
+.bsub {
+  font-size: 0.8rem;
+  color: #888 !important; /* Se mantiene gris sutil */
+}
+
+/* --- CAMPOS DE ENTRADA (INPUTS) Y LABELS --- */
+.flbl {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--liv-navy);
+}
+
+.fctrl {
+  display: block;
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.fctrl:focus {
+  border-color: var(--liv-pink);
+  box-shadow: 0 0 0 .2rem rgba(210,88,148,.25);
+  outline: none;
+}
+
+/* Checkbox "Recordarme" */
+#remember { 
+  accent-color: var(--liv-magenta); 
+}
+#remember:focus { 
+  box-shadow: none; 
+}
+#remember:focus-visible { 
+  box-shadow: 0 0 0 .2rem rgba(210,88,148,.25); 
+}
+
+/* --- ENLACES Y BOTONES --- */
+.link-auth { 
+  color: var(--liv-navy); 
+}
+.link-auth:hover { 
+  color: var(--liv-magenta); 
+}
+
+/* Corrección para asegurar el fondo rosa de Liverpool en los botones */
+.btn.btn-pink, .btn-pink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--liv-magenta) !important; /* Forzamos el color base */
+  border: 1px solid var(--liv-magenta) !important;
+  color: #fff !important;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn.btn-pink:hover, .btn-pink:hover {
+  background-color: var(--liv-purple) !important; /* El morado que te gusta al pasar el cursor */
+  border-color: var(--liv-purple) !important;
+  color: #fff !important;
 }
 
 /* ===================== TOP BAR ===================== */
