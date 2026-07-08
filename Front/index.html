@@ -45,6 +45,7 @@
             </div>
          </div>
       </div>
+      
       <!-- ============================================================
          NAVBAR
          ============================================================ -->
@@ -64,445 +65,360 @@
             </button>
             <div class="collapse navbar-collapse" id="navmenu">
                <ul class="navbar-nav mx-auto">
-                  <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#chefs">Chefs</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#reservation">Reservation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#about">Nosotros</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#areas">Áreas</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#beneficios">Beneficios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#testimonios">Historias de Éxito</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                </ul>
                <div class="d-flex align-items-center gap-1">
-                  <!-- FIX 1: Search button -->
-                  <button id="navSearchBtn" title="Search"><i class="fas fa-search"></i></button>
-                  <a href="#menu" class="nav-link nav-cta"><i class="fas fa-shopping-bag me-1"></i>Order Now</a>
+                  <!-- Cambiamos el botón de orden por tu trigger de acceso -->
+                  <a href="login.html" class="nav-link nav-cta"><i class="fas fa-user-circle me-1"></i>Ingresar</a>
                </div>
             </div>
          </div>
       </nav>
-      <!-- ============================================================
-         FIX 1 � SEARCH OVERLAY POPUP
-         ============================================================ -->
-      <div id="searchOv">
-         <button class="sovclose" id="searchClose"><i class="fas fa-times"></i></button>
-         <div class="sovbox">
-            <h4>What are you craving today?</h4>
-            <div class="sovinput">
-               <input type="text" id="searchInput" placeholder="Search burgers, pizza, chicken..." autocomplete="off"/>
-               <button><i class="fas fa-search"></i></button>
-            </div>
-            <!-- Categories inside search box -->
-            <div class="sovcats">
-               <div class="sovcat active" data-cat="all">
-                  <img src="img/menu/1.jpg" alt=""/>All Items
-               </div>
-               <div class="sovcat" data-cat="burgers">
-                  <img src="img/menu/1.jpg" alt=""/>Burgers
-               </div>
-               <div class="sovcat" data-cat="pizza">
-                  <img src="img/menu/2.jpg" alt=""/>Pizza
-               </div>
-               <div class="sovcat" data-cat="chicken">
-                  <img src="img/menu/3.jpg" alt=""/>Chicken
-               </div>
-               <div class="sovcat" data-cat="wraps">
-                  <img src="img/menu/4.jpg" alt=""/>Wraps
-               </div>
-               <div class="sovcat" data-cat="pasta">
-                  <img src="img/menu/5.jpg" alt=""/>Pasta
-               </div>
-               <div class="sovcat" data-cat="desserts">
-                  <img src="img/menu/6.jpg" alt=""/>Desserts
-               </div>
-            </div>
-            <div class="sovtrend">
-               <p><i class="fas fa-fire me-1" style="color:var(--secondary);"></i>Trending Searches</p>
-               <span class="ttag">Smash Burger</span>
-               <span class="ttag">Nashville Chicken</span>
-               <span class="ttag">Truffle Pizza</span>
-               <span class="ttag">Lava Cake</span>
-               <span class="ttag">Loaded Fries</span>
-               <span class="ttag">Mango Shake</span>
-            </div>
-         </div>
-      </div>
-      <!-- ============================================================
-         HERO
+
+<!-- ============================================================
+         HERO (Bolsa de Trabajo Liverpool)
          ============================================================ -->
       <section id="hero">
          <div class="hs hs1"></div>
          <div class="hs hs2"></div>
-         <div class="hbgtxt">FOOD</div>
+         <!-- Texto gigante de fondo, cambiamos FOOD por TEAM o PINK -->
+         <div class="hbgtxt">TEAM</div>
          <div class="container">
             <div class="row align-items-center g-5" style="min-height:88vh;">
                <div class="col-lg-6">
                   <div class="hbadge">
                      <div class="hbi"><i class="fas fa-star"></i></div>
-                     <span>#1 Rated Fast Food Restaurant in New York</span>
+                     <span>#1 Empresa para Crecer en México</span>
                   </div>
-                  <h1 class="htitle">Delicious <span class="hl">Fast Food</span><br/>for Every Moment</h1>
-                  <p class="hdesc">Experience bold flavors crafted from premium ingredients. From crispy burgers to gourmet pizzas - every bite is an adventure worth savoring.</p>
+                  <h1 class="htitle">Construye tu <span class="hl">Futuro Profesional</span><br/>con Nosotros</h1>
+                  <p class="hdesc">Tu talento es la pieza clave que nos impulsa a innovar. Únete a El Puerto de Liverpool y encuentra un espacio donde tus ideas, pasión y crecimiento no tienen límites.</p>
                   <div class="d-flex flex-wrap gap-3 mb-2">
-                     <a href="#menu" class="btn-red"><i class="fas fa-utensils"></i>Explore Menu</a>
-                     <!-- FIX 2: Magnific popup video trigger -->
-					 <a href="https://www.youtube.com/watch?v=RXv_uIN6e-Y" class="magnific_popup btn-play popup-youtube">
-						<div class="pico"><i class="fas fa-play"></i></div>
-						<span>Watch Our Story</span>
-					 </a>
+                     <!-- El botón principal ahora los manda a loggearse o ver vacantes -->
+                     <a href="login.html" class="btn-red"><i class="fas fa-user-plus"></i>Postularme Ahora</a>
+                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
+                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="magnific_popup btn-play popup-youtube">
+                        <div class="pico"><i class="fas fa-play"></i></div>
+                        <span>Conoce Nuestra Cultura</span>
+                     </a>
                   </div>
+                  <!-- Estadísticas corporativas de Liverpool -->
                   <div class="hstats d-flex gap-3 flex-wrap mt-4">
-                     <div class="hstat"><span class="snum">850<em>+</em></span><small>Happy Customers</small></div>
+                     <div class="hstat"><span class="snum">170<em>+</em></span><small>Almacenes y Tiendas</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">120<em>+</em></span><small>Menu Items</small></div>
+                     <div class="hstat"><span class="snum">45k<em>+</em></span><small>Colaboradores</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">15<em>+</em></span><small>Expert Chefs</small></div>
+                     <div class="hstat"><span class="snum">40<em>+</em></span><small>Ciudades en México</small></div>
                      <div class="sdiv"></div>
-                     <div class="hstat"><span class="snum">12<em>yr</em></span><small>Experience</small></div>
+                     <div class="hstat"><span class="snum">175<em>yr</em></span><small>De Historia</small></div>
                   </div>
                </div>
                <div class="col-lg-6">
                   <div style="position:relative;text-align:center;">
                      <div class="hcircle">
-                        <img src="img/banner-img.jpg" alt="Burger"/>
+                        <!-- TIP: Aquí pon una imagen circular de colaboradores o el logo rosa corporativo -->
+                        <img src="img/banner-img.jpg" alt="Liverpool Team"/>
                      </div>
+                     <!-- Cambiamos los globos flotantes de la hamburguesa a beneficios del empleo -->
                      <div class="fcard fc1">
-                        <div class="fcoi r"><i class="fas fa-fire"></i></div>
-                        <div><span class="fcnum">Hot Deal</span><span class="fcsm">30% off today</span></div>
+                        <div class="fcoi r"><i class="fas fa-heart"></i></div>
+                        <div><span class="fcnum">SGMM</span><span class="fcsm">Seguro de Vida</span></div>
                      </div>
                      <div class="fcard fc2">
-                        <div class="fcoi y"><i class="fas fa-star"></i></div>
-                        <div><span class="fcnum">4.9/5</span><span class="fcsm">2k+ reviews</span></div>
+                        <div class="fcoi y"><i class="fas fa-graduation-cap"></i></div>
+                        <div><span class="fcnum">UVL</span><span class="fcsm">Universidad Virtual</span></div>
                      </div>
                      <div class="fcard fc3">
-                        <div class="fcoi g"><i class="fas fa-clock"></i></div>
-                        <div><span class="fcnum">20 min</span><span class="fcsm">Fast delivery</span></div>
+                        <div class="fcoi g"><i class="fas fa-percentage"></i></div>
+                        <div><span class="fcnum">Descuentos</span><span class="fcsm">En Tiendas del Grupo</span></div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
-      <!-- MARQUEE -->
+
+      <!-- ============================================================
+         MARQUEE (Cinta de texto en movimiento rápido)
+         ============================================================ -->
       <div class="mqsec">
          <div class="mqtrack">
-            <div class="mqitem"><i class="fas fa-circle"></i>Crispy Fried Chicken</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Gourmet Burgers</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Artisan Pizzas</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Fresh Wraps &amp; Rolls</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Loaded Fries</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Ice Cream Shakes</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Grilled Sandwiches</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Crispy Fried Chicken</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Gourmet Burgers</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Artisan Pizzas</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Fresh Wraps &amp; Rolls</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Loaded Fries</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Ice Cream Shakes</div>
-            <div class="mqitem"><i class="fas fa-circle"></i>Grilled Sandwiches</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Bolsa de Trabajo Nacional</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Prestaciones Superiores</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Planes de Carrera</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Capacitación Constante</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Cultura Inclusiva</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Estabilidad Laboral</div>
+            <!-- Duplicados para el efecto infinito del scroll -->
+            <div class="mqitem"><i class="fas fa-circle"></i>Bolsa de Trabajo Nacional</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Prestaciones Superiores</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Planes de Carrera</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Capacitación Constante</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Cultura Inclusiva</div>
+            <div class="mqitem"><i class="fas fa-circle"></i>Estabilidad Laboral</div>
          </div>
       </div>
-      <!-- CATEGORY -->
+
+      <!-- ============================================================
+         CATEGORY (Áreas de Contratación)
+         ============================================================ -->
       <section id="category">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">What We Offer</span>
-               <h2 class="stitle">Browse by <span>Category</span></h2>
+               <span class="slbl">Tu Oportunidad</span>
+               <h2 class="stitle">Explora por <span>Áreas</span></h2>
                <div class="sline"></div>
-               <p class="sdesc mx-auto" style="max-width:480px;">From sizzling burgers to exotic world cuisines - find your favourite in our menu</p>
+               <p class="sdesc mx-auto" style="max-width:480px;">Desde operaciones en piso de venta hasta innovación tecnológica, encuentra el área ideal para ti</p>
             </div>
             <div class="row g-3 justify-content-center">
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="0">
                   <div class="catcard active" data-filter="all">
-                     <img class="catimg" src="img/category/1.jpg" alt=""/>
-                     <div class="catnm">All Items</div>
-                     <div class="catct">99 items</div>
+                     <img class="catimg" src="img/category/1.jpg" alt="Todas"/>
+                     <div class="catnm">Todas</div>
+                     <div class="catct">Ver todo</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="70">
-                  <div class="catcard" data-filter="burgers">
-                     <img class="catimg" src="img/category/2.jpg" alt=""/>
-                     <div class="catnm">Burgers</div>
-                     <div class="catct">24 items</div>
+                  <div class="catcard" data-filter="ventas">
+                     <img class="catimg" src="img/category/2.jpg" alt="Ventas"/>
+                     <div class="catnm">Piso de Venta</div>
+                     <div class="catct">Cajeros y Asesores</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="140">
-                  <div class="catcard" data-filter="pizza">
-                     <img class="catimg" src="img/category/3.jpg" alt=""/>
-                     <div class="catnm">Pizza</div>
-                     <div class="catct">18 items</div>
+                  <div class="catcard" data-filter="logistica">
+                     <img class="catimg" src="img/category/3.jpg" alt="Logística"/>
+                     <div class="catnm">Logística / CEDIS</div>
+                     <div class="catct">Distribución</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="210">
-                  <div class="catcard" data-filter="chicken">
-                     <img class="catimg" src="img/category/4.jpg" alt=""/>
-                     <div class="catnm">Fried Chicken</div>
-                     <div class="catct">15 items</div>
+                  <div class="catcard" data-filter="tecnologia">
+                     <img class="catimg" src="img/category/4.jpg" alt="TI"/>
+                     <div class="catnm">Tecnología / TI</div>
+                     <div class="catct">Células Ágiles</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="280">
-                  <div class="catcard" data-filter="wraps">
-                     <img class="catimg" src="img/category/5.jpg" alt=""/>
-                     <div class="catnm">Wraps</div>
-                     <div class="catct">12 items</div>
+                  <div class="catcard" data-filter="corporativo">
+                     <img class="catimg" src="img/category/5.jpg" alt="Corporativo"/>
+                     <div class="catnm">Corporativo</div>
+                     <div class="catct">Administración</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="350">
-                  <div class="catcard" data-filter="desserts">
-                     <img class="catimg" src="img/category/6.jpg" alt=""/>
-                     <div class="catnm">Desserts</div>
-                     <div class="catct">20 items</div>
+                  <div class="catcard" data-filter="atencion">
+                     <img class="catimg" src="img/category/6.jpg" alt="Atención"/>
+                     <div class="catnm">Atención a Clientes</div>
+                     <div class="catct">Call Center</div>
                   </div>
                </div>
             </div>
          </div>
       </section>
-      <!-- ABOUT -->
+
+      <!-- ============================================================
+         ABOUT (Nuestra Identidad Corporativa)
+         ============================================================ -->
       <section id="about">
          <div class="container">
             <div class="row align-items-center g-5">
                <div class="col-lg-5" data-aos="fade-right">
                   <div class="astack">
-                     <div class="aexp"><span class="anum">12+</span><small>Years of<br/>Excellence</small></div>
-                     <div class="amain"><img src="img/about1.jpg" alt="Restaurant"/></div>
-                     <div class="asm"><img src="img/about2.jpg" alt=""/></div>
+                     <div class="aexp"><span class="anum">GPTW</span><small>Great Place<br/>To Work</small></div>
+                     <div class="amain"><img src="img/about1.jpg" alt="Liverpool Corporativo"/></div>
+                     <div class="asm"><img src="img/about2.jpg" alt="Colaboradores"/></div>
                   </div>
                </div>
                <div class="col-lg-7" data-aos="fade-left">
-                  <span class="slbl">Our Story</span>
-                  <h2 class="stitle text-start">We Invite You to Visit<br/>Our <span>Food Restaurant</span></h2>
+                  <span class="slbl">Nuestra Historia</span>
+                  <h2 class="stitle text-start">Un Lugar donde puedes<br/>Ser Tú Mismo y <span>Crecer</span></h2>
                   <div class="sline lft"></div>
-                  <p class="sdesc mb-4">Founded in 2012, Sarab began as a small corner joint with a big dream - to serve food that brings people together. Today we're proud to serve thousands of happy customers every week with the same passion that started it all.</p>
+                  <p class="sdesc mb-4">En El Puerto de Liverpool valoramos la diversidad, el compromiso y la innovación. Nos esforzamos día a día por ofrecer un ambiente seguro, dinámico y lleno de retos que impulse al máximo el desarrollo de nuestra comunidad interna.</p>
                   <div class="mb-4">
                      <div class="fti">
-                        <div class="ftico r"><i class="fas fa-leaf"></i></div>
+                        <div class="ftico r"><i class="fas fa-hand-holding-heart"></i></div>
                         <div>
-                           <h6>100% Fresh Ingredients</h6>
-                           <p>We source locally and sustainably. Every ingredient is hand-picked daily for maximum freshness.</p>
+                           <h6>Bienestar Integral</h6>
+                           <p>Cuidamos de ti y de los tuyos ofreciendo esquemas competitivos, seguros médicos y soporte familiar continuo.</p>
                         </div>
                      </div>
                      <div class="fti">
-                        <div class="ftico y"><i class="fas fa-award"></i></div>
+                        <div class="ftico y"><i class="fas fa-trophy"></i></div>
                         <div>
-                           <h6>Award-Winning Recipes</h6>
-                           <p>Our signature recipes have won national culinary awards 5 years in a row.</p>
+                           <h6>Reconocimiento y Crecimiento</h6>
+                           <p>Fomentamos el desarrollo interno. La gran mayoría de nuestros puestos de liderazgo son cubiertos por talento promovido desde adentro.</p>
                         </div>
                      </div>
                      <div class="fti">
-                        <div class="ftico g"><i class="fas fa-shipping-fast"></i></div>
+                        <div class="ftico g"><i class="fas fa-users"></i></div>
                         <div>
-                           <h6>Lightning-Fast Delivery</h6>
-                           <p>Order online and get hot, fresh food at your door in under 25 minutes, guaranteed.</p>
+                           <h6>Cultura Líder e Inclusiva</h6>
+                           <p>Forma parte de un equipo galardonado a nivel nacional que respeta la individualidad y premia el esfuerzo colectivo.</p>
                         </div>
                      </div>
                   </div>
-                  <a href="#menu" class="btn-red"><i class="fas fa-book-open"></i>View Full Menu</a>
+                  <a href="login.html" class="btn-red"><i class="fas fa-sign-in-alt"></i>Registra tu Currículum</a>
                </div>
             </div>
          </div>
       </section>
-      <!-- ============================================================
-         MENU � FIX 3 (filter works) + FIX 4 (plus opens popup)
+
+<!-- ============================================================
+         MENU / VACANTES - FILTROS ACTIVOS DE TRABAJO
          ============================================================ -->
       <section id="menu">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">What's Cooking</span>
-               <h2 class="stitle">Our Delicious <span>Menu</span></h2>
+               <span class="slbl">Oportunidades Activas</span>
+               <h2 class="stitle">Vacantes <span>Recientes</span></h2>
                <div class="sline"></div>
             </div>
-            <!-- FIX 3 � filter buttons -->
+
+            <!-- FILTROS DE ÁREAS (Mantiene la lógica JS usando data-f) -->
             <div class="text-center mb-4" data-aos="fade-up">
-               <button class="filtbtn active" data-f="all">All</button>
-               <button class="filtbtn" data-f="burgers">Burgers</button>
-               <button class="filtbtn" data-f="pizza">Pizza</button>
-               <button class="filtbtn" data-f="chicken">Chicken</button>
-               <button class="filtbtn" data-f="wraps">Wraps</button>
-               <button class="filtbtn" data-f="desserts">Desserts</button>
-               <button class="filtbtn" data-f="pasta">Pasta</button>
+               <button class="filtbtn active" data-f="all">Todas</button>
+               <button class="filtbtn" data-f="ti">Tecnología (TI)</button>
+               <button class="filtbtn" data-f="ventas">Ventas</button>
+               <button class="filtbtn" data-f="gestion">Gestión / Admin</button>
+               <button class="filtbtn" data-f="transporte">Transporte / CEDIS</button>
             </div>
+
             <div class="row g-4" id="mgrid">
-               <!-- CARD 1: Burgers -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="burgers" data-aos="fade-up">
+               
+               <!-- CARD 1: TI -->
+               <div class="col-sm-6 col-lg-4 mwrap" data-c="ti" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/1.jpg"
-                     data-title="Classic Smash Burger"
-                     data-cat="Burgers"
-                     data-price="$14.99" data-old="$18.99"
-                     data-rating="4.9" data-reviews="128"
-                     data-cal="620" data-time="12"
-                     data-desc="Double smashed patty, cheddar cheese, caramelized onions, house pickles and our legendary special sauce. Made fresh to order on a toasted brioche bun."
-                     data-tags="Spicy,Bestseller,Beef">
+                     data-img="img/menu/ti-1.jpg"
+                     data-title="Desarrollador Backend Senior"
+                     data-cat="Tecnología (TI)"
+                     data-price="Competitivo" data-old="CDMX"
+                     data-rating="ID" data-reviews="9432"
+                     data-cal="Full-time" data-time="Híbrido"
+                     data-desc="Buscamos un Ingeniero de Software para integrarse a nuestras células ágiles de comercio electrónico. Experiencia sólida en APIs, microservicios y despliegues en la nube."
+                     data-tags="Urgente,TI,Sistemas">
                      <div class="mimg">
-                        <img src="img/menu/1.jpg" alt="Smash Burger"/>
-                        <div class="mbdg hot"><i class="fas fa-star"></i> Hot</div>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                        <img src="img/menu/1.jpg" alt="Backend Dev"/>
+                        <div class="mbdg hot"><i class="fas fa-fire"></i> Destacada</div>
+                        <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
                      <div class="mbody">
-                        <div class="mcat">Burgers</div>
-                        <div class="mtit">Classic Smash Burger</div>
-                        <div class="mdesc">Double smashed patty, cheddar, caramelized onions, pickles &amp; special sauce</div>
+                        <div class="mcat">Tecnología (TI)</div>
+                        <div class="mtit">Desarrollador Backend</div>
+                        <div class="mdesc">Integración de microservicios, optimización de APIs y arquitectura de nube.</div>
                         <div class="mfoot">
                            <div>
-                              <div class="mprice">$14.99 <small>$18.99</small></div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(128)</span></div>
+                              <div class="mprice">Sueldo Competitivo</div>
+                              <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 9432</span></div>
                            </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
                </div>
-               <!-- CARD 2: Pizza -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="pizza" data-aos="fade-up" data-aos-delay="80">
+
+               <!-- CARD 2: Ventas -->
+               <div class="col-sm-6 col-lg-4 mwrap" data-c="ventas" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/2.jpg"
-                     data-title="Margherita Royale"
-                     data-cat="Pizza"
-                     data-price="$19.99" data-old="$24.99"
-                     data-rating="4.8" data-reviews="95"
-                     data-cal="480" data-time="18"
-                     data-desc="San Marzano tomatoes, fresh buffalo mozzarella, fragrant basil leaves, drizzled with Italian truffle oil on a hand-stretched sourdough base."
-                     data-tags="Vegetarian,New,Italian">
+                     data-img="img/menu/ventas-1.jpg"
+                     data-title="Asesor de Ventas - Liverpool Insurgentes"
+                     data-cat="Ventas"
+                     data-price="Sueldo base + Comisiones" data-old="CDMX"
+                     data-rating="ID" data-reviews="8821"
+                     data-cal="Piso" data-time="Turno Rotativo"
+                     data-desc="Únete al equipo en piso de venta. Atención personalizada a clientes, alcance de metas mensuales y gestión de inventario básico en departamento."
+                     data-tags="Comisiones,Ventas,Tienda">
                      <div class="mimg">
-                        <img src="img/menu/2.jpg" alt="Pizza"/>
-                        <div class="mbdg new"><i class="fas fa-star"></i> New</div>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                        <img src="img/menu/2.jpg" alt="Asesor de ventas"/>
+                        <div class="mbdg" style="background:var(--secondary);"><i class="fas fa-star"></i> Nueva</div>
+                        <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
                      <div class="mbody">
-                        <div class="mcat">Pizza</div>
-                        <div class="mtit">Margherita Royale</div>
-                        <div class="mdesc">San Marzano tomatoes, buffalo mozzarella, basil &amp; truffle oil on sourdough</div>
+                        <div class="mcat">Ventas</div>
+                        <div class="mtit">Asesor de Piso de Venta</div>
+                        <div class="mdesc">Atención al cliente, asesoría de imagen y cumplimiento de objetivos comerciales.</div>
                         <div class="mfoot">
                            <div>
-                              <div class="mprice">$19.99 <small>$24.99</small></div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(95)</span></div>
+                              <div class="mprice">Base + Comisiones</div>
+                              <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 8821</span></div>
                            </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
                </div>
-               <!-- CARD 3: Chicken -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="chicken" data-aos="fade-up" data-aos-delay="160">
+
+               <!-- CARD 3: Gestión -->
+               <div class="col-sm-6 col-lg-4 mwrap" data-c="gestion" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/3.jpg"
-                     data-title="Nashville Hot Chicken"
-                     data-cat="Chicken"
-                     data-price="$12.99" data-old="$16.99"
-                     data-rating="5.0" data-reviews="210"
-                     data-cal="710" data-time="15"
-                     data-desc="Extra-crispy fried chicken tossed in our signature fiery Nashville spice blend, served with honey drizzle and house pickles on a toasted brioche bun."
-                     data-tags="Spicy,Bestseller,Crispy">
+                     data-img="img/menu/gestion-1.jpg"
+                     data-title="Analista de Inventarios y Gestión"
+                     data-cat="Gestión / Admin"
+                     data-price="Competitivo" data-old="EdoMex"
+                     data-rating="ID" data-reviews="7311"
+                     data-cal="Oficina" data-time="Lunes a Viernes"
+                     data-desc="Responsable de la auditoría de entradas y salidas de mercancía, generación de reportes y enlace logístico corporativo."
+                     data-tags="Administración,Inventarios">
                      <div class="mimg">
-                        <img src="img/menu/3.jpg" alt="Chicken"/>
-                        <div class="mbdg"><i class="fas fa-star"></i> Best Seller</div>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                        <img src="img/menu/3.jpg" alt="Analista Admin"/>
+                        <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
                      <div class="mbody">
-                        <div class="mcat">Chicken</div>
-                        <div class="mtit">Nashville Hot Chicken</div>
-                        <div class="mdesc">Crispy fried chicken in fiery Nashville spice blend with honey drizzle</div>
+                        <div class="mcat">Gestión / Administración</div>
+                        <div class="mtit">Analista de Inventarios</div>
+                        <div class="mdesc">Control de stock corporativo, auditorías operativas y manejo avanzado de datos.</div>
                         <div class="mfoot">
                            <div>
-                              <div class="mprice">$12.99 <small>$16.99</small></div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(210)</span></div>
+                              <div class="mprice">Prestaciones Superiores</div>
+                              <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 7311</span></div>
                            </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
                </div>
-               <!-- CARD 4: Wraps -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="wraps" data-aos="fade-up">
+
+               <!-- CARD 4: Transporte -->
+               <div class="col-sm-6 col-lg-4 mwrap" data-c="transporte" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/4.jpg"
-                     data-title="Loaded Fajita Wrap"
-                     data-cat="Wraps"
-                     data-price="$10.99" data-old=""
-                     data-rating="4.5" data-reviews="74"
-                     data-cal="520" data-time="10"
-                     data-desc="Grilled chicken strips, saut�ed bell peppers and onions, sour cream, fresh guacamole and salsa wrapped in a warm flour tortilla with melted cheddar."
-                     data-tags="Grilled,Fresh,Mexican">
+                     data-img="img/menu/transporte-1.jpg"
+                     data-title="Chofer de Distribución - CEDIS"
+                     data-cat="Transporte / CEDIS"
+                     data-price="Atractivo" data-old="EdoMex"
+                     data-rating="ID" data-reviews="6524"
+                     data-cal="Logística" data-time="Full-time"
+                     data-desc="Operación de unidades de reparto para distribución intertiendas o última milla. Licencia vigente obligatoria."
+                     data-tags="Transporte,CEDIS,Logística">
                      <div class="mimg">
-                        <img src="img/menu/4.jpg" alt="Wrap"/>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                        <img src="img/menu/4.jpg" alt="Chofer Logística"/>
+                        <div class="mbdg hot"><i class="fas fa-truck"></i> Urgente</div>
+                        <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
                      <div class="mbody">
-                        <div class="mcat">Wraps</div>
-                        <div class="mtit">Loaded Fajita Wrap</div>
-                        <div class="mdesc">Grilled chicken, peppers, sour cream &amp; guacamole in a warm tortilla</div>
+                        <div class="mcat">Transporte / CEDIS</div>
+                        <div class="mtit">Operador de Distribución</div>
+                        <div class="mdesc">Traslado seguro de mercancía hacia sucursales y centros de distribución locales.</div>
                         <div class="mfoot">
                            <div>
-                              <div class="mprice">$10.99</div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(74)</span></div>
+                              <div class="mprice">Bonos de Productividad</div>
+                              <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 6524</span></div>
                            </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
                </div>
-               <!-- CARD 5: Desserts -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="desserts" data-aos="fade-up" data-aos-delay="80">
-                  <div class="mcard"
-                     data-img="img/menu/5.jpg"
-                     data-title="Nutella Lava Cake"
-                     data-cat="Desserts"
-                     data-price="$8.99" data-old="$11.99"
-                     data-rating="4.9" data-reviews="56"
-                     data-cal="390" data-time="8"
-                     data-desc="Warm molten chocolate cake with a gooey Nutella center, served alongside Madagascar vanilla bean ice cream with salted caramel drizzle and fresh berries."
-                     data-tags="Sweet,New,Chocolate">
-                     <div class="mimg">
-                        <img src="img/menu/5.jpg" alt="Lava Cake"/>
-                        <div class="mbdg new"><i class="fas fa-star"></i> New</div>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
-                     </div>
-                     <div class="mbody">
-                        <div class="mcat">Desserts</div>
-                        <div class="mtit">Nutella Lava Cake</div>
-                        <div class="mdesc">Molten chocolate cake with Nutella center, vanilla ice cream &amp; caramel</div>
-                        <div class="mfoot">
-                           <div>
-                              <div class="mprice">$8.99 <small>$11.99</small></div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(56)</span></div>
-                           </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- CARD 6: Pasta -->
-               <div class="col-sm-6 col-lg-4 mwrap" data-c="pasta" data-aos="fade-up" data-aos-delay="160">
-                  <div class="mcard"
-                     data-img="img/menu/6.jpg"
-                     data-title="Truffle Mushroom Pasta"
-                     data-cat="Pasta"
-                     data-price="$16.99" data-old=""
-                     data-rating="4.9" data-reviews="88"
-                     data-cal="560" data-time="20"
-                     data-desc="Al dente tagliatelle tossed with mixed wild mushrooms, freshly shaved black truffle, aged parmesan, fresh thyme and a touch of cream in garlic butter."
-                     data-tags="Vegetarian,Chef's Pick,Italian">
-                     <div class="mimg">
-                        <img src="img/menu/6.jpg" alt="Pasta"/>
-                        <div class="mbdg hot">Chef's Pick</div>
-                        <div class="mhrt"><i class="far fa-heart"></i></div>
-                     </div>
-                     <div class="mbody">
-                        <div class="mcat">Pasta</div>
-                        <div class="mtit">Truffle Mushroom Pasta</div>
-                        <div class="mdesc">Al dente tagliatelle, wild mushrooms, black truffle, parmesan &amp; thyme</div>
-                        <div class="mfoot">
-                           <div>
-                              <div class="mprice">$16.99</div>
-                              <div class="mstars"><i class="fas fa-star"></i> <span style="color:#bbb;font-size:.7rem;">(88)</span></div>
-                           </div>
-                           <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               
+            </div> <!-- end #mgrid -->
+
+            <!-- BOTÓN QUE LLEVA AL LOGIN PARA VER MÁS -->
+            <div class="text-center mt-5">
+               <a href="login.html" class="btn-red"><i class="fas fa-search-plus"></i>Ver Otras Vacantes</a>
             </div>
-            <!-- end #mgrid -->
-            <div class="text-center mt-5"><a href="#" class="btn-red"><i class="fas fa-th-large"></i>View Full Menu</a></div>
          </div>
       </section>
 	  
