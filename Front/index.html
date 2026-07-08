@@ -46,34 +46,35 @@
          </div>
       </div>
       
-      <!-- ============================================================
-         NAVBAR
+<!-- ============================================================
+         NAVBAR / NAVEGACIÓN PORTAL DE TALENTO
          ============================================================ -->
       <nav class="navbar navbar-expand-lg" id="nav">
          <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#hero">
                <div class="blogo">
-                  <div class="bico"><i class="fas fa-utensils"></i></div>
+                  <!-- Cambiamos cubiertos por maletín corporativo -->
+                  <div class="bico"><i class="fas fa-briefcase"></i></div>
                   <div>
-                     <div class="bname">Sar<span>ab</span></div>
-                     <div class="bsub">Fast Food & Restaurant</div>
+                     <div class="bname">Bolsa<span>Talento</span></div>
+                     <div class="bsub">El Puerto de Liverpool</div>
                   </div>
                </div>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-            <i class="fas fa-bars" style="color:var(--primary);font-size:1.35rem;"></i>
+               <i class="fas fa-bars" style="color:var(--primary);font-size:1.35rem;"></i>
             </button>
             <div class="collapse navbar-collapse" id="navmenu">
                <ul class="navbar-nav mx-auto">
                   <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#about">Nosotros</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#areas">Áreas</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#beneficios">Beneficios</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#testimonios">Historias de Éxito</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#menu">Vacantes</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#special">Beneficios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#history">Historia</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#gallery">Casos de Éxito</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#chefs">Célula Dev</a></li>
                </ul>
                <div class="d-flex align-items-center gap-1">
-                  <!-- Cambiamos el botón de orden por tu trigger de acceso -->
+                  <!-- Botón de acceso directo a Login -->
                   <a href="login.html" class="nav-link nav-cta"><i class="fas fa-user-circle me-1"></i>Ingresar</a>
                </div>
             </div>
@@ -421,10 +422,9 @@
             </div>
          </div>
       </section>
-	  
-	  
-      <!-- ============================================================
-         FIX 4 � MENU DETAIL POPUP MODAL
+
+<!-- ============================================================
+         MODAL DE DETALLE DE VACANTE (Neutralizado de carrito de compras)
          ============================================================ -->
       <div id="menuPop">
          <div class="mpbox">
@@ -433,545 +433,252 @@
             <div class="mpbody">
                <div id="mpCat"></div>
                <div id="mpTitle"></div>
-               <div id="mpStars"></div>
+               <div id="mpStars" style="display:none;"></div> <!-- Ocultamos estrellas si no se ocupan -->
                <div id="mpDesc"></div>
                <div id="mpPrice"></div>
                <div class="mpmeta" id="mpMeta"></div>
-               <div class="mpqty">
+               
+               <!-- Ocultamos los selectores de porciones de comida -->
+               <div class="mpqty" style="display:none !important;">
                   <button class="mpqbtn" id="mpMinus">-</button>
                   <span class="mpqnum" id="mpQnum">1</span>
                   <button class="mpqbtn" id="mpPlus">+</button>
-                  <span style="font-size:.82rem;color:#aaa;margin-left:9px;">portion</span>
                </div>
+               
                <div class="mptags" id="mpTags"></div>
-               <button class="mpaddcart" id="mpAddCart"><i class="fas fa-shopping-cart"></i>Add to Cart</button>
+               <!-- Cambiamos el botón de carrito por uno de postulación corporativa -->
+               <a href="login.html" class="btn-red text-center d-block w-100" style="text-decoration:none; line-height:40px;">
+                  <i class="fas fa-user-check me-2"></i>Iniciar Sesión para Postularme
+               </a>
+               <!-- Dejamos el ID original abajo oculto por si el script lo busca para no romper el JS -->
+               <button id="mpAddCart" style="display:none;"></button> 
             </div>
          </div>
       </div>
-      <!-- SPECIAL OFFER -->
+
+      <!-- ============================================================
+         BENEFICIOS Y PRESTACIONES (Antes Special Offer)
+         ============================================================ -->
       <section id="special">
          <div class="spbg"></div>
          <div class="container" style="position:relative;z-index:2;">
             <div class="row align-items-center g-5">
                <div class="col-lg-6" data-aos="fade-right">
-                  <div class="sptag"><i class="fas fa-bolt me-1"></i>Limited Time Offer</div>
-                  <h2 class="sptitle">Get 30% Off<br/>Our Signature<br/><span>Burger</span> Meal</h2>
-                  <p class="spdesc">Don't miss our weekend special - grab our award-winning signature burger combo with loaded fries and a premium shake at an unbeatable price.</p>
-                  <div class="cdwrap">
-                     <div class="cditem"><span class="cdnum" id="cdH">08</span><span class="cdlbl">Hours</span></div>
-                     <div class="cditem"><span class="cdnum" id="cdM">45</span><span class="cdlbl">Minutes</span></div>
-                     <div class="cditem"><span class="cdnum" id="cdS">30</span><span class="cdlbl">Seconds</span></div>
+                  <div class="sptag"><i class="fas fa-gift me-1"></i>Paquete de Compensaciones</div>
+                  <h2 class="sptitle">Mucho más que un trabajo:<br/>Nuestros <span>Beneficios</span></h2>
+                  <p class="spdesc">En El Puerto de Liverpool tu bienestar y el de tu familia son lo más importante. Por eso, diseñamos un ecosistema de prestaciones pensado para tu estabilidad, salud y crecimiento continuo.</p>
+                  
+                  <!-- Lista de beneficios destacados en lugar del contador de hamburguesas -->
+                  <div class="row g-3 mb-4">
+                     <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-2 text-white">
+                           <i class="fas fa-check-circle text-warning"></i>
+                           <span>Vales de Despensa</span>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-2 text-white">
+                           <i class="fas fa-check-circle text-warning"></i>
+                           <span>Caja y Fondo de Ahorro</span>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-2 text-white">
+                           <i class="fas fa-check-circle text-warning"></i>
+                           <span>Seguro de Vida</span>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="d-flex align-items-center gap-2 text-white">
+                           <i class="fas fa-check-circle text-warning"></i>
+                           <span>Becas de Estudio (UVL)</span>
+                        </div>
+                     </div>
                   </div>
-                  <a href="#menu" class="btn-red"><i class="fas fa-shopping-cart"></i>Grab the Deal</a>
+
+                  <a href="login.html" class="btn-red"><i class="fas fa-id-card"></i>¡Quiero estos Beneficios!</a>
                </div>
+               
+               <!-- Lado derecho: Grid interno o vista de tarjetas de apoyo -->
                <div class="col-lg-6" data-aos="fade-left">
                   <div class="spimgw">
                      <div class="spglow"></div>
-                     <div class="sppbdg"><span class="old">$24.99</span><span class="np">$17.49</span></div>
-                     <img src="img/off-img.jpg" alt="Special Burger"/>
+                     <!-- Removemos el badge de precio de comida -->
+                     <img src="img/beneficios-banner.jpg" alt="Beneficios Liverpool" style="border-radius: 20px; width:100%; object-fit:cover;"/>
                   </div>
                </div>
             </div>
          </div>
       </section>
-	  
-	  
+
       <!-- ============================================================
-         GALLERY � FIX 7 (click opens detail popup)
+         GALLERY - HISTORIAS DE ÉXITO Y CRECIMIENTO
          ============================================================ -->
       <section id="gallery">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">Food Showcase</span>
-               <h2 class="stitle">Let's See Our <span>Fast Food</span></h2>
+               <span class="slbl">Cultura en Acción</span>
+               <h2 class="stitle">Nuestras Historias de <span>Éxito</span></h2>
                <div class="sline"></div>
             </div>
+            
             <div class="ggrid" data-aos="fade-up">
+               <!-- CASO 1 -->
                <div class="gitem"
                   data-gi="0"
-                  data-gimg="img/portfolio/work1.jpg"
-                  data-gtitle="Gourmet Burgers"
-                  data-gdesc="Our award-winning smash burgers, hand-crafted with 100% premium beef, aged cheddar and house-made sauces.">
-                  <img src="img/portfolio/work1.jpg" alt="Burgers"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Gourmet Burgers</span></div>
+                  data-gimg="img/portfolio/exito1.jpg"
+                  data-gtitle="Sofía Rodríguez - De Auxiliar a Gerente de Tienda"
+                  data-gdesc="'Inicié hace 5 años en el piso de venta. Gracias a las capacitaciones y el plan de carrera interno, hoy lidero una de las sucursales más grandes de la región.'">
+                  <img src="img/portfolio/work1.jpg" alt="Sofía Rodríguez"/>
+                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Sofía</span></div>
                </div>
+               
+               <!-- CASO 2 -->
                <div class="gitem"
                   data-gi="1"
-                  data-gimg="img/portfolio/work2.jpg"
-                  data-gtitle="Wood-Fired Pizza"
-                  data-gdesc="Authentic Neapolitan-style pizzas fired at 900deg F in our wood-burning stone oven for the perfect char.">
-                  <img src="img/portfolio/work2.jpg" alt="Pizza"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Wood-Fired Pizza</span></div>
+                  data-gimg="img/portfolio/exito2.jpg"
+                  data-gtitle="Carlos Mendoza - Líder de Célula en TI"
+                  data-gdesc="'Desarrollar software para millones de usuarios en México es un reto increíble. El ambiente de innovación tecnológica aquí no le pide nada a Silicon Valley.'">
+                  <img src="img/portfolio/work2.jpg" alt="Carlos Mendoza"/>
+                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Carlos</span></div>
                </div>
+               
+               <!-- CASO 3 -->
                <div class="gitem"
                   data-gi="2"
-                  data-gimg="img/portfolio/work3.jpg"
-                  data-gtitle="Crispy Fried Chicken"
-                  data-gdesc="Double-brined, hand-battered chicken fried to golden perfection using our 15-spice secret blend.">
-                  <img src="img/portfolio/work3.jpg" alt="Chicken"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Crispy Fried Chicken</span></div>
+                  data-gimg="img/portfolio/exito3.jpg"
+                  data-gtitle="Mariana Torres - Coordinadora de Operaciones CEDIS"
+                  data-gdesc="'La logística de El Puerto de Liverpool es el motor del negocio. Empecé en despacho y hoy coordino las rutas críticas de distribución de última milla.'">
+                  <img src="img/portfolio/work3.jpg" alt="Mariana Torres"/>
+                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Mariana</span></div>
                </div>
+               
+               <!-- CASO 4 -->
                <div class="gitem"
                   data-gi="3"
-                  data-gimg="img/portfolio/work4.jpg"
-                  data-gtitle="Sweet Desserts"
-                  data-gdesc="Handcrafted desserts - from molten lava cakes to artisan ice cream sundaes and seasonal pastries.">
-                  <img src="img/portfolio/work4.jpg" alt="Desserts"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Sweet Desserts</span></div>
+                  data-gimg="img/portfolio/exito4.jpg"
+                  data-gtitle="Alejandro Ruiz - Asesor de Mesa de Control"
+                  data-gdesc="'El balance de vida y carrera que encontré aquí me permitió terminar mis estudios universitarios mientras seguía generando ingresos estables.'">
+                  <img src="img/portfolio/work4.jpg" alt="Alejandro Ruiz"/>
+                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Alejandro</span></div>
                </div>
+
+               <!-- CASO 5 -->
                <div class="gitem"
                   data-gi="4"
-                  data-gimg="img/portfolio/work5.jpg"
-                  data-gtitle="Fresh Wraps &amp; Rolls"
-                  data-gdesc="Loaded fresh wraps packed with grilled proteins, crunchy vegetables and our house-made sauces.">
-                  <img src="img/portfolio/work5.jpg" alt="Wraps"/>
-                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Fresh Wraps &amp; Rolls</span></div>
+                  data-gimg="img/portfolio/exito5.jpg"
+                  data-gtitle="Comunidad Liverpool - Diversidad e Inclusión"
+                  data-gdesc="Creamos espacios donde cada voz cuenta. Nuestro compromiso es asegurar un entorno equitativo, inclusivo y libre de discriminación para todos.">
+                  <img src="img/portfolio/work5.jpg" alt="Cultura de Trabajo"/>
+                  <div class="gover"><span><i class="fas fa-expand-alt"></i> Conoce Nuestra Cultura</span></div>
                </div>
             </div>
          </div>
       </section>
-      <!-- FIX 7 � GALLERY POPUP -->
+
+      <!-- ============================================================
+         POPUP DE GALERÍA (Mantiene los IDs idénticos para el JavaScript)
+         ============================================================ -->
       <div id="galPop">
          <div class="gpbox">
             <button class="gpclose" id="gpClose"><i class="fas fa-times"></i></button>
-            <img id="gpImg" src="" alt=""/>
+            <img id="gpImg" src="" alt="Colaborador"/>
             <div class="gpcap">
-               <h5 id="gpTitle"></h5>
-               <p id="gpDesc"></p>
+               <h5 id="gpTitle" style="color: var(--primary); font-weight:700;"></h5>
+               <p id="gpDesc" style="font-style: italic; color: #555;"></p>
             </div>
             <div class="gpnav">
-               <button id="gpPrev"><i class="fas fa-chevron-left me-1"></i>Prev</button>
-               <button id="gpNext">Next <i class="fas fa-chevron-right ms-1"></i></button>
+               <button id="gpPrev"><i class="fas fa-chevron-left me-1"></i>Anterior</button>
+               <button id="gpNext">Siguiente <i class="fas fa-chevron-right ms-1"></i></button>
             </div>
          </div>
       </div>
-	  
-	  
-      <!-- ============================================================
-         HISTORY � FIX 8 (alternating left/right text)
+
+<!-- ============================================================
+         HISTORY - LÍNEA DE TIEMPO CORPORATIVA (EL PUERTO DE LIVERPOOL)
          ============================================================ -->
       <section id="history">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">Our Journey</span>
-               <h2 class="stitle">A History of <span>Restaurant</span></h2>
+               <span class="slbl">Nuestra Trayectoria</span>
+               <h2 class="stitle">Más de 175 Años de <span>Historia</span></h2>
                <div class="sline"></div>
-               <p class="sdesc mx-auto" style="max-width:480px;">From humble beginnings to the city's most beloved restaurant - every chapter written with passion.</p>
+               <p class="sdesc mx-auto" style="max-width:480px;">Desde nuestros inicios en el centro de la ciudad hasta convertirnos en el referente omnicanal de México.</p>
             </div>
             <div class="timeline" data-aos="fade-up">
-               <!-- ODD ? text on LEFT -->
+               
+               <!-- 1847: El Origen -->
                <div class="tli">
                   <div class="tl-left">
-                     <div class="tlyear">2012</div>
-                     <h5>Evolution of Restaurants</h5>
-                     <p>Sarab opens its first 20-seat diner on Flavor Street. Within 3 months, lines stretch around the block every evening as word of our food spreads.</p>
+                     <div class="tlyear">1847</div>
+                     <h5>El Inicio de un Sueño</h5>
+                     <p>Jean Baptiste Ebrard instala un cajón dedicado a la venta de telas en el centro de la Ciudad de México. El nombre nace al importar las mercancías que embarcaban desde el puerto de Liverpool, Inglaterra.</p>
                   </div>
                   <div class="tl-center">
                      <div class="tldot"></div>
                   </div>
                   <div class="tl-right">
-                     <div class="tlyear">2012</div>
-                     <h5>Evolution of Restaurants</h5>
-                     <p>Sarab opens its first 20-seat diner on Flavor Street. Within 3 months, lines stretch around the block every evening as word of our food spreads.</p>
+                     <div class="tlyear">1847</div>
+                     <h5>El Inicio de un Sueño</h5>
+                     <p>Jean Baptiste Ebrard instala un cajón dedicado a la venta de telas en el centro de la Ciudad de México. El nombre nace al importar las mercancías que embarcaban desde el puerto de Liverpool, Inglaterra.</p>
                   </div>
                </div>
-               <!-- EVEN ? text on RIGHT -->
+
+               <!-- 1936: Innovación Histórica -->
                <div class="tli">
                   <div class="tl-left">
-                     <div class="tlyear">2015</div>
-                     <h5>Fine Dining &amp; The Concept</h5>
-                     <p>Expanding the vision - we introduced our signature tasting menu and hired our first Michelin-trained chef, elevating our craft to remarkable new heights.</p>
+                     <div class="tlyear">1936</div>
+                     <h5>Pioneros en Innovación</h5>
+                     <p>Inauguramos el emblemático edificio de Liverpool Centro en la CDMX. Marcamos la historia del comercio al instalar la primera escalera eléctrica de todo el país, transformando la experiencia de compra.</p>
                   </div>
                   <div class="tl-center">
                      <div class="tldot"></div>
                   </div>
                   <div class="tl-right">
-                     <div class="tlyear">2015</div>
-                     <h5>Fine Dining &amp; The Concept</h5>
-                     <p>Expanding the vision - we introduced our signature tasting menu and hired our first Michelin-trained chef, elevating our craft to remarkable new heights.</p>
+                     <div class="tlyear">1936</div>
+                     <h5>Pioneros en Innovación</h5>
+                     <p>Inauguramos el emblemático edificio de Liverpool Centro en la CDMX. Marcamos la historia del comercio al instalar la primera escalera eléctrica de todo el país, transformando la experiencia de compra.</p>
                   </div>
                </div>
-               <!-- ODD ? text on LEFT -->
+
+               <!-- 1965: Expansión y Bolsa -->
                <div class="tli">
                   <div class="tl-left">
-                     <div class="tlyear">2019</div>
-                     <h5>Modern Fast Food Origins</h5>
-                     <p>Launched our signature fast-food line, merging gourmet quality with speed and convenience. Within 6 months we won 3 prestigious culinary awards nationally.</p>
+                     <div class="tlyear">1965</div>
+                     <h5>Crecimiento y Solidez</h5>
+                     <p>Comenzamos a cotizar en la Bolsa Mexicana de Valores (BMV) e inauguramos Liverpool Insurgentes, nuestra primera sucursal fuera del centro, consolidando un modelo de negocio financiero y comercial sumamente exitoso.</p>
                   </div>
                   <div class="tl-center">
                      <div class="tldot"></div>
                   </div>
                   <div class="tl-right">
-                     <div class="tlyear">2019</div>
-                     <h5>Modern Fast Food Origins</h5>
-                     <p>Launched our signature fast-food line, merging gourmet quality with speed and convenience. Within 6 months we won 3 prestigious culinary awards nationally.</p>
+                     <div class="tlyear">1965</div>
+                     <h5>Crecimiento y Solidez</h5>
+                     <p>Comenzamos a cotizar en la Bolsa Mexicana de Valores (BMV) e inauguramos Liverpool Insurgentes, nuestra primera sucursal fuera del centro, consolidando un modelo de negocio financiero y comercial sumamente exitoso.</p>
                   </div>
                </div>
-               <!-- EVEN ? text on RIGHT -->
+
+               <!-- 2026: Liderazgo Omnicanal -->
                <div class="tli">
                   <div class="tl-left">
-                     <div class="tlyear">2026</div>
-                     <h5>National Expansion</h5>
-                     <p>Now operating in 8 cities across the US with an online delivery platform handling 10,000+ orders weekly - and growing every single day.</p>
+                     <div class="tlyear">Hoy</div>
+                     <h5>Liderazgo y Transformación Digital</h5>
+                     <p>Con más de 170 almacenes, centros de distribución de última generación como ARCO y una sólida plataforma digital, somos el ecosistema omnicanal líder en retail de México, impulsado por el mejor talento del país.</p>
                   </div>
                   <div class="tl-center">
                      <div class="tldot"></div>
                   </div>
                   <div class="tl-right">
-                     <div class="tlyear">2026</div>
-                     <h5>National Expansion</h5>
-                     <p>Now operating in 8 cities across the US with an online delivery platform handling 10,000+ orders weekly - and growing every single day.</p>
+                     <div class="tlyear">Hoy</div>
+                     <h5>Liderazgo y Transformación Digital</h5>
+                     <p>Con más de 170 almacenes, centros de distribución de última generación como ARCO y una sólida plataforma digital, somos el ecosistema omnicanal líder en retail de México, impulsado por el mejor talento del país.</p>
                   </div>
                </div>
+
             </div>
          </div>
       </section>
-	  
-	  
-      <!-- CHEFS -->
-      <section id="chefs">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">The Culinary Team</span>
-               <h2 class="stitle">Meet Our Expert <span>Chefs</span></h2>
-               <div class="sline"></div>
-            </div>
-            <div class="row g-4">
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="img/chefs/1.jpg" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Alice Mortal</div>
-                        <div class="chrole">Head Chef</div>
-                        <div class="chexp">12 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="img/chefs/2.jpg" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Michael Corn</div>
-                        <div class="chrole">Grill Master</div>
-                        <div class="chexp">8 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="img/chefs/3.jpg" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">Faz Chowdel</div>
-                        <div class="chrole">Pastry Chef</div>
-                        <div class="chexp">10 years experience</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                  <div class="chcard">
-                     <div class="chimg">
-                        <img src="img/chefs/4.jpg" alt=""/>
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div>
-                     </div>
-                     <div class="chbody">
-                        <div class="chnm">William Latnum</div>
-                        <div class="chrole">Pizza Artisan</div>
-                        <div class="chexp">9 years experience</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-	  
-	  
-      <!-- HOURS -->
-      <section id="hours">
-         <div class="hrsbg"></div>
-         <div class="container" style="position:relative;z-index:2;">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl" style="color:#a5d6bc;">Opening Hours</span>
-               <h2 class="stitle" style="color:#fff;">We're Open <span style="color:var(--secondary);">For You</span></h2>
-               <div class="sline"></div>
-            </div>
-            <div class="row g-4 align-items-start">
-               <div class="col-lg-5" data-aos="fade-right">
-                  <div class="hrscard">
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Monday - Tuesday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot off"></div>
-                           <span class="hrstime" style="color:#ff6b6b;">Closed</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Wednesday - Thursday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">09:00 AM - 10:00 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Friday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">09:00 AM - 11:00 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Saturday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">10:00 AM - 11:30 PM</span>
-                        </div>
-                     </div>
-                     <div class="hrsrow">
-                        <span class="hrsday"><i class="fas fa-calendar-day me-2" style="color:var(--secondary);"></i>Sunday</span>
-                        <div class="d-flex align-items-center gap-2">
-                           <div class="hdot on"></div>
-                           <span class="hrstime">11:00 AM - 09:00 PM</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-3" data-aos="zoom-in">
-                  <div class="hrscta">
-                     <i class="fas fa-truck-fast fa-2x mb-3" style="color:rgba(255,255,255,.8);"></i>
-                     <h4>Order Online</h4>
-                     <p>Get hot food delivered in 25 minutes</p>
-                     <a href="#menu" class="btnw">Order Now ?</a>
-                  </div>
-               </div>
-               <div class="col-lg-4" data-aos="fade-left">
-                  <div class="hrscard">
-                     <h5 style="color:#fff;margin-bottom:18px;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;"><i class="fas fa-map-marker-alt me-2" style="color:var(--secondary);"></i>Find Us</h5>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-location-dot me-2" style="color:var(--secondary);"></i>Address</span><span class="hrstime" style="font-size:.8rem;">42 Flavor Street, NY</span></div>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-phone me-2" style="color:var(--secondary);"></i>Phone</span><span class="hrstime" style="font-size:.8rem;">+1 (800) 123-4567</span></div>
-                     <div class="hrsrow"><span class="hrsday"><i class="fas fa-envelope me-2" style="color:var(--secondary);"></i>Email</span><span class="hrstime" style="font-size:.8rem;">hello@sarabfood.com</span></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-	  
-	  
-      <!-- TESTIMONIALS -->
-      <section id="testimonials">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">What People Say</span>
-               <h2 class="stitle">Our Customers <span>Feedback</span></h2>
-               <div class="sline"></div>
-            </div>
-            <div class="swiper tesSwiper" data-aos="fade-up">
-               <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Honestly the best burgers I've ever had. The smash burger is incredible - perfectly crispy edges, juicy inside, and those pickles! We come every Friday now.</p>
-                        <div class="tesauth">
-                           <img src="img/testimonial/1.jpg" alt=""/>
-                           <div>
-                              <div class="tesnm">Monica Wilber</div>
-                              <div class="tesrl">Regular Customer</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Ordered delivery and the food arrived hot and fresh in 22 minutes. Portions are generous. Sarab has become my go-to comfort food spot without question.</p>
-                        <div class="tesauth">
-                           <img src="img/testimonial/2.jpg" alt=""/>
-                           <div>
-                              <div class="tesnm">Cameron Fox</div>
-                              <div class="tesrl">Food Blogger</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">The truffle pasta blew my mind. I didn't expect that quality from a fast food place. Great ambiance, super friendly staff. Highly recommended!</p>
-                        <div class="tesauth">
-                           <img src="img/testimonial/3.jpg" alt=""/>
-                           <div>
-                              <div class="tesnm">Priya Sharma</div>
-                              <div class="tesrl">Food Enthusiast</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="tescard">
-                        <div class="tesq">"</div>
-                        <div class="tess"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="testxt">Catered our office party of 50 people and everything was flawless. Fresh, delicious, on time and well presented. Nashville chicken was the absolute star!</p>
-                        <div class="tesauth">
-                           <img src="img/testimonial/4.jpg" alt=""/>
-                           <div>
-                              <div class="tesnm">David Park</div>
-                              <div class="tesrl">Corporate Client</div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="swiper-pagination mt-4" style="position:static;"></div>
-            </div>
-         </div>
-      </section>
-	  
-      <!-- RESERVATION FORM -->
-      <section id="reservation">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">Book a Table</span>
-               <h2 class="stitle">Make a <span>Reservation</span></h2>
-               <div class="sline"></div>
-               <p class="sdesc mx-auto" style="max-width:480px;">Reserve your table for a memorable dining experience. We recommend booking 24 hours in advance for weekend evenings.</p>
-            </div>
-            <div class="row g-4 align-items-start">
-               <div class="col-lg-4" data-aos="fade-right">
-                  <div style="background:var(--dark);border-radius:18px;padding:36px;">
-                     <h4 style="color:#fff;font-size:1.3rem;margin-bottom:8px;">Contact Info</h4>
-                     <p style="color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:26px;">We're happy to help you plan the perfect dining experience.</p>
-                     <div class="d-flex flex-column gap-3">
-                        <div class="d-flex align-items-center gap-3">
-                           <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-clock"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Opening Hours</strong><span style="color:#fff;font-size:.87rem;">Wed - Sun, 9 AM - 11 PM</span></div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                           <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-phone-alt"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Call for Booking</strong><span style="color:#fff;font-size:.87rem;">+1 (800) 123-4567</span></div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                           <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-users"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Group Dining</strong><span style="color:#fff;font-size:.87rem;">Special menus for 10+ guests</span></div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                           <div style="width:46px;height:46px;border-radius:11px;background:rgba(232,40,26,.2);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.1rem;flex-shrink:0;"><i class="fas fa-map-marker-alt"></i></div>
-                           <div><strong style="display:block;color:#ccc;font-size:.78rem;text-transform:uppercase;letter-spacing:.8px;">Location</strong><span style="color:#fff;font-size:.87rem;">42 Flavor Street, NY</span></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-8" data-aos="fade-left">
-                  <div class="fcard">
-                     <div class="row g-3">
-                        <div class="col-sm-6"><label class="flbl">Full Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>
-                        <div class="col-sm-6"><label class="flbl">Phone Number *</label><input type="tel" class="fctrl" placeholder="+1 (800) 000-0000"/></div>
-                        <div class="col-sm-6"><label class="flbl">Email Address *</label><input type="email" class="fctrl" placeholder="you@email.com"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Number of Guests *</label>
-                           <select class="fctrl">
-                              <option>1 Person</option>
-                              <option>2 People</option>
-                              <option>3 - 4 People</option>
-                              <option>5 - 6 People</option>
-                              <option>7 -10 People</option>
-                              <option>10+ People</option>
-                           </select>
-                        </div>
-                        <div class="col-sm-6"><label class="flbl">Date *</label><input type="date" class="fctrl"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Time *</label>
-                           <select class="fctrl">
-                              <option>09:00 AM</option>
-                              <option>10:00 AM</option>
-                              <option>11:00 AM</option>
-                              <option>12:00 PM</option>
-                              <option>01:00 PM</option>
-                              <option>02:00 PM</option>
-                              <option>06:00 PM</option>
-                              <option>07:00 PM</option>
-                              <option>08:00 PM</option>
-                              <option>09:00 PM</option>
-                              <option>10:00 PM</option>
-                           </select>
-                        </div>
-                        <div class="col-12"><label class="flbl">Special Requests</label><textarea class="fctrl" rows="3" placeholder="Allergies, dietary needs, special occasions..."></textarea></div>
-                        <div class="col-12"><button class="btn-red w-100 justify-content-center" id="resBtn"><i class="fas fa-calendar-check"></i>Confirm Reservation</button></div>
-                     </div>
-                     <div class="sucmsg" id="resOk">
-                        <i class="fas fa-check-circle"></i>
-                        <p>Table reserved! We'll confirm via email shortly.</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-	  
-      <!-- BLOG -->
-      <section id="blog">
-         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">News &amp; Updates</span>
-               <h2 class="stitle">Our Latest <span>Blog</span> Posts</h2>
-               <div class="sline"></div>
-            </div>
-            <div class="row g-4">
-               <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-                  <div class="blcard">
-                     <div class="blimg">
-                        <img src="img/blog/1.jpg" alt=""/>
-                        <div class="bldatebdg"><span class="bd">14</span><span class="bm">Mar</span></div>
-                     </div>
-                     <div class="blbody">
-                        <div class="bltag">Food &amp; Health</div>
-                        <div class="bltit"><a href="#">Healthy Fast Food: A Myth or Beautiful Reality</a></div>
-                        <div class="blmeta"><span><i class="fas fa-user"></i>James Writer</span><span><i class="fas fa-comment"></i>24 Comments</span></div>
-                        <a href="#" class="blmore">Read More <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
-                  <div class="blcard">
-                     <div class="blimg">
-                        <img src="img/blog/2.jpg" alt=""/>
-                        <div class="bldatebdg"><span class="bd">28</span><span class="bm">Feb</span></div>
-                     </div>
-                     <div class="blbody">
-                        <div class="bltag">Food Science</div>
-                        <div class="bltit"><a href="#">Is Fast Food Getting Healthier? Here's What We Found</a></div>
-                        <div class="blmeta"><span><i class="fas fa-user"></i>Sarah Grain</span><span><i class="fas fa-comment"></i>18 Comments</span></div>
-                        <a href="#" class="blmore">Read More <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
-                  <div class="blcard">
-                     <div class="blimg">
-                        <img src="img/blog/3.jpg" alt=""/>
-                        <div class="bldatebdg"><span class="bd">05</span><span class="bm">Jan</span></div>
-                     </div>
-                     <div class="blbody">
-                        <div class="bltag">Recipes</div>
-                        <div class="bltit"><a href="#">Innovative Hot Chickpeas Flake Crackin' Recipe at Home</a></div>
-                        <div class="blmeta"><span><i class="fas fa-user"></i>Chef Marcus</span><span><i class="fas fa-comment"></i>32 Comments</span></div>
-                        <a href="#" class="blmore">Read More <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-	  
+
       <!-- NEWSLETTER -->
       <section id="newsletter">
          <div class="nlbg"></div>
@@ -988,149 +695,205 @@
             </div>
          </div>
       </section>
-	  
-      <!-- ============================================================
-         FIX 6 � CONTACT FORM
+
+<!-- ============================================================
+         EQUIPO DE DESARROLLO (Antes Chefs)
          ============================================================ -->
-      <section id="contact-section">
+      <section id="chefs">
          <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-               <span class="slbl">Get In Touch</span>
-               <h2 class="stitle">Contact <span>Us</span></h2>
+               <span class="slbl">Célula Tecnológica</span>
+               <h2 class="stitle">Equipo de <span>Desarrollo</span></h2>
                <div class="sline"></div>
-               <p class="sdesc mx-auto" style="max-width:480px;">Have a question, feedback, or want to plan a special event? We'd love to hear from you.</p>
+               <p class="sdesc mx-auto" style="max-width:480px;">Los ingenieros detrás de la arquitectura, diseño e implementación de la plataforma de talento.</p>
             </div>
-            <div class="row g-4">
-               <div class="col-lg-4" data-aos="fade-right">
-                  <div class="ctdark">
-                     <h4>Let's Talk</h4>
-                     <p class="ctsub">We typically respond within 2 hours during business hours.</p>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="ctinfo"><strong>Address</strong><span>42 Flavor Street, Manhattan,<br/>New York, NY 10001</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-phone-alt"></i></div>
-                        <div class="ctinfo"><strong>Phone</strong><span>+1 (800) 123-4567</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-envelope"></i></div>
-                        <div class="ctinfo"><strong>Email</strong><span>hello@sarabfood.com</span></div>
-                     </div>
-                     <div class="ctitem">
-                        <div class="cticon"><i class="fas fa-clock"></i></div>
-                        <div class="ctinfo"><strong>Working Hours</strong><span>Wed - Sun: 9 AM - 11 PM</span></div>
-                     </div>
-                     <div class="ctsocrow">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-8" data-aos="fade-left">
-                  <div class="fcard">
-                     <div class="row g-3">
-                        <div class="col-sm-6"><label class="flbl">Your Name *</label><input type="text" class="fctrl" placeholder="John Doe"/></div>
-                        <div class="col-sm-6"><label class="flbl">Email Address *</label><input type="email" class="fctrl" placeholder="you@email.com"/></div>
-                        <div class="col-sm-6"><label class="flbl">Phone Number</label><input type="tel" class="fctrl" placeholder="+1 (800) 000-0000"/></div>
-                        <div class="col-sm-6">
-                           <label class="flbl">Subject *</label>
-                           <select class="fctrl">
-                              <option>General Inquiry</option>
-                              <option>Catering &amp; Events</option>
-                              <option>Feedback</option>
-                              <option>Partnership</option>
-                              <option>Media &amp; Press</option>
-                           </select>
+            
+            <div class="row g-4 justify-content-center">
+               
+               <!-- INTEGRANTE 1: Daniela Maldonado -->
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                  <div class="chcard">
+                     <div class="chimg">
+                        <img src="img/team/daniela.jpg" alt="Daniela Maldonado"/>
+                        <div class="chsoc">
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fas fa-envelope"></i></a>
                         </div>
-                        <div class="col-12"><label class="flbl">Message *</label><textarea class="fctrl" rows="5" placeholder="Write your message here..."></textarea></div>
-                        <div class="col-12"><button class="btn-red" id="ctcBtn"><i class="fas fa-paper-plane"></i>Send Message</button></div>
                      </div>
-                     <div class="sucmsg" id="ctcOk">
-                        <i class="fas fa-check-circle"></i>
-                        <p>Message sent! We'll reply within 2 hours.</p>
+                     <div class="chbody">
+                        <div class="chnm">Daniela Maldonado</div>
+                        <div class="chrole">Lead Software Engineer</div>
+                        <div class="chexp">Arquitectura de Software y Cloud</div>
                      </div>
                   </div>
                </div>
-            </div>
+
+               <!-- INTEGRANTE 2 -->
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
+                  <div class="chcard">
+                     <div class="chimg">
+                        <img src="img/team/dev2.jpg" alt="Desarrollador 2"/>
+                        <div class="chsoc">
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                     </div>
+                     <div class="chbody">
+                        <div class="chnm">Carlos Fuentes</div>
+                        <div class="chrole">Backend Developer</div>
+                        <div class="chexp">Gestión de APIs y Sockets</div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- INTEGRANTE 3 -->
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
+                  <div class="chcard">
+                     <div class="chimg">
+                        <img src="img/team/dev3.jpg" alt="Desarrollador 3"/>
+                        <div class="chsoc">
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                     </div>
+                     <div class="chbody">
+                        <div class="chnm">Sofía Altamirano</div>
+                        <div class="chrole">Frontend Engineer</div>
+                        <div class="chexp">Diseño de Interfaz y UX/UI</div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- INTEGRANTE 4 -->
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="240">
+                  <div class="chcard">
+                     <div class="chimg">
+                        <img src="img/team/dev4.jpg" alt="Desarrollador 4"/>
+                        <div class="chsoc">
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                     </div>
+                     <div class="chbody">
+                        <div class="chnm">Alejandro Gómez</div>
+                        <div class="chrole">DevOps &amp; Infraestructura</div>
+                        <div class="chexp">Docker y Despliegue Multi-Cloud</div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- INTEGRANTE 5 -->
+               <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="320">
+                  <div class="chcard">
+                     <div class="chimg">
+                        <img src="img/team/dev5.jpg" alt="Desarrollador 5"/>
+                        <div class="chsoc">
+                           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                           <a href="#"><i class="fab fa-github"></i></a>
+                           <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                     </div>
+                     <div class="chbody">
+                        <div class="chnm">Elena Rostova</div>
+                        <div class="chrole">Data Analyst &amp; QA</div>
+                        <div class="chexp">Modelado Estadístico y Pruebas</div>
+                     </div>
+                  </div>
+               </div>
+
+            </div> <!-- end row -->
          </div>
       </section>
-	  
-      <!-- FOOTER -->
+
+<!-- ============================================================
+         FOOTER / PIE DE PÁGINA CORPORATIVO
+         ============================================================ -->
       <footer>
          <div class="container">
             <div class="row g-5">
+               
+               <!-- COLUMNA 1: IDENTIDAD -->
                <div class="col-lg-4">
-                  <div class="fnm">Sar<span>ab</span></div>
-                  <p class="fdesc">We bring the world's finest flavors together in a fast, friendly, and affordable experience. Every meal crafted with love.</p>
+                  <div class="fnm">Bolsa<span>Talento</span></div>
+                  <p class="fdesc">Conectando el mejor talento de México con las grandes oportunidades de crecimiento en El Puerto de Liverpool. Tu próximo gran paso profesional comienza aquí.</p>
                   <div class="fsoc">
-                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                     <a href="#"><i class="fab fa-instagram"></i></a>
-                     <a href="#"><i class="fab fa-twitter"></i></a>
-                     <a href="#"><i class="fab fa-youtube"></i></a>
-                     <a href="#"><i class="fab fa-tiktok"></i></a>
+                     <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                     <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                     <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                     <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
                   </div>
                </div>
+               
+               <!-- COLUMNA 2: ENLACES RÁPIDOS -->
                <div class="col-sm-6 col-lg-2">
-                  <div class="ftit">Quick Links</div>
+                  <div class="ftit">Enlaces Rápidos</div>
                   <ul class="flinks ps-0">
-                     <li><a href="#hero"><i class="fas fa-chevron-right"></i>Home</a></li>
-                     <li><a href="#about"><i class="fas fa-chevron-right"></i>About Us</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Our Menu</a></li>
-                     <li><a href="#reservation"><i class="fas fa-chevron-right"></i>Reservation</a></li>
-                     <li><a href="#blog"><i class="fas fa-chevron-right"></i>Blog</a></li>
-                     <li><a href="#contact-section"><i class="fas fa-chevron-right"></i>Contact</a></li>
+                     <li><a href="#hero"><i class="fas fa-chevron-right"></i>Inicio</a></li>
+                     <li><a href="#special"><i class="fas fa-chevron-right"></i>Beneficios</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Vacantes</a></li>
+                     <li><a href="#history"><i class="fas fa-chevron-right"></i>Historia</a></li>
+                     <li><a href="#gallery"><i class="fas fa-chevron-right"></i>Casos de Éxito</a></li>
+                     <li><a href="#chefs"><i class="fas fa-chevron-right"></i>Célula Dev</a></li>
                   </ul>
                </div>
+               
+               <!-- COLUMNA 3: ÁREAS DE INTERÉS -->
                <div class="col-sm-6 col-lg-2">
-                  <div class="ftit">Our Menu</div>
+                  <div class="ftit">Áreas de Empleo</div>
                   <ul class="flinks ps-0">
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Burgers</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Pizza</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Fried Chicken</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Wraps &amp; Rolls</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Pasta</a></li>
-                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Desserts</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Tecnología (TI)</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Ventas y Piso</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Gestión y Admin</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Logística y CEDIS</a></li>
+                     <li><a href="#menu"><i class="fas fa-chevron-right"></i>Corporativo</a></li>
                   </ul>
                </div>
+               
+               <!-- COLUMNA 4: CONTACTO -->
                <div class="col-lg-4">
-                  <div class="ftit">Get In Touch</div>
+                  <div class="ftit">Contacto Talento</div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-map-marker-alt"></i></div>
-                     <div class="fciinfo"><strong>Address</strong>42 Flavor Street, Manhattan, NY 10001</div>
+                     <div class="fciinfo"><strong>Dirección Corporativa</strong>Mario Pani 200, Santa Fe, Cuajimalpa, CDMX, México.</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-phone-alt"></i></div>
-                     <div class="fciinfo"><strong>Phone</strong>+1 (800) 123-4567</div>
+                     <div class="fciinfo"><strong>Atención a Candidatos</strong>55-5263-6900</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-envelope"></i></div>
-                     <div class="fciinfo"><strong>Email</strong>hello@sarabfood.com</div>
+                     <div class="fciinfo"><strong>Soporte Técnico Portal</strong>talento@liverpool.com.mx</div>
                   </div>
                   <div class="fci">
                      <div class="fciico"><i class="fas fa-clock"></i></div>
-                     <div class="fciinfo"><strong>Hours</strong>Wed - Sun: 09 AM - 11 PM</div>
+                     <div class="fciinfo"><strong>Horario de Atención</strong>Lun - Vie: 09:00 AM - 06:00 PM</div>
                   </div>
                </div>
             </div>
          </div>
+         
+         <!-- DERECHOS Y PRIVACIDAD -->
          <div class="fbot">
             <div class="container">
                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                  <p>&copy 2026 <span>Sarab Restaurant</span>. All Rights Reserved by <a target="_blank" class="mx-0 fw-bold text-success" href="https://bestwpware.com/">Bestwpware</a>. Made with <span><i class="fas fa-heart"></i></span>  <br>Distributed by <a target="_blank" class="mx-0 fw-bold text-success" href="https://themewagon.com">ThemeWagon</a></p>
-                  <div><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+                  <p>&copy 2026 <span>El Puerto de Liverpool</span>. Proyecto Académico de Ingeniería en Sistemas. Hecho con <span><i class="fas fa-heart" style="color: var(--primary);"></i></span> por la Célula de Desarrollo.</p>
+                  <div><a href="#">Aviso de Privacidad</a><a href="#">Términos y Condiciones</a><a href="#">Cookies</a></div>
                </div>
             </div>
          </div>
       </footer>
-      <!-- Floating cart -->
-      <!-- <div class="cartfl"><i class="fas fa-shopping-cart"></i><span>My Cart</span><div class="ccount" id="cartCount">0</div></div> -->
-      <!-- Back to top -->
+
+      <!-- Back to top (Mantiene funcionalidad original) -->
       <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
     
-	<!-- jQuery -->
+      <!-- ============================================================
+         SCRIPTS DE LA PLANTILLA
+         ============================================================ -->
+      <!-- jQuery -->
       <script src="js/jquery-3.7.1.min.js"></script>
       <!-- Bootstrap 5 -->
       <script src="js/bootstrap.bundle.min.js"></script>
