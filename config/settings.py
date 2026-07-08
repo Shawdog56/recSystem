@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recluitment',
+    'auth2fa',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql' if config('POSTGRES_HOST', default='') else 'django.db.backends.sqlite3',
+        'NAME': config('POSTGRES_DB', default=BASE_DIR / 'db.sqlite3'),
+        'USER': config('POSTGRES_USER', default=''),
+        'PASSWORD': config('POSTGRES_PASSWORD', default=''),
+        'HOST': config('POSTGRES_HOST', default=''),
+        'PORT': config('POSTGRES_PORT', default='5432'),
     }
 }
 
@@ -116,3 +122,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# ==============================================================================
+# Configuración de correo electrónico (Google SMTP)
+# ==============================================================================
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+
+# ==============================================================================
+# Configuración de tokens de verificación (auth2fa)
+# ==============================================================================
+TOKEN_LENGTH = 6
+TOKEN_EXPIRY_MINUTES = 10
+
+# Asuntos de correos (configurables desde .env)
+VERIFICATION_EMAIL_SUBJECT = config(
+    'VERIFICATION_EMAIL_SUBJECT',
+    default='Código de verificación — Recruitment System',
+)
+PASSWORD_CHANGE_EMAIL_SUBJECT = config(
+    'PASSWORD_CHANGE_EMAIL_SUBJECT',
+    default='Código para cambio de contraseña — Recruitment System',
+)
