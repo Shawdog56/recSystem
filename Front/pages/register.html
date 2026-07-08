@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="registro">
+
+    <h2>Crear Cuenta</h2>
+    <p>Completa tus datos para registrarte</p>
+
+    <form method="POST">
+        
+
+        <div class="grupo">
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+        </div>
+
+        <div class="grupo">
+            <input type="password" name="password" placeholder="Contraseña" required>
+        </div>
+
+        <div class="grupo">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+        </div>
+
+        <div class="grupo">
+            <input type="text" name="apellidos" placeholder="Apellidos">
+        </div>
+
+        <div class="grupo">
+            <input type="text" name="telefono" placeholder="Teléfono" required>
+        </div>
+
+        <div class="grupo">
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+        </div>
+
+        <button class="btn" type="submit">
+            Registrarse
+        </button>
+    </form>
+
+    <div class="login">
+        ¿Ya tienes una cuenta?
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    </div>
+
+</div>
+
+</body>
+</html>
