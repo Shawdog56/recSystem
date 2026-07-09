@@ -25,7 +25,7 @@ def register(request):
             correo=correo
         )
         new_user.save()
-        return redirect('login/') # Redirect to login page after registration
+        return redirect('pages_login') # Redirect to login page after registration
         
     return render(request, 'pages/register.html')
 
@@ -47,3 +47,11 @@ def login_view(request):
             messages.error(request, "User does not exist")
             
     return render(request, 'pages/login.html')
+
+
+def forgot_password_view(request):
+    return render(request, 'pages/forgot-password.html')
+
+
+def verification_code_view(request):
+    return render(request, 'pages/verification_code.html')
