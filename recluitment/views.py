@@ -27,7 +27,7 @@ def register(request):
         new_user.save()
         return redirect('login/') # Redirect to login page after registration
         
-    return render(request, 'register.html')
+    return render(request, 'pages/register.html')
 
 
 def login_view(request):
@@ -46,4 +46,4 @@ def login_view(request):
         except Usuario.DoesNotExist:
             messages.error(request, "User does not exist")
             
-    return render(request, 'login.html')
+    return render(request, 'pages/login.html')
