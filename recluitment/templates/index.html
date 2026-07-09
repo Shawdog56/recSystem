@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -12,15 +12,15 @@
       <!-- Bootstrap 5.3 -->
       <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
       <!-- AOS Animate on Scroll -->
-      <link href="css/aos.css" rel="stylesheet"/>
+      <link href="{% static 'css/aos.css' %}" rel="stylesheet"/>
       <!-- Swiper -->
-      <link href="css/swiper-bundle.min.css" rel="stylesheet"/>
+      <link href="{% static 'css/swiper-bundle.min.css' %}" rel="stylesheet"/>
       <!-- all min css -->
-      <link rel="stylesheet" href="css/all.min.css"/>
+      <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
       <!-- magnific CSS -->
-      <link rel="stylesheet" href="css/magnific-popup.css"/>
+      <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
       <!-- Style CSS -->
-      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
    </head>
    <body>
       <!-- ============================================================
@@ -111,7 +111,7 @@
                   <p class="hdesc">Tu talento es la pieza clave que nos impulsa a innovar. Únete a El Puerto de Liverpool y encuentra un espacio donde tus ideas, pasión y crecimiento no tienen límites.</p>
                   <div class="d-flex flex-wrap gap-3 mb-2">
                      <!-- El botón principal ahora los manda a loggearse o ver vacantes -->
-                     <a href="pages/login.html" class="btn btn-red text-white d-inline-flex align-items-center"><i class="fas fa-user-plus me-2"></i>Postularme Ahora</a>                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
+                     <a href="{% url 'pages_login' %}" class="btn btn-red text-white d-inline-flex align-items-center"><i class="fas fa-user-plus me-2"></i>Postularme Ahora</a>                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="magnific_popup btn-play popup-youtube">
                         <div class="pico"><i class="fas fa-play"></i></div>
                         <span>Conoce Nuestra Cultura</span>
@@ -132,7 +132,7 @@
                   <div style="position:relative;text-align:center;">
                      <div class="hcircle">
                         <!-- TIP: Aquí pon una imagen circular de colaboradores o el logo rosa corporativo -->
-                        <img src="img/banner-img.jpg" alt="Liverpool Team"/>
+                        <img src="{% static 'img/banner-img.jpg' %}" alt="Liverpool Team"/>
                      </div>
                      <!-- Cambiamos los globos flotantes de la hamburguesa a beneficios del empleo -->
                      <div class="fcard fc1">
@@ -188,42 +188,42 @@
             <div class="row g-3 justify-content-center">
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="0">
                   <div class="catcard" data-filter="all">
-                     <img class="catimg" src="img/category/1.jpg" alt="Todas"/>
+                     <img class="catimg" src="{% static 'img/category/1.jpg' %}" alt="Todas"/>
                      <div class="catnm">Todas</div>
                      <div class="catct">Ver todo</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="70">
                   <div class="catcard" data-filter="ventas">
-                     <img class="catimg" src="img/category/2.jpg" alt="Ventas"/>
+                     <img class="catimg" src="{% static 'img/category/2.jpg' %}" alt="Ventas"/>
                      <div class="catnm">Piso de Venta</div>
                      <div class="catct">Cajeros y Asesores</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="140">
                   <div class="catcard" data-filter="logistica">
-                     <img class="catimg" src="img/category/3.jpg" alt="Logística"/>
+                     <img class="catimg" src="{% static 'img/category/3.jpg' %}" alt="Logística"/>
                      <div class="catnm">Logística / CEDIS</div>
                      <div class="catct">Distribución</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="210">
                   <div class="catcard" data-filter="tecnologia">
-                     <img class="catimg" src="img/category/4.jpg" alt="TI"/>
+                     <img class="catimg" src="{% static 'img/category/4.jpg' %}" alt="TI"/>
                      <div class="catnm">Tecnología / TI</div>
                      <div class="catct">Células Ágiles</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="280">
                   <div class="catcard" data-filter="corporativo">
-                     <img class="catimg" src="img/category/5.jpg" alt="Corporativo"/>
+                     <img class="catimg" src="{% static 'img/category/5.jpg' %}" alt="Corporativo"/>
                      <div class="catnm">Corporativo</div>
                      <div class="catct">Administración</div>
                   </div>
                </div>
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="350">
                   <div class="catcard" data-filter="atencion">
-                     <img class="catimg" src="img/category/6.jpg" alt="Atención"/>
+                     <img class="catimg" src="{% static 'img/category/6.jpg' %}" alt="Atención"/>
                      <div class="catnm">Atención a Clientes</div>
                      <div class="catct">Call Center</div>
                   </div>
@@ -241,8 +241,8 @@
                <div class="col-lg-5" data-aos="fade-right">
                   <div class="astack">
                      <div class="aexp"><span class="anum">GPTW</span><small>Great Place<br/>To Work</small></div>
-                     <div class="amain"><img src="img/about1.jpg" alt="Liverpool Corporativo"/></div>
-                     <div class="asm"><img src="img/about2.jpg" alt="Colaboradores"/></div>
+                     <div class="amain"><img src="{% static 'img/about1.jpg' %}" alt="Liverpool Corporativo"/></div>
+                     <div class="asm"><img src="{% static 'img/about2.jpg' %}" alt="Colaboradores"/></div>
                   </div>
                </div>
                <div class="col-lg-7" data-aos="fade-left">
@@ -273,7 +273,7 @@
                         </div>
                      </div>
                   </div>
-                  <a href="pages/login.html" class="btn-red"><i class="fas fa-sign-in-alt"></i>Registra tu Currículum</a>
+                  <a href="{% url 'pages_login' %}" class="btn-red"><i class="fas fa-sign-in-alt"></i>Registra tu Currículum</a>
                </div>
             </div>
          </div>
@@ -304,7 +304,7 @@
                <!-- CARD 1: TI -->
                <div class="col-sm-6 col-lg-4 mwrap" data-c="ti" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/ti-1.jpg"
+                     data-img="{% static 'img/menu/ti-1.jpg' %}"
                      data-title="Desarrollador Backend Senior"
                      data-cat="Tecnología (TI)"
                      data-price="Competitivo" data-old="CDMX"
@@ -313,7 +313,7 @@
                      data-desc="Buscamos un Ingeniero de Software para integrarse a nuestras células ágiles de comercio electrónico. Experiencia sólida en APIs, microservicios y despliegues en la nube."
                      data-tags="Urgente,TI,Sistemas">
                      <div class="mimg">
-                        <img src="img/menu/1.jpg" alt="Backend Dev"/>
+                        <img src="{% static 'img/menu/1.jpg' %}" alt="Backend Dev"/>
                         <div class="mbdg hot"><i class="fas fa-fire"></i> Destacada</div>
                         <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
@@ -326,7 +326,7 @@
                               <div class="mprice">Sueldo Competitivo</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 9432</span></div>
                            </div>
-                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="{% url 'pages_login' %}" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -335,7 +335,7 @@
                <!-- CARD 2: Ventas -->
                <div class="col-sm-6 col-lg-4 mwrap" data-c="ventas" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/ventas-1.jpg"
+                     data-img="{% static 'img/menu/ventas-1.jpg' %}"
                      data-title="Asesor de Ventas - Liverpool Insurgentes"
                      data-cat="Ventas"
                      data-price="Sueldo base + Comisiones" data-old="CDMX"
@@ -344,7 +344,7 @@
                      data-desc="Únete al equipo en piso de venta. Atención personalizada a clientes, alcance de metas mensuales y gestión de inventario básico en departamento."
                      data-tags="Comisiones,Ventas,Tienda">
                      <div class="mimg">
-                        <img src="img/menu/2.jpg" alt="Asesor de ventas"/>
+                        <img src="{% static 'img/menu/2.jpg' %}" alt="Asesor de ventas"/>
                         <div class="mbdg" style="background:var(--secondary);"><i class="fas fa-star"></i> Nueva</div>
                         <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
@@ -357,7 +357,7 @@
                               <div class="mprice">Base + Comisiones</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 8821</span></div>
                            </div>
-                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="{% url 'pages_login' %}" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -366,7 +366,7 @@
                <!-- CARD 3: Gestión -->
                <div class="col-sm-6 col-lg-4 mwrap" data-c="gestion" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/gestion-1.jpg"
+                     data-img="{% static 'img/menu/gestion-1.jpg' %}"
                      data-title="Analista de Inventarios y Gestión"
                      data-cat="Gestión / Admin"
                      data-price="Competitivo" data-old="EdoMex"
@@ -375,7 +375,7 @@
                      data-desc="Responsable de la auditoría de entradas y salidas de mercancía, generación de reportes y enlace logístico corporativo."
                      data-tags="Administración,Inventarios">
                      <div class="mimg">
-                        <img src="img/menu/3.jpg" alt="Analista Admin"/>
+                        <img src="{% static 'img/menu/3.jpg' %}" alt="Analista Admin"/>
                         <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
                      <div class="mbody">
@@ -387,7 +387,7 @@
                               <div class="mprice">Prestaciones Superiores</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 7311</span></div>
                            </div>
-                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="{% url 'pages_login' %}" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -396,7 +396,7 @@
                <!-- CARD 4: Transporte -->
                <div class="col-sm-6 col-lg-4 mwrap" data-c="transporte" data-aos="fade-up">
                   <div class="mcard"
-                     data-img="img/menu/transporte-1.jpg"
+                     data-img="{% static 'img/menu/transporte-1.jpg' %}"
                      data-title="Chofer de Distribución - CEDIS"
                      data-cat="Transporte / CEDIS"
                      data-price="Atractivo" data-old="EdoMex"
@@ -405,7 +405,7 @@
                      data-desc="Operación de unidades de reparto para distribución intertiendas o última milla. Licencia vigente obligatoria."
                      data-tags="Transporte,CEDIS,Logística">
                      <div class="mimg">
-                        <img src="img/menu/4.jpg" alt="Chofer Logística"/>
+                        <img src="{% static 'img/menu/4.jpg' %}" alt="Chofer Logística"/>
                         <div class="mbdg hot"><i class="fas fa-truck"></i> Urgente</div>
                         <div class="mhrt"><i class="far fa-bookmark"></i></div>
                      </div>
@@ -418,7 +418,7 @@
                               <div class="mprice">Bonos de Productividad</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 6524</span></div>
                            </div>
-                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="{% url 'pages_login' %}" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -428,7 +428,7 @@
 
             <!-- BOTÓN QUE LLEVA AL LOGIN PARA VER MÁS -->
             <div class="text-center mt-5">
-               <a href="pages/login.html" class="btn-red"><i class="fas fa-search-plus"></i>Ver Otras Vacantes</a>
+               <a href="{% url 'pages_login' %}" class="btn-red"><i class="fas fa-search-plus"></i>Ver Otras Vacantes</a>
             </div>
          </div>
       </section>
@@ -457,7 +457,7 @@
                
                <div class="mptags" id="mpTags"></div>
                <!-- Cambiamos el botón de carrito por uno de postulación corporativa -->
-               <a href="pages/login.html" class="btn-red text-center d-block w-100" style="text-decoration:none; line-height:40px;">
+               <a href="{% url 'pages_login' %}" class="btn-red text-center d-block w-100" style="text-decoration:none; line-height:40px;">
                   <i class="fas fa-user-check me-2"></i>Iniciar Sesión para Postularme
                </a>
                <!-- Dejamos el ID original abajo oculto por si el script lo busca para no romper el JS -->
@@ -506,7 +506,7 @@
                      </div>
                   </div>
 
-                  <a href="pages/login.html" class="btn-red"><i class="fas fa-id-card"></i>¡Quiero estos Beneficios!</a>
+                  <a href="{% url 'pages_login' %}" class="btn-red"><i class="fas fa-id-card"></i>¡Quiero estos Beneficios!</a>
                </div>
                
                <!-- Lado derecho: Grid interno o vista de tarjetas de apoyo -->
@@ -514,7 +514,7 @@
                   <div class="spimgw">
                      <div class="spglow"></div>
                      <!-- Removemos el badge de precio de comida -->
-                     <img src="img/beneficios-banner.jpg" alt="Beneficios Liverpool" style="border-radius: 20px; width:100%; object-fit:cover;"/>
+                     <img src="{% static 'img/beneficios-banner.jpg' %}" alt="Beneficios Liverpool" style="border-radius: 20px; width:100%; object-fit:cover;"/>
                   </div>
                </div>
             </div>
@@ -536,50 +536,50 @@
                <!-- CASO 1 -->
                <div class="gitem"
                   data-gi="0"
-                  data-gimg="img/portfolio/exito1.jpg"
+                  data-gimg="{% static 'img/portfolio/exito1.jpg' %}"
                   data-gtitle="Sofía Rodríguez - De Auxiliar a Gerente de Tienda"
                   data-gdesc="'Inicié hace 5 años en el piso de venta. Gracias a las capacitaciones y el plan de carrera interno, hoy lidero una de las sucursales más grandes de la región.'">
-                  <img src="img/portfolio/work1.jpg" alt="Sofía Rodríguez"/>
+                  <img src="{% static 'img/portfolio/work1.jpg' %}" alt="Sofía Rodríguez"/>
                   <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Sofía</span></div>
                </div>
                
                <!-- CASO 2 -->
                <div class="gitem"
                   data-gi="1"
-                  data-gimg="img/portfolio/exito2.jpg"
+                  data-gimg="{% static 'img/portfolio/exito2.jpg' %}"
                   data-gtitle="Carlos Mendoza - Líder de Célula en TI"
                   data-gdesc="'Desarrollar software para millones de usuarios en México es un reto increíble. El ambiente de innovación tecnológica aquí no le pide nada a Silicon Valley.'">
-                  <img src="img/portfolio/work2.jpg" alt="Carlos Mendoza"/>
+                  <img src="{% static 'img/portfolio/work2.jpg' %}" alt="Carlos Mendoza"/>
                   <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Carlos</span></div>
                </div>
                
                <!-- CASO 3 -->
                <div class="gitem"
                   data-gi="2"
-                  data-gimg="img/portfolio/exito3.jpg"
+                  data-gimg="{% static 'img/portfolio/exito3.jpg' %}"
                   data-gtitle="Mariana Torres - Coordinadora de Operaciones CEDIS"
                   data-gdesc="'La logística de El Puerto de Liverpool es el motor del negocio. Empecé en despacho y hoy coordino las rutas críticas de distribución de última milla.'">
-                  <img src="img/portfolio/work3.jpg" alt="Mariana Torres"/>
+                  <img src="{% static 'img/portfolio/work3.jpg' %}" alt="Mariana Torres"/>
                   <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Mariana</span></div>
                </div>
                
                <!-- CASO 4 -->
                <div class="gitem"
                   data-gi="3"
-                  data-gimg="img/portfolio/exito4.jpg"
+                  data-gimg="{% static 'img/portfolio/exito4.jpg' %}"
                   data-gtitle="Alejandro Ruiz - Asesor de Mesa de Control"
                   data-gdesc="'El balance de vida y carrera que encontré aquí me permitió terminar mis estudios universitarios mientras seguía generando ingresos estables.'">
-                  <img src="img/portfolio/work4.jpg" alt="Alejandro Ruiz"/>
+                  <img src="{% static 'img/portfolio/work4.jpg' %}" alt="Alejandro Ruiz"/>
                   <div class="gover"><span><i class="fas fa-expand-alt"></i> Ver Trayectoria de Alejandro</span></div>
                </div>
 
                <!-- CASO 5 -->
                <div class="gitem"
                   data-gi="4"
-                  data-gimg="img/portfolio/exito5.jpg"
+                  data-gimg="{% static 'img/portfolio/exito5.jpg' %}"
                   data-gtitle="Comunidad Liverpool - Diversidad e Inclusión"
                   data-gdesc="Creamos espacios donde cada voz cuenta. Nuestro compromiso es asegurar un entorno equitativo, inclusivo y libre de discriminación para todos.">
-                  <img src="img/portfolio/work5.jpg" alt="Cultura de Trabajo"/>
+                  <img src="{% static 'img/portfolio/work5.jpg' %}" alt="Cultura de Trabajo"/>
                   <div class="gover"><span><i class="fas fa-expand-alt"></i> Conoce Nuestra Cultura</span></div>
                </div>
             </div>
@@ -724,7 +724,7 @@
                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
                   <div class="chcard">
                      <div class="chimg">
-                        <img src="img/team/daniela.jpg" alt="Daniela Maldonado"/>
+                        <img src="{% static 'img/team/daniela.jpg' %}" alt="Daniela Maldonado"/>
                         <div class="chsoc">
                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
                            <a href="#"><i class="fab fa-github"></i></a>
@@ -743,7 +743,7 @@
                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
                   <div class="chcard">
                      <div class="chimg">
-                        <img src="img/team/dev2.jpg" alt="Desarrollador 2"/>
+                        <img src="{% static 'img/team/dev2.jpg' %}" alt="Desarrollador 2"/>
                         <div class="chsoc">
                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
                            <a href="#"><i class="fab fa-github"></i></a>
@@ -762,7 +762,7 @@
                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
                   <div class="chcard">
                      <div class="chimg">
-                        <img src="img/team/dev3.jpg" alt="Desarrollador 3"/>
+                        <img src="{% static 'img/team/dev3.jpg' %}" alt="Desarrollador 3"/>
                         <div class="chsoc">
                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
                            <a href="#"><i class="fab fa-github"></i></a>
@@ -781,7 +781,7 @@
                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="240">
                   <div class="chcard">
                      <div class="chimg">
-                        <img src="img/team/dev4.jpg" alt="Desarrollador 4"/>
+                        <img src="{% static 'img/team/dev4.jpg' %}" alt="Desarrollador 4"/>
                         <div class="chsoc">
                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
                            <a href="#"><i class="fab fa-github"></i></a>
@@ -800,7 +800,7 @@
                <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="320">
                   <div class="chcard">
                      <div class="chimg">
-                        <img src="img/team/dev5.jpg" alt="Desarrollador 5"/>
+                        <img src="{% static 'img/team/dev5.jpg' %}" alt="Desarrollador 5"/>
                         <div class="chsoc">
                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
                            <a href="#"><i class="fab fa-github"></i></a>
@@ -904,18 +904,19 @@
          SCRIPTS DE LA PLANTILLA
          ============================================================ -->
       <!-- jQuery -->
-      <script src="js/jquery-3.7.1.min.js"></script>
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
       <!-- Bootstrap 5 -->
-      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
       <!-- AOS -->
-      <script src="js/aos.js"></script>
+      <script src="{% static 'js/aos.js' %}"></script>
       <!-- Swiper -->
-      <script src="js/swiper-bundle.min.js"></script>
+      <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
       <!-- CounterUp -->
-      <script src="js/jquery.magnific-popup.min.js"></script>
+      <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
       <!-- Main js -->
-      <script src="js/main.js"></script>
+      <script src="{% static 'js/main.js' %}"></script>
 
       
    </body>
 </html>
+
