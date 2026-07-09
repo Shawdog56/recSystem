@@ -49,7 +49,6 @@ def login_view(request):
                 print(roles)
                 request.session['roles'] = roles
                 request.session['user_id'] = user.id
-                user.backend = 'recluitment.backends.IgnoreLastLoginBackend'
                 login(request, user)
                 next_url = request.GET.get('next')
                 if next_url:
