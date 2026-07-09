@@ -43,7 +43,7 @@ def login_view(request):
                 return redirect('dashboard')
             else:
                 messages.error(request, "Invalid credentials")
-        except Usuario.DoesNotExist:
+        except Usuario.DoesNotExist as e:
             messages.error(request, "User does not exist")
             
     return render(request, 'pages/login.html')

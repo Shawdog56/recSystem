@@ -57,11 +57,16 @@
                   <h2 class="stitle text-start" style="font-size:1.6rem;">Inicia sesión</h2>
                   <p class="sdesc mb-4">Accede para ver el tablero de vacantes y candidatos</p>
 
-                  <form action="/reclutamiento/login" method="POST" novalidate>
-
+                  <form action="/app/login/" method="POST" novalidate>
+                     {% if messages %}
+                        {% for message in messages %}
+                              <p style="color: red;">{{ message }}</p>
+                        {% endfor %}
+                     {% endif %}
+                     {% csrf_token %}
                      <div class="mb-3">
                         <label for="email" class="flbl">Correo electrónico</label>
-                        <input type="email" class="fctrl" id="email" name="email"
+                        <input type="text" class="fctrl" id="username" name="username"
                                placeholder="nombre@correo.com" required autocomplete="username">
                      </div>
 
