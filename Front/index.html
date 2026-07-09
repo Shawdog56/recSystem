@@ -28,56 +28,65 @@
       <div id="topbar">
          <div class="container">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-               <div class="top-contact d-flex flex-wrap">
-                  <span><i class="fas fa-phone-alt"></i>+1 (800) 123-4567</span>
-                  <span><i class="fas fa-envelope"></i>hello@sarabfood.com</span>
-                  <span><i class="fas fa-map-marker-alt"></i>42 Flavor Street, NY</span>
+               
+               <!-- Contacto Institucional -->
+               <div class="top-contact d-flex flex-wrap gap-3">
+                     <span><i class="fas fa-phone-alt"></i>01-800-LIVERPOOL</span>
+                     <span><i class="fas fa-envelope"></i>talento@liverpool.com.mx</span>
                </div>
+               
+               <!-- Avisos y Redes -->
                <div class="d-flex align-items-center gap-3">
-                  <span class="ttag"><i class="fas fa-fire me-1"></i>Free Delivery Today!</span>
-                  <div class="tsoc">
-                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                     <a href="#"><i class="fab fa-instagram"></i></a>
-                     <a href="#"><i class="fab fa-tiktok"></i></a>
-                     <a href="#"><i class="fab fa-youtube"></i></a>
-                  </div>
+                     <span class="ttag"><i class="fas fa-briefcase"></i>¡Únete al equipo!</span>
+                     <div class="tsoc d-flex gap-1">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                     </div>
                </div>
+
             </div>
          </div>
       </div>
-      
-<!-- ============================================================
-         NAVBAR / NAVEGACIÓN PORTAL DE TALENTO
-         ============================================================ -->
+      <!-- ============================================================
+     NAVBAR / NAVEGACIÓN PORTAL DE TALENTO LIVERPOOL
+     ============================================================ -->
       <nav class="navbar navbar-expand-lg" id="nav">
          <div class="container">
+            
+            <!-- Marca / Logo -->
             <a class="navbar-brand" href="#hero">
                <div class="blogo">
-                  <!-- Cambiamos cubiertos por maletín corporativo -->
                   <div class="bico"><i class="fas fa-briefcase"></i></div>
                   <div>
-                     <div class="bname">Bolsa<span>Talento</span></div>
+                     <div class="bname">Liver<span>Talent</span></div>
                      <div class="bsub">El Puerto de Liverpool</div>
                   </div>
                </div>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-               <i class="fas fa-bars" style="color:var(--primary);font-size:1.35rem;"></i>
+            
+            <!-- Botón Hamburguesa Responsivo para Móviles -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
+               <i class="fas fa-bars" style="color: var(--primary); font-size: 1.35rem;"></i>
             </button>
+            
+            <!-- Enlaces de navegación -->
             <div class="collapse navbar-collapse" id="navmenu">
                <ul class="navbar-nav mx-auto">
                   <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#menu">Vacantes</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#special">Beneficios</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#history">Historia</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#gallery">Casos de Éxito</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#chefs">Célula Dev</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#vacantes">Vacantes</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#dashboard-rh">Panel RH</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#beneficios">Beneficios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#casos-exito">Historias</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#equipo-dev">Célula Dev</a></li>
                </ul>
-               <div class="d-flex align-items-center gap-1">
-                  <!-- Botón de acceso directo a Login -->
-                  <a href="login.html" class="nav-link nav-cta"><i class="fas fa-user-circle me-1"></i>Ingresar</a>
+               
+               <!-- Botón de Acción Principal (Login Reclutador / Candidato) -->
+               <div class="d-flex align-items-center">
+                  <a href="pages/login.html" class="nav-cta"><i class="fas fa-user-circle me-1"></i>Ingresar</a>
                </div>
             </div>
+
          </div>
       </nav>
 
@@ -87,6 +96,7 @@
       <section id="hero">
          <div class="hs hs1"></div>
          <div class="hs hs2"></div>
+
          <!-- Texto gigante de fondo, cambiamos FOOD por TEAM o PINK -->
          <div class="hbgtxt">TEAM</div>
          <div class="container">
@@ -100,8 +110,7 @@
                   <p class="hdesc">Tu talento es la pieza clave que nos impulsa a innovar. Únete a El Puerto de Liverpool y encuentra un espacio donde tus ideas, pasión y crecimiento no tienen límites.</p>
                   <div class="d-flex flex-wrap gap-3 mb-2">
                      <!-- El botón principal ahora los manda a loggearse o ver vacantes -->
-                     <a href="login.html" class="btn-red"><i class="fas fa-user-plus"></i>Postularme Ahora</a>
-                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
+                     <a href="pages/login.html" class="btn btn-red text-white d-inline-flex align-items-center"><i class="fas fa-user-plus me-2"></i>Postularme Ahora</a>                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="magnific_popup btn-play popup-youtube">
                         <div class="pico"><i class="fas fa-play"></i></div>
                         <span>Conoce Nuestra Cultura</span>
@@ -177,7 +186,7 @@
             </div>
             <div class="row g-3 justify-content-center">
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="0">
-                  <div class="catcard active" data-filter="all">
+                  <div class="catcard" data-filter="all">
                      <img class="catimg" src="img/category/1.jpg" alt="Todas"/>
                      <div class="catnm">Todas</div>
                      <div class="catct">Ver todo</div>
@@ -263,7 +272,7 @@
                         </div>
                      </div>
                   </div>
-                  <a href="login.html" class="btn-red"><i class="fas fa-sign-in-alt"></i>Registra tu Currículum</a>
+                  <a href="pages/login.html" class="btn-red"><i class="fas fa-sign-in-alt"></i>Registra tu Currículum</a>
                </div>
             </div>
          </div>
@@ -282,7 +291,7 @@
 
             <!-- FILTROS DE ÁREAS (Mantiene la lógica JS usando data-f) -->
             <div class="text-center mb-4" data-aos="fade-up">
-               <button class="filtbtn active" data-f="all">Todas</button>
+               <button class="filtbtn" data-f="all">Todas</button>
                <button class="filtbtn" data-f="ti">Tecnología (TI)</button>
                <button class="filtbtn" data-f="ventas">Ventas</button>
                <button class="filtbtn" data-f="gestion">Gestión / Admin</button>
@@ -316,7 +325,7 @@
                               <div class="mprice">Sueldo Competitivo</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 9432</span></div>
                            </div>
-                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -347,7 +356,7 @@
                               <div class="mprice">Base + Comisiones</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 8821</span></div>
                            </div>
-                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -377,7 +386,7 @@
                               <div class="mprice">Prestaciones Superiores</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 7311</span></div>
                            </div>
-                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -408,7 +417,7 @@
                               <div class="mprice">Bonos de Productividad</div>
                               <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 6524</span></div>
                            </div>
-                           <a href="login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                           <a href="pages/login.html" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
                         </div>
                      </div>
                   </div>
@@ -418,7 +427,7 @@
 
             <!-- BOTÓN QUE LLEVA AL LOGIN PARA VER MÁS -->
             <div class="text-center mt-5">
-               <a href="login.html" class="btn-red"><i class="fas fa-search-plus"></i>Ver Otras Vacantes</a>
+               <a href="pages/login.html" class="btn-red"><i class="fas fa-search-plus"></i>Ver Otras Vacantes</a>
             </div>
          </div>
       </section>
@@ -447,7 +456,7 @@
                
                <div class="mptags" id="mpTags"></div>
                <!-- Cambiamos el botón de carrito por uno de postulación corporativa -->
-               <a href="login.html" class="btn-red text-center d-block w-100" style="text-decoration:none; line-height:40px;">
+               <a href="pages/login.html" class="btn-red text-center d-block w-100" style="text-decoration:none; line-height:40px;">
                   <i class="fas fa-user-check me-2"></i>Iniciar Sesión para Postularme
                </a>
                <!-- Dejamos el ID original abajo oculto por si el script lo busca para no romper el JS -->
@@ -496,7 +505,7 @@
                      </div>
                   </div>
 
-                  <a href="login.html" class="btn-red"><i class="fas fa-id-card"></i>¡Quiero estos Beneficios!</a>
+                  <a href="pages/login.html" class="btn-red"><i class="fas fa-id-card"></i>¡Quiero estos Beneficios!</a>
                </div>
                
                <!-- Lado derecho: Grid interno o vista de tarjetas de apoyo -->
@@ -818,7 +827,7 @@
                
                <!-- COLUMNA 1: IDENTIDAD -->
                <div class="col-lg-4">
-                  <div class="fnm">Bolsa<span>Talento</span></div>
+                  <div class="fnm">Liver<span>Talent</span></div>
                   <p class="fdesc">Conectando el mejor talento de México con las grandes oportunidades de crecimiento en El Puerto de Liverpool. Tu próximo gran paso profesional comienza aquí.</p>
                   <div class="fsoc">
                      <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -905,5 +914,7 @@
       <script src="js/jquery.magnific-popup.min.js"></script>
       <!-- Main js -->
       <script src="js/main.js"></script>
+
+      
    </body>
 </html>
