@@ -58,10 +58,12 @@
                   <h2 class="stitle text-start" style="font-size:1.6rem;">Inicia sesión</h2>
                   <p class="sdesc mb-4">Accede para ver el tablero de vacantes y candidatos</p>
 
-                  <form method="POST" novalidate>
+                  <form action="{% url 'pages_login' %}" method="POST" novalidate>
                      {% if messages %}
                         {% for message in messages %}
-                              <p style="color: red;">{{ message }}</p>
+                           <div class="mb-3">
+                              <p style="color: red;">{{ message }}</p>                              
+                           </div>
                         {% endfor %}
                      {% endif %}
                      {% csrf_token %}
