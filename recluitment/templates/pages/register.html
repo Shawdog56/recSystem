@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
    <head>
@@ -8,11 +9,11 @@
       <title>Registro | Bolsa de Trabajo</title>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
       <!-- Bootstrap 5.3 -->
-      <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
       <!-- all min css (Font Awesome) -->
-      <link rel="stylesheet" href="../css/all.min.css"/>
+      <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
       <!-- Style CSS -->
-      <link rel="stylesheet" href="../css/style.css"/>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
       <style>
         :root{
           --liv-pink:#d25894;
@@ -96,7 +97,7 @@
 
          <!-- Logotipo Superior Centrado -->
          <div class="text-center mb-4">
-            <a href="../index.html" class="d-inline-block text-decoration-none">
+            <a href="{% url 'hello_world' %}" class="d-inline-block text-decoration-none">
                <div class="blogo mx-auto">
                   <div class="bico"><i class="fas fa-briefcase"></i></div>
                   <div class="text-start">
@@ -111,7 +112,8 @@
          <h2 class="stitle text-center" style="font-size:1.7rem; font-family:'Poppins', sans-serif; font-weight:700; color: var(--liv-purple);">Únete a Nuestro Equipo</h2>
          <p class="sdesc text-center mb-4 text-muted">Completa tus datos para registrarte en la plataforma</p>
 
-         <form action="/reclutamiento/register" method="POST" novalidate>
+         <form action="{% url 'pages_registro' %}" method="POST" novalidate>
+            {% csrf_token %}
 
             <!-- Fila para Usuario y Contraseña -->
             <div class="row">
@@ -159,14 +161,14 @@
 
          <!-- Enlace para volver a Iniciar Sesión -->
          <p class="text-center text-muted small mt-4 mb-0">
-            ¿Ya tienes una cuenta? <a href="login.html" class="link-auth fw-semibold text-decoration-none">Iniciar sesión</a>
+            ¿Ya tienes una cuenta? <a href="{% url 'pages_login' %}" class="link-auth fw-semibold text-decoration-none">Iniciar sesión</a>
          </p>
 
       </div>
 
       <!-- jQuery -->
-      <script src="../js/jquery-3.7.1.min.js"></script>
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
       <!-- Bootstrap 5 -->
-      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
    </body>
 </html>
