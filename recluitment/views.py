@@ -1,11 +1,17 @@
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import check_password,  make_password
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Usuario
 
 # Create your views here.
 def hello_world(request):
     return render(request, 'index.html')
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')
 
 
 def register(request):
@@ -39,8 +45,17 @@ def login_view(request):
             user = Usuario.objects.get(username=username)
             
             if check_password(password, user.password):
+                roles = list(user.roles.values_list('descripcion',flat=True))
+                print(roles)
+                request.session['roles'] = roles
                 request.session['user_id'] = user.id
-                return redirect('dashboard')
+                user.backend = 'recluitment.backends.IgnoreLastLoginBackend'
+                login(request, user)
+                next_url = request.GET.get('next')
+                if next_url:
+                    return redirect(next_url)
+                else:
+                    return redirect('dashboard')
             else:
                 messages.error(request, "Invalid credentials")
         except Usuario.DoesNotExist as e:

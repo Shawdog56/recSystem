@@ -122,6 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+LOGIN_URL = 'pages_login'
+
+AUTHENTICATION_BACKENDS = [
+    'recluitment.backends.IgnoreLastLoginBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # ==============================================================================
 # Configuración de correo electrónico (Google SMTP)
