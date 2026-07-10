@@ -1,6 +1,5 @@
 import logging
 
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import redirect, render
@@ -24,7 +23,17 @@ def home(request):
     return render(request, 'index.html')
 
 
-# ─── Registro (pre‑verificación: usuario NO se crea hasta validar código) ──
+def hello_world(request):
+    return home(request)
+
+
+def dashboard(request):
+    if not request.session.get('user_id'):
+        return redirect('pages_login')
+    return render(request, 'dashboard.html')
+
+
+# ─── Registro ──────────────────────────────────────────────────────────────
 
 
 def register(request):
@@ -52,7 +61,7 @@ def register(request):
         if errors:
             for e in errors:
                 messages.error(request, e)
-            return render(request, 'register.html')
+            return render(request, 'pages/register.html')
 
         request.session['reg_data'] = {
             'username': username,
@@ -86,7 +95,7 @@ def register(request):
                 request,
                 'Error al enviar el código de verificación. Intenta de nuevo.',
             )
-            return render(request, 'register.html')
+            return render(request, 'pages/register.html')
 
         messages.success(
             request,
@@ -95,7 +104,7 @@ def register(request):
         )
         return redirect('/verify/')
 
-    return render(request, 'register.html')
+    return render(request, 'pages/register.html')
 
 
 # ─── Verificación de código (registro y cambio de contraseña) ─────────────
@@ -120,7 +129,7 @@ def verify(request):
 
         if not code or len(code) != 6 or not code.isdigit():
             messages.error(request, 'El código debe tener 6 dígitos numéricos.')
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
 
         if verify_mode == 'registration':
             reg_data = request.session.get('reg_data')
@@ -145,13 +154,13 @@ def verify(request):
             )
         except InvalidToken:
             messages.error(request, 'El código ingresado es incorrecto.')
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
         except TokenExpired:
             messages.error(
                 request,
                 'El código ha expirado. Solicita uno nuevo.',
             )
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
 
         if verify_mode == 'registration':
             reg_data = request.session.pop('reg_data', {})
@@ -189,7 +198,7 @@ def verify(request):
             messages.success(request, 'Código verificado. Ahora puedes cambiar tu contraseña.')
             return redirect('/reset-password/')
 
-    return render(request, 'verification_code.html', {'email': email})
+    return render(request, 'pages/verification_code.html', {'email': email})
 
 
 # ─── Reenviar código de verificación ──────────────────────────────────────
@@ -261,15 +270,15 @@ def reset_password(request):
 
         if not new_password:
             messages.error(request, 'La nueva contraseña es obligatoria.')
-            return render(request, 'reset-password.html')
+            return render(request, 'pages/reset-password.html')
 
         if new_password != confirm_password:
             messages.error(request, 'Las contraseñas no coinciden.')
-            return render(request, 'reset-password.html')
+            return render(request, 'pages/reset-password.html')
 
         if len(new_password) < 6:
             messages.error(request, 'La contraseña debe tener al menos 6 caracteres.')
-            return render(request, 'reset-password.html')
+            return render(request, 'pages/reset-password.html')
 
         try:
             user = Usuario.objects.get(correo=email)
@@ -286,7 +295,7 @@ def reset_password(request):
         messages.success(request, 'Contraseña actualizada exitosamente. Inicia sesión.')
         return redirect('/login/')
 
-    return render(request, 'reset-password.html', {'email': email})
+    return render(request, 'pages/reset-password.html', {'email': email})
 
 
 # ─── Recuperar contraseña (paso 1: enviar código) ─────────────────────────
@@ -298,7 +307,7 @@ def forgot_password(request):
 
         if not email:
             messages.error(request, 'El correo es obligatorio.')
-            return render(request, 'forgot-password.html')
+            return render(request, 'pages/forgot-password.html')
 
         # No revelar si el usuario existe (seguridad)
         user_exists = Usuario.objects.filter(correo=email).exists()
@@ -328,7 +337,7 @@ def forgot_password(request):
         )
         return redirect('/verify/')
 
-    return render(request, 'forgot-password.html')
+    return render(request, 'pages/forgot-password.html')
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -346,7 +355,7 @@ def login_view(request):
 
             if not check_password(password, user.password):
                 messages.error(request, 'Credenciales inválidas.')
-                return render(request, 'login.html')
+                return render(request, 'pages/login.html')
 
             if not user.enabled:
                 # El usuario no ha verificado su email
@@ -377,13 +386,14 @@ def login_view(request):
             # Login exitoso
             request.session['user_id'] = user.id
             request.session['username'] = user.username
-            messages.success(request, f'¡Bienvenido, {user.nombre}!')
+            request.session['roles'] = list(user.roles.values_list('descripcion', flat=True))
+            messages.success(request, f'Bienvenido, {user.nombre}!')
             return redirect('/')
 
         except Usuario.DoesNotExist:
             messages.error(request, 'Credenciales inválidas.')
 
-    return render(request, 'login.html')
+    return render(request, 'pages/login.html')
 
 
 def logout_view(request):

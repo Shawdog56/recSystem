@@ -44,7 +44,7 @@ class Usuario(models.Model):
     telefono = models.CharField(max_length=15, unique=True)
     correo = models.CharField(max_length=100, unique=True)
     enabled = models.BooleanField(default=True)
-
+    
     roles = models.ManyToManyField(
         'Rol', 
         through='UsuarioRol', 

@@ -6,7 +6,11 @@ CREATE TABLE usuario(
     apellidos VARCHAR(50) NULL,
     telefono VARCHAR(15) UNIQUE NOT NULL,
     correo VARCHAR(100) UNIQUE NOT NULL,
-    enabled BOOLEAN DEFAULT TRUE
+    enabled BOOLEAN DEFAULT TRUE,
+    last_login TIMESTAMP NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    is_staff BOOLEAN DEFAULT FALSE,
+    is_superuser BOOLEAN DEFAULT FALSE
 );
 CREATE TABLE rol(
     id BIGSERIAL PRIMARY KEY,

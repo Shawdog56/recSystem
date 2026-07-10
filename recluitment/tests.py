@@ -15,13 +15,13 @@ class RegisterFlowTest(TestCase):
         """GET /register/ debe renderizar el template."""
         response = self.client.get('/register/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'register.html')
+        self.assertTemplateUsed(response, 'pages/register.html')
 
     def test_login_page_serves_form(self):
         """GET /login/ debe renderizar el template."""
         response = self.client.get('/login/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'login.html')
+        self.assertTemplateUsed(response, 'pages/login.html')
 
     def test_verify_page_redirects_if_no_session(self):
         """GET /verify/ sin sesión debe redirigir a /register/."""
