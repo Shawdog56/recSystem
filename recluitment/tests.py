@@ -3,13 +3,28 @@ from unittest.mock import patch
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 
-from auth2fa.models import VerificationToken
-
 from .models import Usuario
 
 
 class RegisterFlowTest(TestCase):
     """Tests de integración para el flujo de registro + verificación."""
+
+    def _set_reg_session(self, client, code='123456', username='testuser',
+                         email='test@example.com'):
+        session = client.session
+        session['reg_code'] = code
+        session['reg_code_expires'] = '2099-12-31T23:59:59+00:00'
+        session['reg_data'] = {
+            'username': username,
+            'password': 'SecurePass123!',
+            'nombre': 'Test',
+            'apellidos': 'User',
+            'telefono': '5512345678',
+            'correo': email,
+        }
+        session['verify_email'] = email
+        session['verify_mode'] = 'registration'
+        session.save()
 
     def test_register_page_serves_form(self):
         """GET /register/ debe renderizar el template."""
@@ -28,14 +43,11 @@ class RegisterFlowTest(TestCase):
         response = self.client.get('/verify/')
         self.assertRedirects(response, '/register/')
 
-    @patch('recluitment.views.token_service.generate')
-    @patch('recluitment.views.email_sender.send_code')
+    @patch('recluitment.views.send_mail')
     def test_register_stores_data_in_session_and_redirects(
-        self, mock_send_code, mock_generate
+        self, mock_send_mail
     ):
-        """POST /register/ guarda datos en sesión, NO crea usuario aún."""
-        mock_generate.return_value.code = '123456'
-
+        """POST /register/ guarda en sesión, NO crea usuario aún."""
         response = self.client.post('/register/', {
             'username': 'testuser',
             'password': 'SecurePass123!',
@@ -47,24 +59,20 @@ class RegisterFlowTest(TestCase):
 
         self.assertRedirects(response, '/verify/')
 
-        # El usuario NO debe existir en BD hasta verificar código
+        # Usuario NO debe existir en BD
         self.assertFalse(Usuario.objects.filter(username='testuser').exists())
 
-        # Los datos deben estar en sesión
+        # Datos guardados en sesión
         self.assertEqual(
             self.client.session.get('verify_email'), 'test@example.com'
         )
-        self.assertEqual(
-            self.client.session.get('verify_mode'), 'registration'
-        )
+        self.assertIsNotNone(self.client.session.get('reg_code'))
+        self.assertIsNotNone(self.client.session.get('reg_data'))
+        mock_send_mail.assert_called_once()
 
-        mock_generate.assert_called_once()
-        mock_send_code.assert_called_once()
-
-    @patch('recluitment.views.token_service.generate')
-    @patch('recluitment.views.email_sender.send_code')
+    @patch('recluitment.views.send_mail')
     def test_register_duplicate_username_shows_error(
-        self, mock_send_code, mock_generate
+        self, mock_send_mail
     ):
         """Registro con username duplicado debe mostrar error."""
         Usuario.objects.create(
@@ -99,22 +107,9 @@ class RegisterFlowTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'obligatoria')
 
-    @patch('recluitment.views.token_service.validate')
-    def test_verify_valid_code_creates_user(self, mock_validate):
+    def test_verify_valid_code_creates_user(self):
         """Código válido en verify crea el usuario y redirige al home."""
-        # Simular que register ya guardó datos en sesión
-        session = self.client.session
-        session['reg_data'] = {
-            'username': 'testuser',
-            'password': 'SecurePass123!',
-            'nombre': 'Test',
-            'apellidos': 'User',
-            'telefono': '5512345678',
-            'correo': 'test@example.com',
-        }
-        session['verify_email'] = 'test@example.com'
-        session['verify_mode'] = 'registration'
-        session.save()
+        self._set_reg_session(self.client)
 
         response = self.client.post('/verify/', {
             'code1': '1', 'code2': '2', 'code3': '3',
@@ -123,13 +118,24 @@ class RegisterFlowTest(TestCase):
 
         self.assertRedirects(response, '/')
 
-        # El usuario debe existir AHORA y estar activo
+        # Usuario creado y activo
         user = Usuario.objects.get(username='testuser')
         self.assertTrue(user.enabled)
         self.assertEqual(user.correo, 'test@example.com')
         self.assertTrue(check_password('SecurePass123!', user.password))
 
-        mock_validate.assert_called_once()
+    def test_verify_invalid_code_shows_error(self):
+        """Código incorrecto muestra error y no crea usuario."""
+        self._set_reg_session(self.client)
+
+        response = self.client.post('/verify/', {
+            'code1': '0', 'code2': '0', 'code3': '0',
+            'code4': '0', 'code5': '0', 'code6': '0',
+        })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'incorrecto')
+        self.assertFalse(Usuario.objects.filter(username='testuser').exists())
 
     @patch('recluitment.views.token_service.generate')
     @patch('recluitment.views.email_sender.send_code')
@@ -264,8 +270,7 @@ class RegisterFlowTest(TestCase):
         response = self.client.get('/reset-password/')
         self.assertRedirects(response, '/forgot-password/')
 
-    @patch('recluitment.views.token_service.validate')
-    def test_reset_password_updates_password(self, mock_validate):
+    def test_reset_password_updates_password(self):
         """POST /reset-password/ con sesión verificada cambia la contraseña."""
         from django.contrib.auth.hashers import make_password
 
@@ -290,7 +295,6 @@ class RegisterFlowTest(TestCase):
 
         self.assertRedirects(response, '/login/')
 
-        # Verificar que la contraseña cambió
         user = Usuario.objects.get(username='testuser')
         self.assertTrue(check_password('NewPass456!', user.password))
 

@@ -1,8 +1,14 @@
 import logging
+import secrets
+from datetime import timedelta
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password, make_password
+from django.core.mail import send_mail
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils import timezone
 
 from auth2fa.exceptions import InvalidToken, TokenExpired
 from auth2fa.models import VerificationToken
@@ -14,6 +20,31 @@ from .models import Usuario
 logger = logging.getLogger(__name__)
 token_service = TokenServiceImpl()
 email_sender = EmailSenderImpl()
+
+TOKEN_LIFETIME_MINUTES = 10
+
+
+def _gen_code() -> str:
+    return str(secrets.randbelow(10**6)).zfill(6)
+
+
+def _send_code_email(to_email: str, code: str, user_name: str) -> None:
+    subject = 'Código de verificación — Recruitment System'
+    plain_message = (
+        f'Hola {user_name},\n\n'
+        f'Tu código de verificación es:\n\n'
+        f'   {code}\n\n'
+        f'Este código expira en {TOKEN_LIFETIME_MINUTES} minutos.\n\n'
+        f'Si no solicitaste este código, ignora este mensaje.'
+    )
+    context = {
+        'code': code,
+        'user_name': user_name or 'Usuario',
+        'action_label': 'Verificar mi correo',
+        'expiry_minutes': TOKEN_LIFETIME_MINUTES,
+    }
+    html_message = render_to_string('auth2fa/verification_email.html', context)
+    send_mail(subject, plain_message, None, [to_email], html_message=html_message)
 
 
 # ─── Home ──────────────────────────────────────────────────────────────────
@@ -33,10 +64,17 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
-# ─── Registro ──────────────────────────────────────────────────────────────
+# ─── Registro (el usuario NO se crea hasta validar el código) ─────────────
 
 
 def register(request):
+    # ── Detectar verificación pendiente en GET ──────────────────────
+    pending_email = request.session.get('verify_email')
+    pending_mode = request.session.get('verify_mode')
+
+    if request.method == 'GET' and request.session.get('reg_data') is not None:
+        return redirect('/verify/')
+
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
@@ -53,16 +91,42 @@ def register(request):
         if not correo:
             errors.append('El correo electrónico es obligatorio.')
 
-        if Usuario.objects.filter(username=username).exists():
-            errors.append('El nombre de usuario ya está registrado.')
-        if Usuario.objects.filter(correo=correo).exists():
-            errors.append('El correo electrónico ya está registrado.')
+        # ── Si el email ya tiene verificación pendiente, reenviar código ──
+        has_pending = (
+            pending_email == correo
+            and pending_mode == 'registration'
+            and request.session.get('reg_data') is not None
+        )
+        if not has_pending:
+            if Usuario.objects.filter(username=username).exists():
+                errors.append('El nombre de usuario ya está registrado.')
+            if Usuario.objects.filter(correo=correo).exists():
+                errors.append('El correo electrónico ya está registrado.')
+            if Usuario.objects.filter(telefono=telefono).exists():
+                errors.append('El número de teléfono ya está registrado.')
 
         if errors:
             for e in errors:
                 messages.error(request, e)
             return render(request, 'pages/register.html')
 
+        code = _gen_code()
+        user_name = f'{nombre} {apellidos}'.strip() or username
+
+        try:
+            _send_code_email(correo, code, user_name)
+        except Exception as e:
+            logger.error('Error al enviar código de verificación: %s', e)
+            messages.error(
+                request,
+                'Error al enviar el código de verificación. Intenta de nuevo.',
+            )
+            return render(request, 'pages/register.html')
+
+        request.session['reg_code'] = code
+        request.session['reg_code_expires'] = (
+            timezone.now() + timedelta(minutes=TOKEN_LIFETIME_MINUTES)
+        ).isoformat()
         request.session['reg_data'] = {
             'username': username,
             'password': password,
@@ -74,34 +138,17 @@ def register(request):
         request.session['verify_email'] = correo
         request.session['verify_mode'] = 'registration'
 
-        # auth2fa necesita un modelo Usuario, usamos uno sin persistir
-        temp_user = Usuario(username=username, correo=correo)
-
-        try:
-            token = token_service.generate(
-                temp_user, VerificationToken.Type.EMAIL_VERIFICATION
-            )
-            email_sender.send_code(
-                to_email=correo,
-                code=token.code,
-                token_type=VerificationToken.Type.EMAIL_VERIFICATION,
-                user_name=f'{nombre} {apellidos}'.strip() or username,
-            )
-        except Exception as e:
-            logger.error('Error al enviar código de verificación: %s', e)
-            for k in ('reg_data', 'verify_email', 'verify_mode'):
-                request.session.pop(k, None)
-            messages.error(
+        if has_pending:
+            messages.success(
                 request,
-                'Error al enviar el código de verificación. Intenta de nuevo.',
+                f'Hemos reenviado un nuevo código a {correo}.',
             )
-            return render(request, 'pages/register.html')
-
-        messages.success(
-            request,
-            f'Hemos enviado un código de 6 dígitos a {correo}.'
-            ' Verifícalo para completar tu registro.',
-        )
+        else:
+            messages.success(
+                request,
+                f'Hemos enviado un código de 6 dígitos a {correo}.'
+                ' Verifícalo para completar tu registro.',
+            )
         return redirect('/verify/')
 
     return render(request, 'pages/register.html')
@@ -117,9 +164,9 @@ def verify(request):
     if not email:
         messages.warning(
             request,
-            'No hay una verificación pendiente. Regístrate primero.',
+            'No hay una verificación pendiente.',
         )
-        return redirect('/register/')
+        return redirect('/register/' if verify_mode == 'registration' else '/forgot-password/')
 
     if request.method == 'POST':
         code_parts = [
@@ -132,44 +179,35 @@ def verify(request):
             return render(request, 'pages/verification_code.html', {'email': email})
 
         if verify_mode == 'registration':
-            reg_data = request.session.get('reg_data')
-            if not reg_data:
-                messages.error(request, 'Los datos de registro ya no están disponibles. Regístrate de nuevo.')
-                return redirect('/register/')
-            temp_user = Usuario(username=reg_data['username'], correo=reg_data['correo'])
-        else:
-            try:
-                temp_user = Usuario.objects.get(correo=email)
-            except Usuario.DoesNotExist:
-                messages.error(request, 'Usuario no encontrado.')
+            # ── Validar código desde sesión ──────────────────────────
+            stored_code = request.session.get('reg_code')
+            expires_str = request.session.get('reg_code_expires')
+
+            if not stored_code or not expires_str:
+                messages.error(request, 'No hay un código pendiente. Regístrate de nuevo.')
                 return redirect('/register/')
 
-        try:
-            token_service.validate(
-                temp_user,
-                code,
-                VerificationToken.Type.EMAIL_VERIFICATION
-                if verify_mode == 'registration'
-                else VerificationToken.Type.PASSWORD_CHANGE,
-            )
-        except InvalidToken:
-            messages.error(request, 'El código ingresado es incorrecto.')
-            return render(request, 'pages/verification_code.html', {'email': email})
-        except TokenExpired:
-            messages.error(
-                request,
-                'El código ha expirado. Solicita uno nuevo.',
-            )
-            return render(request, 'pages/verification_code.html', {'email': email})
+            if timezone.now() > timezone.datetime.fromisoformat(expires_str):
+                messages.error(request, 'El código ha expirado. Solicita uno nuevo.')
+                return render(request, 'pages/verification_code.html', {'email': email})
 
-        if verify_mode == 'registration':
+            if code != stored_code:
+                messages.error(request, 'El código ingresado es incorrecto.')
+                return render(request, 'pages/verification_code.html', {'email': email})
+
+            # ── Código válido → crear usuario AHORA ─────────────────
             reg_data = request.session.pop('reg_data', {})
-            # Re-verificar por si otro usuario tomó el username/correo
+            _clean_reg_session(request)
+
+            # Re-verificar uniqueness (por si otro tomó el username, correo o teléfono)
             if Usuario.objects.filter(username=reg_data['username']).exists():
-                messages.error(request, 'El nombre de usuario ya fue tomado mientras verificabas.')
+                messages.error(request, 'El nombre de usuario ya fue tomado. Regístrate de nuevo.')
                 return redirect('/register/')
             if Usuario.objects.filter(correo=reg_data['correo']).exists():
-                messages.error(request, 'El correo ya fue registrado mientras verificabas.')
+                messages.error(request, 'El correo ya fue registrado. Regístrate de nuevo.')
+                return redirect('/register/')
+            if Usuario.objects.filter(telefono=reg_data['telefono']).exists():
+                messages.error(request, 'El número de teléfono ya fue registrado. Regístrate de nuevo.')
                 return redirect('/register/')
 
             user = Usuario.objects.create(
@@ -182,9 +220,6 @@ def verify(request):
                 enabled=True,
             )
 
-            request.session.pop('verify_email', None)
-            request.session.pop('verify_mode', None)
-
             request.session['user_id'] = user.id
             request.session['username'] = user.username
 
@@ -192,6 +227,24 @@ def verify(request):
             return redirect('/')
 
         else:
+            # ── Modo password_reset: validar contra auth2fa ──────────
+            try:
+                user = Usuario.objects.get(correo=email)
+            except Usuario.DoesNotExist:
+                messages.error(request, 'Usuario no encontrado.')
+                return redirect('/register/')
+
+            try:
+                token_service.validate(
+                    user, code, VerificationToken.Type.PASSWORD_CHANGE
+                )
+            except InvalidToken:
+                messages.error(request, 'El código ingresado es incorrecto.')
+                return render(request, 'pages/verification_code.html', {'email': email})
+            except TokenExpired:
+                messages.error(request, 'El código ha expirado. Solicita uno nuevo.')
+                return render(request, 'pages/verification_code.html', {'email': email})
+
             request.session['password_reset_verified'] = True
             request.session['password_reset_email'] = email
             request.session.pop('verify_mode', None)
@@ -201,11 +254,15 @@ def verify(request):
     return render(request, 'pages/verification_code.html', {'email': email})
 
 
+def _clean_reg_session(request):
+    for k in ('reg_code', 'reg_code_expires', 'reg_data', 'verify_email', 'verify_mode'):
+        request.session.pop(k, None)
+
+
 # ─── Reenviar código de verificación ──────────────────────────────────────
 
 
 def resend_code(request):
-    """Reenvía el código de verificación al email en sesión."""
     email = request.session.get('verify_email')
     verify_mode = request.session.get('verify_mode', 'registration')
 
@@ -213,40 +270,46 @@ def resend_code(request):
         messages.warning(request, 'No hay verificación pendiente.')
         return redirect('/register/')
 
-    token_type = (
-        VerificationToken.Type.EMAIL_VERIFICATION
-        if verify_mode == 'registration'
-        else VerificationToken.Type.PASSWORD_CHANGE
-    )
-
-    # Construir temp_user
     if verify_mode == 'registration':
         reg_data = request.session.get('reg_data')
         if not reg_data:
             messages.error(request, 'Los datos de registro expiraron. Regístrate de nuevo.')
             return redirect('/register/')
-        temp_user = Usuario(username=reg_data['username'], correo=reg_data['correo'])
+
+        code = _gen_code()
         user_name = f"{reg_data['nombre']} {reg_data.get('apellidos', '')}".strip() or reg_data['username']
+
+        try:
+            _send_code_email(email, code, user_name)
+        except Exception as e:
+            logger.error('Error al reenviar código: %s', e)
+            messages.error(request, 'Error al reenviar el código. Intenta de nuevo.')
+            return redirect('/verify/')
+
+        request.session['reg_code'] = code
+        request.session['reg_code_expires'] = (
+            timezone.now() + timedelta(minutes=TOKEN_LIFETIME_MINUTES)
+        ).isoformat()
+        messages.success(request, f'Se ha reenviado el código a {email}.')
     else:
         try:
-            temp_user = Usuario.objects.get(correo=email)
+            user = Usuario.objects.get(correo=email)
         except Usuario.DoesNotExist:
             messages.error(request, 'Usuario no encontrado.')
             return redirect('/register/')
-        user_name = temp_user.get_full_name() or temp_user.username
 
-    try:
-        token = token_service.generate(temp_user, token_type)
-        email_sender.send_code(
-            to_email=email,
-            code=token.code,
-            token_type=token_type,
-            user_name=user_name,
-        )
-        messages.success(request, f'Se ha reenviado el código a {email}.')
-    except Exception as e:
-        logger.error('Error al reenviar código: %s', e)
-        messages.error(request, 'Error al reenviar el código. Intenta de nuevo.')
+        try:
+            token = token_service.generate(user, VerificationToken.Type.PASSWORD_CHANGE)
+            email_sender.send_code(
+                to_email=email,
+                code=token.code,
+                token_type=VerificationToken.Type.PASSWORD_CHANGE,
+                user_name=user.get_full_name() or user.username,
+            )
+            messages.success(request, f'Se ha reenviado el código a {email}.')
+        except Exception as e:
+            logger.error('Error al reenviar código: %s', e)
+            messages.error(request, 'Error al reenviar el código. Intenta de nuevo.')
 
     return redirect('/verify/')
 

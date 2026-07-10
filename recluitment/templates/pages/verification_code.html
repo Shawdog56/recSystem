@@ -31,15 +31,26 @@
         <h2 class="mb-3" style="font-weight: 700;">Verificación de correo</h2>
         <p class="mb-4 text-muted">Hemos enviado un código de verificación de <strong>6 dígitos</strong> a tu correo electrónico.</p>
 
+        {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}danger{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         <form method="POST" action="/verify/" id="verifyForm">
             {% csrf_token %}
-            <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code1">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code2">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code3">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code4">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code5">
-                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code6">
+            <div class="codigo-box d-flex justify-content-center gap-2 mb-3" id="codeContainer">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code1" inputmode="numeric" pattern="[0-9]">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code2" inputmode="numeric" pattern="[0-9]">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code3" inputmode="numeric" pattern="[0-9]">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code4" inputmode="numeric" pattern="[0-9]">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code5" inputmode="numeric" pattern="[0-9]">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code6" inputmode="numeric" pattern="[0-9]">
             </div>
 
             <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
@@ -50,9 +61,44 @@
         </form>
 
         <div class="login mt-4 small text-muted"> ¿No recibiste el código?
-            <a href="#" class="link-auth fw-semibold text-decoration-none">Reenviar código</a>
+            <a href="/resend-code/" class="link-auth fw-semibold text-decoration-none">Reenviar código</a>
         </div>
     </div>
 
+<script>
+(function() {
+    const container = document.getElementById('codeContainer');
+    if (!container) return;
+    const inputs = container.querySelectorAll('input[name^="code"]');
+
+    // Auto-avance al escribir un dígito
+    inputs.forEach((input, i) => {
+        input.addEventListener('input', function() {
+            if (this.value.length === 1 && i < inputs.length - 1) {
+                inputs[i + 1].focus();
+            }
+        });
+
+        // Backspace retrocede
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '' && i > 0) {
+                inputs[i - 1].focus();
+            }
+        });
+    });
+
+    // Pegar código completo
+    container.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData('text');
+        const digits = text.replace(/\D/g, '').split('');
+        digits.slice(0, inputs.length).forEach((digit, i) => {
+            if (inputs[i]) inputs[i].value = digit;
+        });
+        const nextIdx = Math.min(digits.length, inputs.length - 1);
+        inputs[nextIdx]?.focus();
+    });
+})();
+</script>
 </body>
 </html>
