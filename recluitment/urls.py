@@ -10,5 +10,6 @@ urlpatterns = [
     path('verification-code/', views.verify, name='pages_verification_code'),
     path('resend-code/', views.resend_code, name='resend_code'),
     path('forgot-password/', view=views.forgot_password, name='pages_forgot_password'),
+    path('reset-password/', view=views.reset_password, name='reset_password'),
     path('logout/', views.logout_view, name='logout'),
 ]
