@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'auth2fa',
 ]
 
+AUTH_USER_MODEL = 'recluitment.Usuario'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,7 +59,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'Front' / 'pages'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'Front'] if (BASE_DIR / 'Front').exists() else []
 LOGIN_URL = 'pages_login'
 
 AUTHENTICATION_BACKENDS = [

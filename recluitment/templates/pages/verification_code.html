@@ -31,20 +31,23 @@
         <h2 class="mb-3" style="font-weight: 700;">Verificación de correo</h2>
         <p class="mb-4 text-muted">Hemos enviado un código de verificación de <strong>6 dígitos</strong> a tu correo electrónico.</p>
 
-        <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-        </div>
+        <form method="POST" action="/verify/" id="verifyForm">
+            {% csrf_token %}
+            <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code1">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code2">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code3">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code4">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code5">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code6">
+            </div>
 
-        <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
+            <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
 
-        <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
-        Verificar código
-        </button>
+            <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
+            Verificar código
+            </button>
+        </form>
 
         <div class="login mt-4 small text-muted"> ¿No recibiste el código?
             <a href="#" class="link-auth fw-semibold text-decoration-none">Reenviar código</a>

@@ -66,7 +66,7 @@ class SendCodeView(View):
 
             # Buscar usuario
             try:
-                user = User.objects.get(email=email)
+                user = User.objects.get(correo=email)
             except User.DoesNotExist:
                 return JsonResponse(
                     {'success': False, 'errors': {'email': 'No existe una cuenta con este correo.'}},
@@ -86,7 +86,7 @@ class SendCodeView(View):
 
             return JsonResponse({
                 'success': True,
-                'message': f'Codigo enviado a {email}.',
+                'message': f'Código enviado a {email}.',
             })
 
         except Auth2FAError as e:
@@ -149,7 +149,7 @@ class VerifyCodeView(View):
 
             # Buscar usuario
             try:
-                user = User.objects.get(email=email)
+                user = User.objects.get(correo=email)
             except User.DoesNotExist:
                 return JsonResponse(
                     {'success': False, 'errors': {'email': 'No existe una cuenta con este correo.'}},

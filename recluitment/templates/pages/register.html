@@ -112,6 +112,16 @@
          <h2 class="stitle text-center" style="font-size:1.7rem; font-family:'Poppins', sans-serif; font-weight:700; color: var(--liv-purple);">Únete a Nuestro Equipo</h2>
          <p class="sdesc text-center mb-4 text-muted">Completa tus datos para registrarte en la plataforma</p>
 
+         {% if messages %}
+            <div class="mb-3">
+               {% for message in messages %}
+                  <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show small py-2" role="alert">
+                     {{ message }}
+                     <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+               {% endfor %}
+            </div>
+         {% endif %}
          <form action="{% url 'pages_registro' %}" method="POST" novalidate>
             {% csrf_token %}
 
