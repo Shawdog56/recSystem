@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificación de Código | Liver Talent</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css"> </head>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> </head>
 <body class="auth-bg-full">
     
     <div class="auth-diamond-overlay"></div>
@@ -15,7 +16,7 @@
     <div class="auth-card-centered my-4 mx-3 text-center">
         
         <div class="d-flex justify-content-center mb-4">
-            <a href="../index.html" class="d-inline-block text-decoration-none">
+            <a href="/" class="d-inline-block text-decoration-none">
                 <div class="blogo">
                     <div class="bico"><i class="fas fa-briefcase"></i></div>
                     <div class="text-start">
@@ -30,20 +31,23 @@
         <h2 class="mb-3" style="font-weight: 700;">Verificación de correo</h2>
         <p class="mb-4 text-muted">Hemos enviado un código de verificación de <strong>6 dígitos</strong> a tu correo electrónico.</p>
 
-        <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-            <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;">
-        </div>
+        <form method="POST" action="/verify/" id="verifyForm">
+            {% csrf_token %}
+            <div class="codigo-box d-flex justify-content-center gap-2 mb-3">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code1">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code2">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code3">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code4">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code5">
+                <input type="text" class="fctrl text-center" maxlength="1" style="width: 45px; height: 50px; font-size: 1.5rem;" name="code6">
+            </div>
 
-        <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
+            <small class="d-block mb-4 text-muted">El código expira en 10 minutos.</small>
 
-        <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
-        Verificar código
-        </button>
+            <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
+            Verificar código
+            </button>
+        </form>
 
         <div class="login mt-4 small text-muted"> ¿No recibiste el código?
             <a href="#" class="link-auth fw-semibold text-decoration-none">Reenviar código</a>
