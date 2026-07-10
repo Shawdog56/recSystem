@@ -129,16 +129,21 @@ STATICFILES_DIRS = [BASE_DIR / 'Front']
 # ==============================================================================
 # Configuración de correo electrónico (Google SMTP)
 # ==============================================================================
-if DEBUG:
+if config('SMTP_USER', default='') and config('SMTP_PASS', default=''):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+elif DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+EMAIL_HOST = config('SMTP_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('SMTP_PORT', default=587, cast=int)
+if config('SMTP_SECURE', default='false').lower() == 'true':
+    EMAIL_USE_SSL = True
+else:
+    EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('SMTP_USER', default='')
+EMAIL_HOST_PASSWORD = config('SMTP_PASS', default='')
+DEFAULT_FROM_EMAIL = config('EMAIL_FROM', default=EMAIL_HOST_USER)
 
 # ==============================================================================
 # Configuración de tokens de verificación (auth2fa)

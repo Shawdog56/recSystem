@@ -19,6 +19,6 @@ CREATE TABLE usuario_rol(
     UNIQUE (usuario_id, rol_id)
 );
 
-INSERT INTO usuario (username, password) VALUES ('shawdog','pbkdf2_sha256$1200000$Okg6cOJr9FRpvrJtkwM7PL$ZSMKTthy/5kT/THVq986v/H9E3u1iifFUEHV0rXjVvM=');
+INSERT INTO usuario (username, password, nombre, telefono, correo) VALUES ('shawdog','pbkdf2_sha256$1200000$Okg6cOJr9FRpvrJtkwM7PL$ZSMKTthy/5kT/THVq986v/H9E3u1iifFUEHV0rXjVvM=','Admin','5512345678','admin@example.com');
 INSERT INTO rol (descripcion) VALUES ('ROLE_RECLUTADOR'),('ROLE_ASPIRANTE'),('ROLE_ADMIN');
 INSERT INTO usuario_rol (usuario_id, rol_id) VALUES (1,3),(1,2),(1,1);

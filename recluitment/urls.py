@@ -8,5 +8,6 @@ urlpatterns = [
     path('verify/', views.verify, name='verify'),
     path('resend-code/', views.resend_code, name='resend_code'),
     path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset-password/', views.reset_password, name='reset_password'),
     path('logout/', views.logout_view, name='logout'),
 ]
