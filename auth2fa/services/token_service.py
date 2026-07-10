@@ -43,7 +43,7 @@ class TokenServiceImpl(AbstractTokenService):
           3. Persiste y retorna el nuevo token.
 
         Args:
-            user: Instancia del modelo User.
+            user: Instancia del modelo User (debe estar persistida en BD).
             token_type: Tipo de token (Type.EMAIL_VERIFICATION o Type.PASSWORD_CHANGE).
 
         Returns:
@@ -53,7 +53,6 @@ class TokenServiceImpl(AbstractTokenService):
 
         try:
             with transaction.atomic():
-                # Invalidar tokens anteriores del mismo tipo no usados
                 VerificationToken.objects.filter(
                     user=user,
                     type=token_type,
@@ -88,7 +87,7 @@ class TokenServiceImpl(AbstractTokenService):
           4. Marca como usado y retorna el token.
 
         Args:
-            user: Instancia del modelo User.
+            user: Instancia del modelo User (debe estar persistida en BD).
             code: Código de 6 dígitos a validar.
             token_type: Tipo de token esperado.
 
@@ -133,7 +132,7 @@ class TokenServiceImpl(AbstractTokenService):
         Útil para limpieza antes de generar un nuevo token.
 
         Args:
-            user: Instancia del modelo User.
+            user: Instancia del modelo User (debe estar persistida en BD).
             token_type: Tipo de token a invalidar.
 
         Returns:

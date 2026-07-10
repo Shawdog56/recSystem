@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código de verificación</title>
+    <title>Código de verificación | Liver Talent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body style="margin: 0; padding: 0; background-color: #f4f4f5; font-family: 'Segoe UI', Arial, sans-serif;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f5; padding: 40px 0;">
+<body style="margin: 0; padding: 0; background: #f4f4f5; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #f4f4f5; padding: 40px 0;">
         <tr>
             <td align="center">
-                <table width="480" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <!-- Header -->
+                <table width="480" cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+
                     <tr>
-                        <td style="background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 32px 24px; text-align: center;">
-                            <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 600;">
+                        <td style="background: linear-gradient(160deg, #78256f 0%, #D10074 55%, #d25894 100%); padding: 32px 24px; text-align: center;">
+                            <table cellpadding="0" cellspacing="0" style="margin: 0 auto 12px;">
+                                <tr>
+                                    <td style="vertical-align: middle; padding-right: 10px;">
+                                        <table cellpadding="0" cellspacing="0" style="width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, #D10074, #d25894); box-shadow: 0 4px 15px rgba(209,0,116,.35);">
+                                            <tr>
+                                                <td align="center" style="color: #ffffff; font-size: 18px; font-family: Arial, sans-serif;">
+                                                    &#128188;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="vertical-align: middle; text-align: left;">
+                                        <div style="color: #ffffff; font-size: 20px; font-weight: 700; line-height: 1.2;">Liver <span style="color: #ff99cc;">Talent</span></div>
+                                        <div style="color: rgba(255,255,255,0.75); font-size: 11px; font-weight: 300; letter-spacing: 1px;">Bolsa de Trabajo</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h1 style="color: #ffffff; margin: 16px 0 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">
                                 Código de verificación
                             </h1>
                         </td>
@@ -29,18 +47,23 @@
                                 Usa el siguiente código para <strong>{{ action_label }}</strong>:
                             </p>
 
-                            <!-- Code Box -->
-                            <div style="background-color: #f0f4ff; border: 2px dashed #2563eb; border-radius: 10px; padding: 24px; text-align: center; margin-bottom: 24px;">
-                                <span style="font-size: 42px; font-weight: 700; letter-spacing: 10px; color: #2563eb; font-family: 'Courier New', monospace;">
+                            <div style="background-color: #fdf0f7; border: 2px dashed #D10074; border-radius: 10px; padding: 24px; text-align: center; margin-bottom: 24px;">
+                                <span style="font-size: 42px; font-weight: 700; letter-spacing: 10px; color: #D10074; font-family: 'Courier New', monospace;">
                                     {{ code }}
                                 </span>
                             </div>
 
                             <p style="color: #6b7280; font-size: 13px; line-height: 1.5; margin: 0 0 4px 0;">
-                                ⏱ Este código expira en <strong>{{ expiry_minutes }} minutos</strong>.
+                                &#9200; Este código expira en <strong>{{ expiry_minutes }} minutos</strong>.
                             </p>
                             <p style="color: #9ca3af; font-size: 12px; line-height: 1.5; margin: 0;">
                                 Si no solicitaste este código, ignora este mensaje.
+                            </p>
+
+                            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 28px 0 0;">
+
+                            <p style="color: #aaa; font-size: 11px; line-height: 1.5; margin: 12px 0 0; text-align: center; font-weight: 300;">
+                                &copy; Liver Talent &mdash; Bolsa de Trabajo
                             </p>
                         </td>
                     </tr>
