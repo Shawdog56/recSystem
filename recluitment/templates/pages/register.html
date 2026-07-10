@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="es">
    <head>
       <meta charset="UTF-8">
@@ -97,7 +97,7 @@
 
          <!-- Logotipo Superior Centrado -->
          <div class="text-center mb-4">
-            <a href="/" class="d-inline-block text-decoration-none">
+            <a href="{% url 'hello_world' %}" class="d-inline-block text-decoration-none">
                <div class="blogo mx-auto">
                   <div class="bico"><i class="fas fa-briefcase"></i></div>
                   <div class="text-start">
@@ -122,7 +122,7 @@
                {% endfor %}
             </div>
          {% endif %}
-         <form action="/register/" method="POST" novalidate>
+         <form action="{% url 'pages_registro' %}" method="POST" novalidate>
             {% csrf_token %}
 
             <!-- Fila para Usuario y Contraseña -->
@@ -171,14 +171,14 @@
 
          <!-- Enlace para volver a Iniciar Sesión -->
          <p class="text-center text-muted small mt-4 mb-0">
-            ¿Ya tienes una cuenta? <a href="/login/" class="link-auth fw-semibold text-decoration-none">Iniciar sesión</a>
+            ¿Ya tienes una cuenta? <a href="{% url 'pages_login' %}" class="link-auth fw-semibold text-decoration-none">Iniciar sesión</a>
          </p>
 
       </div>
 
       <!-- jQuery -->
-      <script src="../js/jquery-3.7.1.min.js"></script>
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
       <!-- Bootstrap 5 -->
-      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
    </body>
 </html>

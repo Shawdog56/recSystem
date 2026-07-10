@@ -1,6 +1,5 @@
 import logging
 
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import redirect, render
@@ -22,6 +21,16 @@ email_sender = EmailSenderImpl()
 
 def home(request):
     return render(request, 'index.html')
+
+
+def hello_world(request):
+    return home(request)
+
+
+def dashboard(request):
+    if not request.session.get('user_id'):
+        return redirect('pages_login')
+    return render(request, 'dashboard.html')
 
 
 # ─── Registro ──────────────────────────────────────────────────────────────
@@ -53,7 +62,7 @@ def register(request):
         if errors:
             for e in errors:
                 messages.error(request, e)
-            return render(request, 'register.html')
+            return render(request, 'pages/register.html')
 
         # ── Crear usuario (inactivo hasta verificar email) ──────────────
         user = Usuario.objects.create(
@@ -85,7 +94,7 @@ def register(request):
                 request,
                 'Error al enviar el código de verificación. Intenta de nuevo.',
             )
-            return render(request, 'register.html')
+            return render(request, 'pages/register.html')
 
         # Guardamos el ID en sesión para el paso de verificación
         request.session['verify_user_id'] = user.id
@@ -97,7 +106,7 @@ def register(request):
         )
         return redirect('/verify/')
 
-    return render(request, 'register.html')
+    return render(request, 'pages/register.html')
 
 
 # ─── Verificación de email ────────────────────────────────────────────────
@@ -121,7 +130,7 @@ def verify(request):
 
         if not code or len(code) != 6 or not code.isdigit():
             messages.error(request, 'El código debe tener 6 dígitos numéricos.')
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
 
         try:
             user = Usuario.objects.get(pk=user_id)
@@ -135,13 +144,13 @@ def verify(request):
             )
         except InvalidToken:
             messages.error(request, 'El código ingresado es incorrecto.')
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
         except TokenExpired:
             messages.error(
                 request,
                 'El código ha expirado. Solicita uno nuevo.',
             )
-            return render(request, 'verification_code.html', {'email': email})
+            return render(request, 'pages/verification_code.html', {'email': email})
 
         # Código válido → activar usuario
         user.enabled = True
@@ -158,7 +167,7 @@ def verify(request):
         messages.success(request, '¡Correo verificado exitosamente!')
         return redirect('/')
 
-    return render(request, 'verification_code.html', {'email': email})
+    return render(request, 'pages/verification_code.html', {'email': email})
 
 
 # ─── Reenviar código de verificación ──────────────────────────────────────
@@ -210,7 +219,7 @@ def login_view(request):
 
             if not check_password(password, user.password):
                 messages.error(request, 'Credenciales inválidas.')
-                return render(request, 'login.html')
+                return render(request, 'pages/login.html')
 
             if not user.enabled:
                 # El usuario no ha verificado su email
@@ -241,13 +250,14 @@ def login_view(request):
             # Login exitoso
             request.session['user_id'] = user.id
             request.session['username'] = user.username
+            request.session['roles'] = list(user.roles.values_list('descripcion', flat=True))
             messages.success(request, f'Bienvenido, {user.nombre}!')
             return redirect('/')
 
         except Usuario.DoesNotExist:
             messages.error(request, 'Credenciales inválidas.')
 
-    return render(request, 'login.html')
+    return render(request, 'pages/login.html')
 
 
 # ─── Cierre de sesión ─────────────────────────────────────────────────────
@@ -268,7 +278,7 @@ def forgot_password(request):
 
         if not email:
             messages.error(request, 'El correo es obligatorio.')
-            return render(request, 'forgot-password.html')
+            return render(request, 'pages/forgot-password.html')
 
         try:
             user = Usuario.objects.get(correo=email)
@@ -278,7 +288,7 @@ def forgot_password(request):
                 request,
                 'Si el correo existe en nuestro sistema, recibirás instrucciones.',
             )
-            return render(request, 'forgot-password.html')
+            return render(request, 'pages/forgot-password.html')
 
         try:
             token = token_service.generate(
@@ -298,4 +308,4 @@ def forgot_password(request):
             'Si el correo existe en nuestro sistema, recibirás instrucciones.',
         )
 
-    return render(request, 'forgot-password.html')
+    return render(request, 'pages/forgot-password.html')

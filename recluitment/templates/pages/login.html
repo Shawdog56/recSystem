@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="es">
    <head>
       <meta charset="UTF-8">
@@ -45,7 +45,7 @@
             <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
                <div class="w-100 auth-form-wrap">
 
-                  <a href="/" class="d-inline-block mb-4 text-decoration-none">
+                  <a href="{% url 'hello_world' %}" class="d-inline-block mb-4 text-decoration-none">
                      <div class="blogo">
                         <div class="bico"><i class="fas fa-briefcase"></i></div>
                         <div>
@@ -58,12 +58,18 @@
                   <h2 class="stitle text-start" style="font-size:1.6rem;">Inicia sesión</h2>
                   <p class="sdesc mb-4">Accede para ver el tablero de vacantes y candidatos</p>
 
-                  <form action="/login/" method="POST" novalidate>
+                  <form action="{% url 'pages_login' %}" method="POST" novalidate>
+                     {% if messages %}
+                        {% for message in messages %}
+                           <div class="mb-3">
+                              <p style="color: red;">{{ message }}</p>                              
+                           </div>
+                        {% endfor %}
+                     {% endif %}
                      {% csrf_token %}
-
                      <div class="mb-3">
                         <label for="email" class="flbl">Correo electrónico</label>
-                        <input type="email" class="fctrl" id="email" name="email"
+                        <input type="text" class="fctrl" id="username" name="username"
                                placeholder="nombre@correo.com" required autocomplete="username">
                      </div>
 
@@ -78,7 +84,7 @@
                            <input class="form-check-input" type="checkbox" id="remember" name="remember">
                            <label class="form-check-label small" for="remember">Recordarme</label>
                         </div>
-                        <a href="/forgot-password/" class="small link-auth text-decoration-none">¿Olvidaste tu contraseña?</a>
+                        <a href="{% url 'pages_forgot_password' %}" class="small link-auth text-decoration-none">¿Olvidaste tu contraseña?</a>
                      </div>
 
                      <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
@@ -88,7 +94,7 @@
                   </form>
 
                   <p class="text-center text-muted small mt-4 mb-0">
-                     ¿Eres candidato? <a href="/register/" class="link-auth fw-semibold text-decoration-none">Registra tu perfil aquí</a>
+                     ¿Eres candidato? <a href="{% url 'pages_registro' %}" class="link-auth fw-semibold text-decoration-none">Registra tu perfil aquí</a>
                   </p>
 
                </div>
@@ -98,8 +104,8 @@
       </div>
 
       <!-- jQuery -->
-      <script src="../js/jquery-3.7.1.min.js"></script>
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
       <!-- Bootstrap 5 -->
-      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
    </body>
 </html>
