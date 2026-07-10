@@ -1,0 +1,405 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Creación de vacantes - Bolsa de Trabajo">
+      <title>Crear Vacante | Bolsa de Trabajo</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+      <!-- Bootstrap 5.3 -->
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+      <!-- all min css (Font Awesome) -->
+      <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+      <style>
+        :root{
+          --liv-pink:#d25894;
+          --liv-peach:#e99a82;
+          --liv-lavender:#c08fb8;
+          --liv-purple:#78256f;
+          --liv-magenta:#D10074;
+          --liv-navy:#4A528A;
+        }
+
+        body{
+          background:linear-gradient(160deg, var(--liv-purple) 0%, var(--liv-magenta) 55%, var(--liv-pink) 100%);
+          min-height:100vh;
+          position:relative;
+          overflow-x:hidden;
+          padding:48px 16px;
+        }
+
+        .diamond-bg{
+          position:absolute; inset:0;
+          background-image:
+            linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%),
+            linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%);
+          background-size:64px 64px;
+          background-position:0 0, 32px 32px;
+          opacity:.6;
+          z-index:0;
+        }
+
+        .vc-container{
+          position:relative;
+          z-index:1;
+          width:100%;
+          max-width:760px;
+          margin:0 auto;
+          padding:2.5rem;
+          background:#ffffff;
+          border-radius:16px;
+          box-shadow:0 10px 30px rgba(0,0,0,.15);
+        }
+
+        .vc-container .bico{
+          background:linear-gradient(135deg, var(--liv-magenta), var(--liv-pink));
+          box-shadow:0 4px 15px rgba(209,0,116,.35);
+        }
+        .vc-container .bname span{ color:var(--liv-magenta); }
+
+        .flbl{ margin-bottom:.4rem; font-weight:500; font-size:.9rem; color:var(--liv-navy); display:block; }
+        .fctrl{
+          display:block; width:100%; padding:.6rem .9rem; font-size:.95rem; font-weight:400;
+          line-height:1.5; color:#212529; background-color:#fff; border:1px solid #ced4da;
+          border-radius:.5rem; transition:border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+        .fctrl:focus{
+          border-color:var(--liv-pink);
+          box-shadow:0 0 0 .2rem rgba(210,88,148,.25);
+          outline:none;
+        }
+
+        .vc-container .input-group{
+          display:flex !important;
+          flex-wrap:nowrap !important;
+          align-items:stretch !important;
+          width:100% !important;
+        }
+        .vc-container .input-group .fctrl{
+          position:relative;
+          flex:1 1 auto;
+          width:1% !important;
+          min-width:0;
+          border-top-left-radius:0;
+          border-bottom-left-radius:0;
+        }
+        .vc-container .input-group .input-group-text{
+          display:flex;
+          align-items:center;
+          border-top-right-radius:0;
+          border-bottom-right-radius:0;
+          border-right:0;
+          background-color:#f8f9fa;
+          color:var(--liv-navy);
+          font-weight:600;
+        }
+
+        .btn-pink{
+          background:var(--liv-magenta);
+          border-color:var(--liv-magenta);
+          color:#fff;
+        }
+        .btn-pink:hover{
+          background:var(--liv-purple);
+          border-color:var(--liv-purple);
+          color:#fff;
+        }
+
+        .vc-section-title{
+          font-family:'Playfair Display', serif;
+          font-size:1.15rem;
+          font-weight:700;
+          color:var(--liv-purple);
+          margin-bottom:4px;
+        }
+        .vc-section-sub{
+          font-size:.83rem;
+          color:#888;
+          margin-bottom:18px;
+        }
+        .vc-section + .vc-section{
+          margin-top:34px;
+          padding-top:28px;
+          border-top:1px solid #f0e6ec;
+        }
+
+        .vc-accordion{
+          border-radius:12px;
+          overflow:hidden;
+          border:1px solid #f0e6ec;
+        }
+        .vc-accordion + .vc-accordion{ margin-top:14px; }
+        .vc-accordion-header{
+          width:100%;
+          display:flex;
+          align-items:center;
+          gap:12px;
+          background:#faf7f9;
+          border:none;
+          padding:14px 18px;
+          cursor:pointer;
+          text-align:left;
+          font-size:.92rem;
+          font-weight:600;
+          color:var(--liv-navy);
+          font-family:'Poppins', sans-serif;
+          transition:background-color .2s ease;
+        }
+        .vc-accordion-header:hover{
+          background:rgba(210,88,148,.05);
+        }
+        .vc-accordion-header:focus-visible{
+          outline:2px solid var(--liv-pink);
+          outline-offset:-2px;
+        }
+        .vc-accordion-icon{
+          color:var(--liv-magenta);
+          font-size:1rem;
+          flex-shrink:0;
+        }
+        .vc-accordion-text{ flex:1; }
+        .vc-accordion-chevron{
+          color:var(--liv-navy);
+          transition:transform .2s ease, color .2s ease;
+          flex-shrink:0;
+        }
+        .vc-accordion-header[aria-expanded="true"] .vc-accordion-chevron{
+          transform:rotate(180deg);
+          color:var(--liv-magenta);
+        }
+        .vc-accordion-panel{
+          max-height:0;
+          overflow:hidden;
+          transition:max-height .35s ease;
+          background:#faf7f9;
+        }
+        .vc-accordion-body{
+          padding:18px;
+          border-top:1px solid #f0e6ec;
+        }
+
+        .etapa-row{
+          display:flex;
+          gap:10px;
+          align-items:center;
+          margin-bottom:10px;
+        }
+        .etapa-row .fctrl{ flex:1; }
+        .btn-remove-etapa{
+          flex-shrink:0;
+          width:38px; height:38px;
+          border:none;
+          border-radius:50%;
+          background:#fdeaf0;
+          color:var(--liv-magenta);
+          display:flex; align-items:center; justify-content:center;
+          transition:.2s;
+        }
+        .btn-remove-etapa:hover{ background:var(--liv-magenta); color:#fff; }
+
+        .btn-add-etapa{
+          background:none;
+          border:2px dashed var(--liv-pink);
+          color:var(--liv-magenta);
+          border-radius:9px;
+          padding:8px 16px;
+          font-size:.85rem;
+          font-weight:600;
+        }
+        .btn-add-etapa:hover{ background:rgba(210,88,148,.08); }
+      </style>
+   </head>
+   <body>
+
+      <div class="diamond-bg"></div>
+
+      <div class="vc-container">
+
+         <div class="text-center mb-4">
+            <a href="{% url 'hello_world' %}" class="d-inline-block text-decoration-none">
+               <div class="blogo mx-auto d-inline-flex">
+                  <div class="bico"><i class="fas fa-briefcase"></i></div>
+                  <div class="text-start">
+                     <div class="bname">Liver <span>Talent</span></div>
+                     <div class="bsub">Bolsa de Trabajo</div>
+                  </div>
+               </div>
+            </a>
+         </div>
+
+         <h2 class="stitle text-center" style="font-size:1.7rem; font-family:'Poppins', sans-serif; font-weight:700; color:var(--liv-purple);">Crear Nueva Vacante</h2>
+         <p class="sdesc text-center mb-4 text-muted">Completa la información general y activa los campos dinámicos que necesites</p>
+
+         {% if messages %}
+            {% for message in messages %}
+               <div class="alert alert-success text-center py-2 small" role="alert">{{ message }}</div>
+            {% endfor %}
+         {% endif %}
+
+         <form action="/reclutamiento/vacantes/crear" method="POST" novalidate>
+            {% csrf_token %}
+
+            <!-- ============================================================
+                 SECCIÓN GENERAL
+                 ============================================================ -->
+            <div class="vc-section">
+               <div class="vc-section-title"><i class="fas fa-circle-info me-2"></i>Información General</div>
+               <p class="vc-section-sub">Datos básicos que toda vacante debe tener</p>
+
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="nombre_vacante" class="flbl">Nombre de la vacante</label>
+                     <input type="text" class="fctrl" id="nombre_vacante" name="nombre_vacante" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                     <label for="nombre_puesto" class="flbl">Nombre del puesto</label>
+                     <input type="text" class="fctrl" id="nombre_puesto" name="nombre_puesto" required>
+                  </div>
+               </div>
+
+               <div class="mb-3">
+                  <label for="descripcion" class="flbl">Descripción</label>
+                  <textarea class="fctrl" id="descripcion" name="descripcion" rows="4" required></textarea>
+               </div>
+
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="sueldo" class="flbl">Sueldo</label>
+                     <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="fctrl" id="sueldo" name="sueldo"
+                               min="0" step="0.01" required>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- ============================================================
+                 SECCIÓN CAMPOS DINÁMICOS
+                 ============================================================ -->
+            <div class="vc-section">
+               <div class="vc-section-title"><i class="fas fa-sliders me-2"></i>Campos Dinámicos</div>
+               <p class="vc-section-sub">Actívalos solo si aplican para esta vacante</p>
+
+               <!-- Etapas de selección -->
+               <div class="vc-accordion">
+                  <button type="button" class="vc-accordion-header" id="etapasHeader"
+                          aria-expanded="false" aria-controls="etapasBlock">
+                     <i class="fas fa-list-check vc-accordion-icon"></i>
+                     <span class="vc-accordion-text">¿Esta vacante maneja etapas de selección?</span>
+                     <i class="fas fa-chevron-down vc-accordion-chevron"></i>
+                  </button>
+                  <input type="checkbox" class="visually-hidden" tabindex="-1" aria-hidden="true"
+                         id="tieneEtapas" name="tiene_etapas">
+                  <div class="vc-accordion-panel" id="etapasBlock">
+                     <div class="vc-accordion-body">
+                        <div id="etapasList">
+                           <div class="etapa-row">
+                              <input type="text" class="fctrl" name="etapas[]">
+                              <button type="button" class="btn-remove-etapa" title="Eliminar etapa"><i class="fas fa-trash"></i></button>
+                           </div>
+                        </div>
+                        <button type="button" class="btn-add-etapa" id="addEtapaBtn">
+                           <i class="fas fa-plus me-1"></i>Agregar etapa
+                        </button>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Fecha de inicio / cierre -->
+               <div class="vc-accordion">
+                  <button type="button" class="vc-accordion-header" id="fechasHeader"
+                          aria-expanded="false" aria-controls="fechasBlock">
+                     <i class="fas fa-calendar-days vc-accordion-icon"></i>
+                     <span class="vc-accordion-text">¿Tiene fecha de inicio o cierre?</span>
+                     <i class="fas fa-chevron-down vc-accordion-chevron"></i>
+                  </button>
+                  <input type="checkbox" class="visually-hidden" tabindex="-1" aria-hidden="true"
+                         id="tieneFechas" name="tiene_fechas">
+                  <div class="vc-accordion-panel" id="fechasBlock">
+                     <div class="vc-accordion-body">
+                        <div class="row">
+                           <div class="col-md-6 mb-3 mb-md-0">
+                              <label for="fecha_inicio" class="flbl">Fecha de inicio</label>
+                              <input type="date" class="fctrl" id="fecha_inicio" name="fecha_inicio">
+                           </div>
+                           <div class="col-md-6">
+                              <label for="fecha_cierre" class="flbl">Fecha de cierre</label>
+                              <input type="date" class="fctrl" id="fecha_cierre" name="fecha_cierre">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <button type="submit" class="btn-red btn-pink w-100 justify-content-center mt-4">
+               <i class="fas fa-plus-circle me-2"></i>Publicar Vacante
+            </button>
+
+         </form>
+
+      </div>
+
+      <!-- jQuery -->
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+      <!-- Bootstrap 5 -->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script>
+        (function(){
+          function bindAccordion(headerId, panelId, checkboxId){
+            var header = document.getElementById(headerId);
+            var panel = document.getElementById(panelId);
+            var checkbox = document.getElementById(checkboxId);
+
+            function setExpanded(expanded){
+              header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+              checkbox.checked = expanded;
+              panel.style.maxHeight = expanded ? (panel.scrollHeight + 'px') : '0px';
+            }
+
+            header.addEventListener('click', function(){
+              setExpanded(header.getAttribute('aria-expanded') !== 'true');
+            });
+
+            return {
+              refresh: function(){
+                if (header.getAttribute('aria-expanded') === 'true') {
+                  panel.style.maxHeight = panel.scrollHeight + 'px';
+                }
+              }
+            };
+          }
+
+          var etapasAccordion = bindAccordion('etapasHeader', 'etapasBlock', 'tieneEtapas');
+          bindAccordion('fechasHeader', 'fechasBlock', 'tieneFechas');
+
+          function attachRemove(row){
+            row.querySelector('.btn-remove-etapa').addEventListener('click', function(){
+              if (document.querySelectorAll('#etapasList .etapa-row').length > 1) {
+                row.remove();
+              } else {
+                row.querySelector('input').value = '';
+              }
+              etapasAccordion.refresh();
+            });
+          }
+          document.querySelectorAll('#etapasList .etapa-row').forEach(attachRemove);
+
+          document.getElementById('addEtapaBtn').addEventListener('click', function(){
+            var row = document.createElement('div');
+            row.className = 'etapa-row';
+            row.innerHTML = '<input type="text" class="fctrl" name="etapas[]">' +
+                             '<button type="button" class="btn-remove-etapa" title="Eliminar etapa"><i class="fas fa-trash"></i></button>';
+            document.getElementById('etapasList').appendChild(row);
+            attachRemove(row);
+            etapasAccordion.refresh();
+          });
+        })();
+      </script>
+   </body>
+</html>
