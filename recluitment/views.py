@@ -64,7 +64,19 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+""" <<<<<<< HEAD
 # ─── Registro (el usuario NO se crea hasta validar el código) ─────────────
+=======
+@login_required(login_url='pages_login')
+def vacancy_creation_view(request):
+    if request.method == 'POST':
+        messages.success(request, 'Vacante recibida correctamente.')
+        return redirect('pages_vacancy_creation')
+
+    return render(request, 'pages/vacancy-creation.html')
+>>>>>>> noi616/feat/creacion-vacante
+
+"""
 
 
 def register(request):

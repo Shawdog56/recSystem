@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Creación de vacantes - Bolsa de Trabajo">
+      <title>Crear Vacante | Bolsa de Trabajo</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+      <!-- Bootstrap 5.3 -->
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+      <!-- all min css (Font Awesome) -->
+      <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+   </head>
+   <body>
+
+      <div class="diamond-bg"></div>
+
+      <div class="vc-container">
+
+         <div class="text-center mb-4">
+            <a href="{% url 'hello_world' %}" class="d-inline-block text-decoration-none">
+               <div class="blogo mx-auto d-inline-flex">
+                  <div class="bico"><i class="fas fa-briefcase"></i></div>
+                  <div class="text-start">
+                     <div class="bname">Liver <span>Talent</span></div>
+                     <div class="bsub">Bolsa de Trabajo</div>
+                  </div>
+               </div>
+            </a>
+         </div>
+
+         <h2 class="stitle text-center" style="font-size:1.7rem; font-family:'Poppins', sans-serif; font-weight:700; color:var(--liv-purple);">Crear Nueva Vacante</h2>
+         <p class="sdesc text-center mb-4 text-muted">Completa la información general y activa los campos dinámicos que necesites</p>
+
+         {% if messages %}
+            {% for message in messages %}
+               <div class="alert alert-success text-center py-2 small" role="alert">{{ message }}</div>
+            {% endfor %}
+         {% endif %}
+
+         <form action="{% url 'pages_vacancy_creation' %}" method="POST" novalidate>
+            {% csrf_token %}
+
+            <!-- ============================================================
+                 SECCIÓN GENERAL
+                 ============================================================ -->
+            <div class="vc-section">
+               <div class="vc-section-title"><i class="fas fa-circle-info me-2"></i>Información General</div>
+               <p class="vc-section-sub">Datos básicos que toda vacante debe tener</p>
+
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="nombre_vacante" class="flbl">Nombre de la vacante</label>
+                     <input type="text" class="fctrl" id="nombre_vacante" name="nombre_vacante" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                     <label for="nombre_puesto" class="flbl">Nombre del puesto</label>
+                     <input type="text" class="fctrl" id="nombre_puesto" name="nombre_puesto" required>
+                  </div>
+               </div>
+
+               <div class="mb-3">
+                  <label for="descripcion" class="flbl">Descripción</label>
+                  <textarea class="fctrl" id="descripcion" name="descripcion" rows="4" required></textarea>
+               </div>
+
+               <div class="row">
+                  <div class="col-md-6 mb-3">
+                     <label for="sueldo" class="flbl">Sueldo</label>
+                     <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="fctrl" id="sueldo" name="sueldo"
+                               min="0" step="0.01" required>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- ============================================================
+                 SECCIÓN CAMPOS DINÁMICOS
+                 ============================================================ -->
+            <div class="vc-section">
+               <div class="vc-section-title"><i class="fas fa-sliders me-2"></i>Campos Dinámicos</div>
+               <p class="vc-section-sub">Actívalos solo si aplican para esta vacante</p>
+
+               <!-- Etapas de selección -->
+               <div class="vc-accordion">
+                  <button type="button" class="vc-accordion-header" id="etapasHeader"
+                          aria-expanded="false" aria-controls="etapasBlock">
+                     <i class="fas fa-list-check vc-accordion-icon"></i>
+                     <span class="vc-accordion-text">¿Esta vacante maneja etapas de selección?</span>
+                     <i class="fas fa-chevron-down vc-accordion-chevron"></i>
+                  </button>
+                  <input type="checkbox" class="visually-hidden" tabindex="-1" aria-hidden="true"
+                         id="tieneEtapas" name="tiene_etapas">
+                  <div class="vc-accordion-panel" id="etapasBlock">
+                     <div class="vc-accordion-body">
+                        <div id="etapasList">
+                           <div class="etapa-row">
+                              <input type="text" class="fctrl" name="etapas[]">
+                              <button type="button" class="btn-remove-etapa" title="Eliminar etapa"><i class="fas fa-trash"></i></button>
+                           </div>
+                        </div>
+                        <button type="button" class="btn-add-etapa" id="addEtapaBtn">
+                           <i class="fas fa-plus me-1"></i>Agregar etapa
+                        </button>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Fecha de inicio / cierre -->
+               <div class="vc-accordion">
+                  <button type="button" class="vc-accordion-header" id="fechasHeader"
+                          aria-expanded="false" aria-controls="fechasBlock">
+                     <i class="fas fa-calendar-days vc-accordion-icon"></i>
+                     <span class="vc-accordion-text">¿Tiene fecha de inicio o cierre?</span>
+                     <i class="fas fa-chevron-down vc-accordion-chevron"></i>
+                  </button>
+                  <input type="checkbox" class="visually-hidden" tabindex="-1" aria-hidden="true"
+                         id="tieneFechas" name="tiene_fechas">
+                  <div class="vc-accordion-panel" id="fechasBlock">
+                     <div class="vc-accordion-body">
+                        <div class="row">
+                           <div class="col-md-6 mb-3 mb-md-0">
+                              <label for="fecha_inicio" class="flbl">Fecha de inicio</label>
+                              <input type="date" class="fctrl" id="fecha_inicio" name="fecha_inicio">
+                           </div>
+                           <div class="col-md-6">
+                              <label for="fecha_cierre" class="flbl">Fecha de cierre</label>
+                              <input type="date" class="fctrl" id="fecha_cierre" name="fecha_cierre">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <button type="submit" class="btn-red btn-pink w-100 justify-content-center mt-4">
+               <i class="fas fa-plus-circle me-2"></i>Publicar Vacante
+            </button>
+
+         </form>
+
+      </div>
+
+      <!-- jQuery -->
+      <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+      <!-- Bootstrap 5 -->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script>
+        (function(){
+          function bindAccordion(headerId, panelId, checkboxId){
+            var header = document.getElementById(headerId);
+            var panel = document.getElementById(panelId);
+            var checkbox = document.getElementById(checkboxId);
+
+            function setExpanded(expanded){
+              header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+              checkbox.checked = expanded;
+              panel.style.maxHeight = expanded ? (panel.scrollHeight + 'px') : '0px';
+            }
+
+            header.addEventListener('click', function(){
+              setExpanded(header.getAttribute('aria-expanded') !== 'true');
+            });
+
+            return {
+              refresh: function(){
+                if (header.getAttribute('aria-expanded') === 'true') {
+                  panel.style.maxHeight = panel.scrollHeight + 'px';
+                }
+              }
+            };
+          }
+
+          var etapasAccordion = bindAccordion('etapasHeader', 'etapasBlock', 'tieneEtapas');
+          bindAccordion('fechasHeader', 'fechasBlock', 'tieneFechas');
+
+          function attachRemove(row){
+            row.querySelector('.btn-remove-etapa').addEventListener('click', function(){
+              if (document.querySelectorAll('#etapasList .etapa-row').length > 1) {
+                row.remove();
+              } else {
+                row.querySelector('input').value = '';
+              }
+              etapasAccordion.refresh();
+            });
+          }
+          document.querySelectorAll('#etapasList .etapa-row').forEach(attachRemove);
+
+          document.getElementById('addEtapaBtn').addEventListener('click', function(){
+            var row = document.createElement('div');
+            row.className = 'etapa-row';
+            row.innerHTML = '<input type="text" class="fctrl" name="etapas[]">' +
+                             '<button type="button" class="btn-remove-etapa" title="Eliminar etapa"><i class="fas fa-trash"></i></button>';
+            document.getElementById('etapasList').appendChild(row);
+            attachRemove(row);
+            etapasAccordion.refresh();
+          });
+        })();
+      </script>
+   </body>
+</html>

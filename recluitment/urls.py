@@ -12,4 +12,7 @@ urlpatterns = [
     path('forgot-password/', view=views.forgot_password, name='pages_forgot_password'),
     path('reset-password/', view=views.reset_password, name='reset_password'),
     path('logout/', views.logout_view, name='logout'),
+    path('vacantes/crear/', view=views.vacancy_creation_view, name='pages_vacancy_creation'),
+    path('forgot-password/', view=views.forgot_password_view, name='pages_forgot_password'),
+    path('verification-code/', view=views.verification_code_view, name='pages_verification_code'),
 ]
