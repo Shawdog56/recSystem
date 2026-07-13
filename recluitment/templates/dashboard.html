@@ -1,11 +1,421 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h3>Hello, this is a dashboard</h3>
-</body>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="Daniela Maldonado">
+      <title>LiverTalent - Panel de Control</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+      <!-- Bootstrap 5.3 -->
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+      <!-- AOS Animate on Scroll -->
+      <link href="{% static 'css/aos.css' %}" rel="stylesheet"/>
+      <!-- all min css -->
+      <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+   </head>
+   <body>
+      <!-- ============================================================
+         TOP BAR (Mismo estilo que el index)
+         ============================================================ -->
+      <div id="topbar">
+         <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+               <div class="top-contact d-flex flex-wrap gap-3">
+                     <span><i class="fas fa-user-circle"></i> Sesión iniciada: {{ request.user.nombre }} ({{ request.user.rol|capfirst }})</span>
+               </div>
+               <div class="d-flex align-items-center gap-3">
+                     <span class="ttag"><i class="fas fa-door-open"></i> Portal de Talento Interno</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- ============================================================
+         NAVBAR DE CONTROL
+         ============================================================ -->
+      <nav class="navbar navbar-expand-lg" id="nav">
+         <div class="container">
+            <a class="navbar-brand" href="#">
+               <div class="blogo">
+                  <div class="bico"><i class="fas fa-briefcase"></i></div>
+                  <div>
+                     <div class="bname">Liver<span>Talent</span></div>
+                     <div class="bsub">Dashboard Interno</div>
+                  </div>
+               </div>
+            </a>
+            <div class="d-flex align-items-center ms-auto">
+               <a href="{% url 'logout' %}" class="nav-cta bg-dark text-white"><i class="fas fa-sign-out-alt me-1"></i>Cerrar Sesión</a>
+            </div>
+         </div>
+      </nav>
+
+      <!-- ============================================================
+         CONTENEDOR DINÁMICO PRINCIPAL (Detecta Tipo de Usuario)
+         ============================================================ -->
+      <!-- ============================================================
+     BOTONES DE SIMULACIÓN PARA TESTEO (Borrar al pasar a producción)
+     ============================================================ -->
+<div class="container mt-4 text-center">
+   <div class="alert alert-info d-inline-block rounded-pill px-4 shadow-sm border-0">
+      <span class="fw-bold me-2"><i class="fas fa-vial"></i> Entorno de Pruebas Internas:</span>
+      <button class="btn btn-sm btn-pink text-white rounded-pill px-3 me-2" onclick="switchView('aspirante')">Ver como Aspirante</button>
+      <button class="btn btn-sm btn-dark rounded-pill px-3" onclick="switchView('reclutador')">Ver como Reclutador</button>
+   </div>
+</div>
+
+<!-- ============================================================
+     CONTENEDOR DINÁMICO PRINCIPAL (Detecta Tipo de Usuario)
+     ============================================================ -->
+<main class="py-5" style="background: #f8f9fa; min-height: 80vh;">
+   
+   <!-- {% if request.user.rol == 'aspirante' %} -->
+   <!-- ============================================================
+        VISTA DEL ASPIRANTE (Secciones Descendentes)
+        ============================================================ -->
+   <div class="container" id="dev-aspirante-view">
+      
+      <!-- 1. Todas las vacantes disponibles -->
+      <section id="todas-vacantes" class="mb-5" data-aos="fade-up">
+         <div class="mb-4">
+            <span class="slbl">Módulo de Empleo</span>
+            <h2 class="stitle text-start">Todas las <span>Vacantes Disponibles</span></h2>
+            <div class="sline lft"></div>
+         </div>
+
+         <!-- FILTROS DE ÁREAS (Mantiene la lógica JS usando data-f) -->
+         <div class="mb-4" data-aos="fade-up">
+            <button class="filtbtn active px-4 py-2 me-1 mb-2" data-f="all">Todas</button>
+            <button class="filtbtn px-4 py-2 me-1 mb-2" data-f="ti">Tecnología (TI)</button>
+            <button class="filtbtn px-4 py-2 me-1 mb-2" data-f="ventas">Ventas</button>
+            <button class="filtbtn px-4 py-2 me-1 mb-2" data-f="gestion">Gestión / Admin</button>
+            <button class="filtbtn px-4 py-2 me-1 mb-2" data-f="transporte">Transporte / CEDIS</button>
+         </div>
+
+         <div class="row g-4" id="mgrid">
+            
+            <!-- CARD 1: TI (Réplica exacta estructurada del index) -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="ti" data-aos="fade-up">
+               <div class="mcard"
+                  data-img="{% static 'img/menu/ti-1.jpg' %}"
+                  data-title="Desarrollador Backend Senior"
+                  data-cat="Tecnología (TI)"
+                  data-price="Competitivo" data-old="CDMX"
+                  data-rating="ID" data-reviews="9432"
+                  data-cal="Full-time" data-time="Híbrido"
+                  data-desc="Buscamos un Ingeniero de Software para integrarse a nuestras células ágiles de comercio electrónico. Experiencia sólida en APIs, microservicios y despliegues en la nube."
+                  data-tags="Urgente,TI,Sistemas">
+                  <div class="mimg">
+                     <img src="{% static 'img/menu/1.jpg' %}" alt="Backend Dev"/>
+                     <div class="mbdg hot"><i class="fas fa-fire"></i> Destacada</div>
+                     <div class="mhrt"><i class="far fa-bookmark"></i></div>
+                  </div>
+                  <div class="mbody">
+                     <div class="mcat">Tecnología (TI)</div>
+                     <div class="mtit">Desarrollador Backend</div>
+                     <div class="mdesc">Integración de microservicios, optimización de APIs y arquitectura de nube en corporativo.</div>
+                     <div class="mfoot">
+                        <div>
+                           <div class="mprice">Sueldo Competitivo</div>
+                           <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 9432</span></div>
+                        </div>
+                        <a href="#" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- CARD 2: LOGÍSTICA / CEDIS -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="transporte" data-aos="fade-up">
+               <div class="mcard"
+                  data-img="{% static 'img/menu/transporte-1.jpg' %}"
+                  data-title="Supervisor de Operaciones CEDIS"
+                  data-cat="Transporte / CEDIS"
+                  data-price="Competitivo" data-old="Arco Norte"
+                  data-rating="ID" data-reviews="7621"
+                  data-cal="Full-time" data-time="Presencial"
+                  data-desc="Control, inventarios avanzados y distribución masiva regional."
+                  data-tags="CEDIS,Logística,Operaciones">
+                  <div class="mimg">
+                     <img src="{% static 'img/menu/1.jpg' %}" alt="Logística"/>
+                     <div class="mbdg hot"><i class="fas fa-clock"></i> Urgente</div>
+                     <div class="mhrt"><i class="far fa-bookmark"></i></div>
+                  </div>
+                  <div class="mbody">
+                     <div class="mcat">Transporte / CEDIS</div>
+                     <div class="mtit">Supervisor de Logística</div>
+                     <div class="mdesc">Control y gestión de cadenas de suministro masivas dentro del nuevo CEDIS Arco Norte.</div>
+                     <div class="mfoot">
+                        <div>
+                           <div class="mprice">Sueldo Competitivo</div>
+                           <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 7621</span></div>
+                        </div>
+                        <a href="#" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- CARD 3: VENTAS -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="ventas" data-aos="fade-up">
+               <div class="mcard"
+                  data-img="{% static 'img/menu/ventas-1.jpg' %}"
+                  data-title="Asesor Comercial Premium"
+                  data-cat="Ventas"
+                  data-price="Comisiones" data-old="Polanco"
+                  data-rating="ID" data-reviews="3340"
+                  data-cal="Full-time" data-time="Presencial"
+                  data-desc="Atención especializada a clientes dentro de piso de venta de alta gama."
+                  data-tags="Ventas,Piso,Atención">
+                  <div class="mimg">
+                     <img src="{% static 'img/menu/1.jpg' %}" alt="Ventas"/>
+                     <div class="mbdg general"><i class="fas fa-star"></i> Perfil Premium</div>
+                     <div class="mhrt"><i class="far fa-bookmark"></i></div>
+                  </div>
+                  <div class="mbody">
+                     <div class="mcat">Ventas / Comercial</div>
+                     <div class="mtit">Asesor de Piso de Ventas</div>
+                     <div class="mdesc">Atención al cliente personalizada y alcance de metas comerciales en sucursal Polanco.</div>
+                     <div class="mfoot">
+                        <div>
+                           <div class="mprice">Base + Comisiones</div>
+                           <div class="mstars"><i class="fas fa-barcode"></i> <span style="color:#bbb;font-size:.7rem;">Ref: 3340</span></div>
+                        </div>
+                        <a href="#" class="madd" title="Postularme"><i class="fas fa-chevron-right"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </section>
+
+      <!-- 2. Seguimiento de Vacantes Solicitadas -->
+      <section id="seguimiento-solicitudes" class="mb-5" data-aos="fade-up">
+         <div class="mb-4">
+            <span class="slbl">Estatus de Postulación</span>
+            <h2 class="stitle text-start">Tus <span>Solicitudes Activas</span></h2>
+            <div class="sline lft"></div>
+         </div>
+         <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+            <div class="table-responsive">
+               <table class="table table-hover align-middle mb-0">
+                  <thead class="table-light">
+                     <tr>
+                        <th>Puesto</th>
+                        <th>Área</th>
+                        <th>Fecha de Envío</th>
+                        <th>Estatus</th>
+                        <th>Acción</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td><strong>Analista de Ciberseguridad</strong></td>
+                        <td>Tecnología / TI</td>
+                        <td>12 Jul 2026</td>
+                        <td><span class="badge bg-warning text-dark px-3 py-2">En proceso de Entrevista</span></td>
+                        <td><button class="btn btn-sm btn-outline-secondary rounded-pill px-3">Ver Progreso</button></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </section>
+
+      <!-- 3. Cards de Consejos Profesionales -->
+      <section id="consejos" class="mb-5" data-aos="fade-up">
+         <div class="text-center mb-4">
+            <span class="slbl">Tips para Ganar</span>
+            <h2 class="stitle">Consejos para <span>Tu Entrevista</span></h2>
+            <div class="sline"></div>
+         </div>
+         <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+               <div class="dash-hybrid-card bg-liver-blue p-4 text-center text-white">
+                  <div class="card-icon mb-2"><i class="fas fa-id-card fa-2x"></i></div>
+                  <h5 class="fw-bold mt-2">Optimiza tu CV</h5>
+                  <p class="small mb-0">Usa palabras clave asociadas a la vacante tecnológica elegida.</p>
+               </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+               <div class="dash-hybrid-card bg-liver-purple p-4 text-center text-white">
+                  <div class="card-icon mb-2"><i class="fas fa-comments fa-2x"></i></div>
+                  <h5 class="fw-bold mt-2">Método STAR</h5>
+                  <p class="small mb-0">Estructura tus respuestas: Situación, Tarea, Acción y Resultado.</p>
+               </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+               <div class="dash-hybrid-card bg-liver-pink p-4 text-center text-white">
+                  <div class="card-icon mb-2"><i class="fas fa-building fa-2x"></i></div>
+                  <h5 class="fw-bold mt-2">Conócenos</h5>
+                  <p class="small mb-0">Investiga a fondo sobre la historia y metas comerciales del Puerto.</p>
+               </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+               <div class="dash-hybrid-card bg-liver-dark p-4 text-center text-white">
+                  <div class="card-icon mb-2"><i class="fas fa-clock fa-2x"></i></div>
+                  <h5 class="fw-bold mt-2">Puntualidad</h5>
+                  <p class="small mb-0">Conéctate siempre 5 minutos antes a tus llamadas grupales de Teams.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+   <!-- {% elif request.user.rol == 'reclutador' %} -->
+   <!-- ============================================================
+        VISTA DEL RECLUTADOR (Secciones Descendentes)
+        ============================================================ -->
+   <div class="container" id="dev-reclutador-view" style="display: none;">
+      
+      <!-- 1. Vista Rápida de Vacantes Publicadas -->
+      <section id="vista-rapida-publicadas" class="mb-5" data-aos="fade-up">
+         <div class="mb-4">
+            <span class="slbl">Operaciones de Reclutamiento</span>
+            <h2 class="stitle text-start">Vista Rápida de <span>Vacantes Publicadas</span></h2>
+            <div class="sline lft"></div>
+         </div>
+         <div class="row g-4">
+            <div class="col-md-4">
+               <div class="card border-0 shadow-sm p-4 rounded-4 text-center bg-white">
+                  <h1 class="display-4 fw-bold text-dark">12</h1>
+                  <p class="text-muted mb-0">Vacantes Activas en el Portal</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="card border-0 shadow-sm p-4 rounded-4 text-center bg-white">
+                  <h1 class="display-4 fw-bold text-primary">84</h1>
+                  <p class="text-muted mb-0">Aspirantes por Revisar</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="card border-0 shadow-sm p-4 rounded-4 text-center bg-white">
+                  <h1 class="display-4 fw-bold text-success">5</h1>
+                  <p class="text-muted mb-0">Contrataciones de este mes</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- 2. Sección de Pestañas (Tabs de Control de Operación) -->
+      <section id="gestion-tabs" data-aos="fade-up">
+         <div class="mb-4">
+            <span class="slbl">Consola de Control</span>
+            <h2 class="stitle text-start">Gestión Integrada de <span>Talento</span></h2>
+            <div class="sline lft"></div>
+         </div>
+
+         <ul class="nav nav-tabs border-0 mb-4 justify-content-center gap-3" id="reclutadorTab" role="tablist">
+            <li class="nav-item" role="presentation">
+               <button class="nav-link active border rounded-pill px-4 py-2" id="crear-tab" data-bs-toggle="tab" data-bs-target="#crear-view" type="button" role="tab"><i class="fas fa-plus-circle me-2"></i>Crear Nueva Vacante</button>
+            </li>
+            <li class="nav-item" role="presentation">
+               <button class="nav-link border rounded-pill px-4 py-2" id="gestionar-tab" data-bs-toggle="tab" data-bs-target="#gestionar-view" type="button" role="tab"><i class="fas fa-tasks me-2"></i>Gestionar Existentes</button>
+            </li>
+         </ul>
+
+         <div class="tab-content" id="reclutadorTabContent">
+            
+            <!-- Tab: Crear Vacante -->
+            <div class="tab-pane fade show active" id="crear-view" role="tabpanel" aria-labelledby="crear-tab">
+               <div class="row g-4 justify-content-center">
+                  <div class="col-md-8">
+                     <div class="card border-0 shadow-sm p-5 rounded-4 bg-white">
+                        <h3 class="mb-4 text-dark fw-bold"><i class="fas fa-pen-nib text-pink me-2"></i>Formulario de Alta de Puesto</h3>
+                        <form action="#" method="POST">
+                           {% csrf_token %}
+                           <div class="mb-3">
+                              <label class="form-label">Título de la Vacante</label>
+                              <input type="text" class="form-control rounded-3" placeholder="Ej. Ingeniero de Software Senior">
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">Área Operativa</label>
+                              <select class="form-select rounded-3">
+                                 <option>Tecnología / TI</option>
+                                 <option>Piso de Venta</option>
+                                 <option>Logística</option>
+                              </select>
+                           </div>
+                           <div class="mb-3">
+                              <label class="form-label">Descripción de Requerimientos</label>
+                              <textarea class="form-control rounded-3" rows="4" placeholder="Detalla habilidades requeridas..."></textarea>
+                           </div>
+                           <button type="submit" class="btn btn-pink text-white fw-bold px-4 rounded-pill">Publicar en Portal</button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Tab: Gestionar Vacantes -->
+            <div class="tab-pane fade" id="gestionar-view" role="tabpanel" aria-labelledby="gestionar-tab">
+               <div class="row g-4">
+                  <div class="col-md-6">
+                     <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+                        <div class="d-flex justify-content-between align-items-start">
+                           <div>
+                              <h5 class="fw-bold">Desarrollador Backend Django</h5>
+                              <p class="small text-muted mb-0">Publicado hace 3 días - 18 Aspirantes</p>
+                           </div>
+                           <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">Activa</span>
+                        </div>
+                        <div class="mt-3">
+                           <button class="btn btn-sm btn-pink text-white rounded-pill px-3 me-2">Ver Candidatos</button>
+                           <button class="btn btn-sm btn-outline-secondary rounded-pill px-3">Pausar</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </section>
+
+   </div>
+   <!-- {% endif %} -->
+
+</main>
+
+<!-- ============================================================
+     SCRIPT DE INTERRUPTOR SÓLO PARA SIMULACIÓN EN CAPA DE DISEÑO
+     ============================================================ -->
+<script>
+   function switchView(role) {
+      const aspView = document.getElementById('dev-aspirante-view');
+      const recView = document.getElementById('dev-reclutador-view');
+      
+      if (role === 'aspirante') {
+         aspView.style.display = 'block';
+         recView.style.display = 'none';
+      } else {
+         aspView.style.display = 'none';
+         recView.style.display = 'block';
+      }
+   }
+</script>
+
+      <!-- ============================================================
+         FOOTER INSTITUCIONAL
+         ============================================================ -->
+      <footer class="bg-dark text-white py-4 text-center">
+         <div class="container">
+            <p class="mb-1">© 2026 El Puerto de Liverpool. Todos los derechos reservados.</p>
+            <small class="text-muted">Célula de Desarrollo - Ingeniería de Sistemas ESCOM IPN</small>
+         </div>
+      </footer>
+
+      <!-- Bootstrap 5.3 JS Bundle -->
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <!-- AOS Animate Scroll -->
+      <script src="{% static 'js/aos.js' %}"></script>
+      <script>
+         AOS.init({ duration: 800, once: true });
+      </script>
+   </body>
 </html>

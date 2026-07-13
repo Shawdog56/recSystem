@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MÓDULO DE AUTENTICACIÓN LIVERPOOL (Tipografía de Alta Fidelidad)
+   liver talents styles
    ========================================================================== */
 
 :root {
@@ -3158,4 +3158,41 @@ footer {
   .stitle {
     font-size: 1.8rem;
   }
+}
+
+/* ==========================================================================
+   Dashboard personalizado
+   ========================================================================== */
+
+.dash-hybrid-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.08);
+  height: 100%;
+}
+/* Colores corporativos siempre activos */
+.bg-liver-pink { background-color: #e6007e !important; color: white !important; }
+.bg-liver-purple { background-color: #6a1b9a !important; color: white !important; }
+.bg-liver-dark { background-color: #4a4a4a !important; color: white !important; }
+.bg-liver-blue { background-color: #0d47a1 !important; color: white !important; }
+
+/* Efecto Hover: Oscurecimiento */
+.dash-hybrid-card.bg-liver-pink:hover { background-color: #b30062 !important; transform: translateY(-5px); }
+.dash-hybrid-card.bg-liver-purple:hover { background-color: #4a148c !important; transform: translateY(-5px); }
+.dash-hybrid-card.bg-liver-dark:hover { background-color: #2b2b2b !important; transform: translateY(-5px); }
+.dash-hybrid-card.bg-liver-blue:hover { background-color: #0a316d !important; transform: translateY(-5px); }
+
+.dash-hybrid-card .card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+.nav-tabs .nav-link.active {
+  background-color: #e6007e !important;
+  color: white !important;
+  border-color: #e6007e !important;
 }
