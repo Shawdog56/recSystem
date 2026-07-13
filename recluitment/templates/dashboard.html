@@ -54,30 +54,16 @@
          </div>
       </nav>
 
-      <!-- ============================================================
-         CONTENEDOR DINÁMICO PRINCIPAL (Detecta Tipo de Usuario)
-         ============================================================ -->
-      <!-- ============================================================
-     BOTONES DE SIMULACIÓN PARA TESTEO (Borrar al pasar a producción)
-     ============================================================ -->
-<div class="container mt-4 text-center">
-   <div class="alert alert-info d-inline-block rounded-pill px-4 shadow-sm border-0">
-      <span class="fw-bold me-2"><i class="fas fa-vial"></i> Entorno de Pruebas Internas:</span>
-      <button class="btn btn-sm btn-pink text-white rounded-pill px-3 me-2" onclick="switchView('aspirante')">Ver como Aspirante</button>
-      <button class="btn btn-sm btn-dark rounded-pill px-3" onclick="switchView('reclutador')">Ver como Reclutador</button>
-   </div>
-</div>
-
 <!-- ============================================================
      CONTENEDOR DINÁMICO PRINCIPAL (Detecta Tipo de Usuario)
      ============================================================ -->
 <main class="py-5" style="background: #f8f9fa; min-height: 80vh;">
    
-   <!-- {% if request.user.rol == 'aspirante' %} -->
+   {% if request.user.rol == 'aspirante' %}
    <!-- ============================================================
         VISTA DEL ASPIRANTE (Secciones Descendentes)
         ============================================================ -->
-   <div class="container" id="dev-aspirante-view">
+   <div class="container">
       
       <!-- 1. Todas las vacantes disponibles -->
       <section id="todas-vacantes" class="mb-5" data-aos="fade-up">
@@ -98,7 +84,7 @@
 
          <div class="row g-4" id="mgrid">
             
-            <!-- CARD 1: TI (Réplica exacta estructurada del index) -->
+            <!-- CARD 1: TI -->
             <div class="col-sm-6 col-lg-4 mwrap" data-c="ti" data-aos="fade-up">
                <div class="mcard"
                   data-img="{% static 'img/menu/ti-1.jpg' %}"
@@ -268,11 +254,11 @@
 
    </div>
 
-   <!-- {% elif request.user.rol == 'reclutador' %} -->
+   {% elif request.user.rol == 'reclutador' %}
    <!-- ============================================================
         VISTA DEL RECLUTADOR (Secciones Descendentes)
         ============================================================ -->
-   <div class="container" id="dev-reclutador-view" style="display: none;">
+   <div class="container">
       
       <!-- 1. Vista Rápida de Vacantes Publicadas -->
       <section id="vista-rapida-publicadas" class="mb-5" data-aos="fade-up">
@@ -378,27 +364,9 @@
       </section>
 
    </div>
-   <!-- {% endif %} -->
+   {% endif %}
 
 </main>
-
-<!-- ============================================================
-     SCRIPT DE INTERRUPTOR SÓLO PARA SIMULACIÓN EN CAPA DE DISEÑO
-     ============================================================ -->
-<script>
-   function switchView(role) {
-      const aspView = document.getElementById('dev-aspirante-view');
-      const recView = document.getElementById('dev-reclutador-view');
-      
-      if (role === 'aspirante') {
-         aspView.style.display = 'block';
-         recView.style.display = 'none';
-      } else {
-         aspView.style.display = 'none';
-         recView.style.display = 'block';
-      }
-   }
-</script>
 
       <!-- ============================================================
          FOOTER INSTITUCIONAL
