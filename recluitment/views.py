@@ -14,6 +14,15 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+@login_required(login_url='pages_login')
+def vacancy_creation_view(request):
+    if request.method == 'POST':
+        messages.success(request, 'Vacante recibida correctamente.')
+        return redirect('pages_vacancy_creation')
+
+    return render(request, 'pages/vacancy-creation.html')
+
+
 def register(request):
     if request.method == 'POST':
         # Retrieve data from form
