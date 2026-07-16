@@ -44,6 +44,10 @@ class Usuario(models.Model):
     telefono = models.CharField(max_length=15, unique=True)
     correo = models.CharField(max_length=100, unique=True)
     enabled = models.BooleanField(default=True)
+    last_login=models.DateTimeField(null=True)
+    is_active=models.BooleanField(default=True)
+    is_staff=models.BooleanField(default=True)
+    is_superuser=models.BooleanField(default=True)
     
     roles = models.ManyToManyField(
         'Rol', 
@@ -67,15 +71,6 @@ class Usuario(models.Model):
     @email.setter
     def email(self, value):
         self.correo = value
-
-    @property
-    def is_active(self):
-        """Alias para is_active → enabled."""
-        return self.enabled
-
-    @is_active.setter
-    def is_active(self, value):
-        self.enabled = value
 
     def get_full_name(self):
         """Retorna nombre completo (requerido por auth2fa)."""

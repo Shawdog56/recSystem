@@ -14,7 +14,8 @@ CREATE TABLE usuario(
 );
 CREATE TABLE rol(
     id BIGSERIAL PRIMARY KEY,
-    descripcion VARCHAR(50) NOT NULL
+    descripcion VARCHAR(50) NOT NULL,
+    UNIQUE(descripcion)
 );
 CREATE TABLE usuario_rol(
     id BIGSERIAL PRIMARY KEY,
@@ -23,6 +24,22 @@ CREATE TABLE usuario_rol(
     UNIQUE (usuario_id, rol_id)
 );
 
-INSERT INTO usuario (username, password, nombre, telefono, correo) VALUES ('shawdog','pbkdf2_sha256$1200000$Okg6cOJr9FRpvrJtkwM7PL$ZSMKTthy/5kT/THVq986v/H9E3u1iifFUEHV0rXjVvM=','Admin','5512345678','admin@example.com');
+ALTER TABLE usuario_rol
+ADD CONSTRAINT fk_usuariorol_usuario
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuario(id);
+
+ALTER TABLE usuario_rol
+ADD CONSTRAINT fk_usuariorol_rol
+FOREIGN KEY (rol_id)
+REFERENCES rol(id);
+
+INSERT INTO usuario (username, password, nombre, telefono, correo, enabled,
+    last_login,
+    is_active,
+    is_staff,
+    is_superuser) VALUES ('shawdog',
+    'pbkdf2_sha256$1200000$Okg6cOJr9FRpvrJtkwM7PL$ZSMKTthy/5kT/THVq986v/H9E3u1iifFUEHV0rXjVvM=',
+    'Admin','5512345678','admin@example.com', TRUE, NULL, TRUE, FALSE, FALSE);
 INSERT INTO rol (descripcion) VALUES ('ROLE_RECLUTADOR'),('ROLE_ASPIRANTE'),('ROLE_ADMIN');
 INSERT INTO usuario_rol (usuario_id, rol_id) VALUES (1,3),(1,2),(1,1);

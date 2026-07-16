@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from auth2fa.exceptions import InvalidToken, TokenExpired
@@ -64,9 +65,6 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
-""" <<<<<<< HEAD
-# ─── Registro (el usuario NO se crea hasta validar el código) ─────────────
-=======
 @login_required(login_url='pages_login')
 def vacancy_creation_view(request):
     if request.method == 'POST':
@@ -74,12 +72,12 @@ def vacancy_creation_view(request):
         return redirect('pages_vacancy_creation')
 
     return render(request, 'pages/vacancy-creation.html')
->>>>>>> noi616/feat/creacion-vacante
 
-"""
 
 
 def register(request):
+    if 'user_id' in request.session:
+        return redirect("dashboard")
     # ── Detectar verificación pendiente en GET ──────────────────────
     pending_email = request.session.get('verify_email')
     pending_mode = request.session.get('verify_mode')
@@ -421,6 +419,9 @@ def forgot_password(request):
 
 
 def login_view(request):
+    if 'user_id' in request.session:
+        return redirect('dashboard')
+    
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
@@ -457,13 +458,15 @@ def login_view(request):
                     'Hemos enviado un nuevo código a tu correo.',
                 )
                 return redirect('/verify/')
+            
+            user.backend = 'recluitment.backends.IgnoreLastLoginBackend'
 
             # Login exitoso
             request.session['user_id'] = user.id
             request.session['username'] = user.username
             request.session['roles'] = list(user.roles.values_list('descripcion', flat=True))
             messages.success(request, f'Bienvenido, {user.nombre}!')
-            return redirect('/')
+            return redirect('/dashboard/')
 
         except Usuario.DoesNotExist:
             messages.error(request, 'Credenciales inválidas.')
