@@ -10,7 +10,7 @@ class RegisterFlowTest(TestCase):
     """Tests de integración para el flujo de registro + verificación."""
 
     def _set_reg_session(self, client, code='123456', username='testuser',
-                         email='test@example.com'):
+                         email='test@example.com', telefono='5512345600'):
         session = client.session
         session['reg_code'] = code
         session['reg_code_expires'] = '2099-12-31T23:59:59+00:00'
@@ -19,7 +19,7 @@ class RegisterFlowTest(TestCase):
             'password': 'SecurePass123!',
             'nombre': 'Test',
             'apellidos': 'User',
-            'telefono': '5512345678',
+            'telefono': telefono,
             'correo': email,
         }
         session['verify_email'] = email
@@ -53,7 +53,7 @@ class RegisterFlowTest(TestCase):
             'password': 'SecurePass123!',
             'nombre': 'Test',
             'apellidos': 'User',
-            'telefono': '5512345678',
+            'telefono': '5512345600',
             'correo': 'test@example.com',
         })
 
@@ -101,7 +101,7 @@ class RegisterFlowTest(TestCase):
             'password': '',
             'nombre': 'Test',
             'correo': 'test@example.com',
-            'telefono': '5512345678',
+            'telefono': '5512345600',
         })
 
         self.assertEqual(response.status_code, 200)
@@ -151,35 +151,35 @@ class RegisterFlowTest(TestCase):
             password=make_password('SecurePass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345601',
             enabled=False,
         )
 
         response = self.client.post('/login/', {
-            'username': 'testuser',
+            'correo': 'test@example.com',
             'password': 'SecurePass123!',
         })
 
         self.assertRedirects(response, '/verify/')
 
     def test_login_with_verified_user_succeeds(self):
-        """Login de usuario verificado debe redirigir al home."""
+        """Login de usuario verificado debe redirigir al dashboard."""
         from django.contrib.auth.hashers import make_password
         Usuario.objects.create(
             username='testuser',
             password=make_password('SecurePass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345602',
             enabled=True,
         )
 
         response = self.client.post('/login/', {
-            'username': 'testuser',
+            'correo': 'test@example.com',
             'password': 'SecurePass123!',
         })
 
-        self.assertRedirects(response, '/')
+        self.assertRedirects(response, '/dashboard/')
 
     def test_logout_clears_session(self):
         """Logout debe limpiar la sesión y redirigir a /login/."""
@@ -189,7 +189,7 @@ class RegisterFlowTest(TestCase):
             password=make_password('SecurePass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345603',
             enabled=True,
         )
 
@@ -218,7 +218,7 @@ class RegisterFlowTest(TestCase):
             password=make_password('SecurePass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345604',
             enabled=True,
         )
 
@@ -246,7 +246,7 @@ class RegisterFlowTest(TestCase):
             password=make_password('SecurePass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345605',
             enabled=True,
         )
 
@@ -279,7 +279,7 @@ class RegisterFlowTest(TestCase):
             password=make_password('OldPass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345606',
             enabled=True,
         )
 
@@ -307,7 +307,7 @@ class RegisterFlowTest(TestCase):
             password=make_password('OldPass123!'),
             nombre='Test',
             correo='test@example.com',
-            telefono='5512345678',
+            telefono='5512345607',
             enabled=True,
         )
 

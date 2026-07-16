@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
+from django.db import DatabaseError
 from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
@@ -258,6 +259,7 @@ def verify(request):
             request.session['password_reset_verified'] = True
             request.session['password_reset_email'] = email
             request.session.pop('verify_mode', None)
+            request.session.pop('verify_email', None)
             messages.success(request, 'Código verificado. Ahora puedes cambiar tu contraseña.')
             return redirect('/reset-password/')
 
@@ -423,11 +425,15 @@ def login_view(request):
         return redirect('dashboard')
     
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()
+        correo = request.POST.get('correo', '').strip().lower()
         password = request.POST.get('password', '')
 
+        if not correo:
+            messages.error(request, 'El correo es obligatorio.')
+            return render(request, 'pages/login.html')
+
         try:
-            user = Usuario.objects.get(username=username)
+            user = Usuario.objects.get(correo=correo)
 
             if not check_password(password, user.password):
                 messages.error(request, 'Credenciales inválidas.')
@@ -459,8 +465,6 @@ def login_view(request):
                 )
                 return redirect('/verify/')
             
-            user.backend = 'recluitment.backends.IgnoreLastLoginBackend'
-
             # Login exitoso
             request.session['user_id'] = user.id
             request.session['username'] = user.username
@@ -470,6 +474,12 @@ def login_view(request):
 
         except Usuario.DoesNotExist:
             messages.error(request, 'Credenciales inválidas.')
+        except DatabaseError as e:
+            logger.error('Error de base de datos en login: %s', e)
+            messages.error(
+                request,
+                'Error interno del servidor. Intenta de nuevo más tarde.',
+            )
 
     return render(request, 'pages/login.html')
 
