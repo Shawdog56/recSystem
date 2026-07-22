@@ -1,13 +1,12 @@
 ﻿{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="author" content="Sarab">
-      <meta name="description" content="Sarab - Fast Food & Restaurant HTML Template">
-      <title>Sarab - Fast Food & Restaurant HTML Template</title>
+      <meta name="description" content="Portal de empleo y bolsa de trabajo de El Puerto de Liverpool">
+      <title>LiverTalent | Bolsa de Trabajo</title>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
       <!-- Bootstrap 5.3 -->
       <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
@@ -20,14 +19,15 @@
       <!-- magnific CSS -->
       <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
       <!-- Style CSS -->
-      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3" />
    </head>
-   <body>
+<body class="p-0 m-0 w-100" style="background-color: #ffffff;">
+      
       <!-- ============================================================
-         TOP BAR
+         TOP BAR (Alineado al contenedor centrado del sitio)
          ============================================================ -->
-      <div id="topbar">
-         <div class="container">
+      <div id="topbar" class="w-100 p-0 m-0">
+         <div class="container py-2">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                
                <!-- Contacto Institucional -->
@@ -49,11 +49,12 @@
             </div>
          </div>
       </div>
+
       <!-- ============================================================
-     NAVBAR / NAVEGACIÓN PORTAL DE TALENTO LIVERPOOL
-     ============================================================ -->
-      <nav class="navbar navbar-expand-lg" id="nav">
-         <div class="container">
+         NAVBAR (Alineado con el Hero y Category)
+         ============================================================ -->
+      <nav class="navbar navbar-expand-lg w-100 p-0 m-0" id="nav">
+         <div class="container py-2">
             
             <!-- Marca / Logo -->
             <a class="navbar-brand" href="#hero">
@@ -66,7 +67,7 @@
                </div>
             </a>
             
-            <!-- Botón Hamburguesa Responsivo para Móviles -->
+            <!-- Botón Hamburguesa Responsivo -->
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation">
                <i class="fas fa-bars" style="color: var(--primary); font-size: 1.35rem;"></i>
             </button>
@@ -75,14 +76,13 @@
             <div class="collapse navbar-collapse" id="navmenu">
                <ul class="navbar-nav mx-auto">
                   <li class="nav-item"><a class="nav-link active" href="#hero">Inicio</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#vacantes">Vacantes</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#dashboard-rh">Panel RH</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#beneficios">Beneficios</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#casos-exito">Historias</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#equipo-dev">Célula Dev</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#menu">Vacantes</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#special">Beneficios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#history">Historia</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#gallery">Historias</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#chefs">Célula Dev</a></li>
                </ul>
                
-               <!-- Botón de Acción Principal (Login Reclutador / Candidato) -->
                <div class="d-flex align-items-center">
                   <a href="{% url 'pages_login' %}" class="nav-cta"><i class="fas fa-user-circle me-1"></i>Ingresar</a>
                </div>
@@ -91,33 +91,44 @@
          </div>
       </nav>
 
-<!-- ============================================================
-         HERO (Bolsa de Trabajo Liverpool)
+      <!-- ============================================================
+         HERO (Con padding simétrico idéntico a las secciones inferiores)
          ============================================================ -->
-      <section id="hero">
+      <section id="hero" class="w-100 p-0 m-0 py-5 position-relative overflow-hidden">
          <div class="hs hs1"></div>
          <div class="hs hs2"></div>
 
-         <!-- Texto gigante de fondo, cambiamos FOOD por TEAM o PINK -->
          <div class="hbgtxt">TEAM</div>
-         <div class="container">
-            <div class="row align-items-center g-5" style="min-height:88vh;">
-               <div class="col-lg-6">
+         <div class="container py-3">
+            <div class="row align-items-center g-5 m-0">
+               <div class="col-lg-6 px-0 px-lg-3">
                   <div class="hbadge">
-                     <div class="hbi"><i class="fas fa-star"></i></div>
+                     <div class="hbi" style="pointer-events: none;"><i class="fas fa-star"></i></div>
                      <span>#1 Empresa para Crecer en México</span>
                   </div>
                   <h1 class="htitle">Construye tu <span class="hl">Futuro Profesional</span><br/>con Nosotros</h1>
                   <p class="hdesc">Tu talento es la pieza clave que nos impulsa a innovar. Únete a El Puerto de Liverpool y encuentra un espacio donde tus ideas, pasión y crecimiento no tienen límites.</p>
-                  <div class="d-flex flex-wrap gap-3 mb-2">
-                     <!-- El botón principal ahora los manda a loggearse o ver vacantes -->
-                     <a href="{% url 'pages_login' %}" class="btn btn-red text-white d-inline-flex align-items-center"><i class="fas fa-user-plus me-2"></i>Postularme Ahora</a>                     <!-- Dejamos el trigger del video corporativo de Liverpool -->
-                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="magnific_popup btn-play popup-youtube">
-                        <div class="pico"><i class="fas fa-play"></i></div>
-                        <span>Conoce Nuestra Cultura</span>
+                  
+                  <div class="d-flex align-items-center flex-wrap gap-3 mb-2">
+                     
+                     <!-- BOTÓN 1: 'Postularme Ahora' -->
+                     <a href="{% url 'pages_login' %}" 
+                        class="btn-red" 
+                        style="display: inline-flex !important; align-items: center !important; justify-content: center !important; white-space: nowrap !important; pointer-events: auto !important;">
+                        <i class="fas fa-user-plus me-2" style="pointer-events: none;"></i>
+                        <span style="pointer-events: none; display: inline;">Postularme Ahora</span>
                      </a>
+                        
+                     <!-- BOTÓN 2: 'Conoce Nuestra Cultura' -->
+                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+                        class="btn-play magnific_popup popup-youtube"
+                        style="display: inline-flex !important; align-items: center !important;">
+                        <div class="pico" style="pointer-events: none;"><i class="fas fa-play" style="pointer-events: none;"></i></div>
+                        <span style="pointer-events: none;">Conoce Nuestra Cultura</span>
+                     </a>
+
                   </div>
-                  <!-- Estadísticas corporativas de Liverpool -->
+                  
                   <div class="hstats d-flex gap-3 flex-wrap mt-4">
                      <div class="hstat"><span class="snum">170<em>+</em></span><small>Almacenes y Tiendas</small></div>
                      <div class="sdiv"></div>
@@ -128,13 +139,12 @@
                      <div class="hstat"><span class="snum">175<em>yr</em></span><small>De Historia</small></div>
                   </div>
                </div>
-               <div class="col-lg-6">
+               
+               <div class="col-lg-6 px-0 px-lg-3">
                   <div style="position:relative;text-align:center;">
                      <div class="hcircle">
-                        <!-- TIP: Aquí pon una imagen circular de colaboradores o el logo rosa corporativo -->
                         <img src="{% static 'img/banner-img.jpg' %}" alt="Liverpool Team"/>
                      </div>
-                     <!-- Cambiamos los globos flotantes de la hamburguesa a beneficios del empleo -->
                      <div class="fcard fc1">
                         <div class="fcoi r"><i class="fas fa-heart"></i></div>
                         <div><span class="fcnum">SGMM</span><span class="fcsm">Seguro de Vida</span></div>
@@ -185,49 +195,63 @@
                <div class="sline"></div>
                <p class="sdesc mx-auto" style="max-width:480px;">Desde operaciones en piso de venta hasta innovación tecnológica, encuentra el área ideal para ti</p>
             </div>
+
             <div class="row g-3 justify-content-center">
+               
+               <!-- TODAS (Sin clase active agregada manualmente) -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="0">
                   <div class="catcard" data-filter="all">
-                     <img class="catimg" src="{% static 'img/category/1.jpg' %}" alt="Todas"/>
+                     <div class="caticon-wrap"><i class="fas fa-th-large"></i></div>
                      <div class="catnm">Todas</div>
                      <div class="catct">Ver todo</div>
                   </div>
                </div>
+                              
+               <!-- PISO DE VENTA -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="70">
                   <div class="catcard" data-filter="ventas">
-                     <img class="catimg" src="{% static 'img/category/2.jpg' %}" alt="Ventas"/>
+                     <div class="caticon-wrap"><i class="fas fa-store"></i></div>
                      <div class="catnm">Piso de Venta</div>
                      <div class="catct">Cajeros y Asesores</div>
                   </div>
                </div>
+               
+               <!-- LOGÍSTICA / CEDIS -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="140">
                   <div class="catcard" data-filter="logistica">
-                     <img class="catimg" src="{% static 'img/category/3.jpg' %}" alt="Logística"/>
+                     <div class="caticon-wrap"><i class="fas fa-truck-loading"></i></div>
                      <div class="catnm">Logística / CEDIS</div>
                      <div class="catct">Distribución</div>
                   </div>
                </div>
+               
+               <!-- TECNOLOGÍA / TI -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="210">
                   <div class="catcard" data-filter="tecnologia">
-                     <img class="catimg" src="{% static 'img/category/4.jpg' %}" alt="TI"/>
+                     <div class="caticon-wrap"><i class="fas fa-code"></i></div>
                      <div class="catnm">Tecnología / TI</div>
                      <div class="catct">Células Ágiles</div>
                   </div>
                </div>
+               
+               <!-- CORPORATIVO -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="280">
                   <div class="catcard" data-filter="corporativo">
-                     <img class="catimg" src="{% static 'img/category/5.jpg' %}" alt="Corporativo"/>
+                     <div class="caticon-wrap"><i class="fas fa-building"></i></div>
                      <div class="catnm">Corporativo</div>
                      <div class="catct">Administración</div>
                   </div>
                </div>
+               
+               <!-- ATENCIÓN A CLIENTES -->
                <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="350">
                   <div class="catcard" data-filter="atencion">
-                     <img class="catimg" src="{% static 'img/category/6.jpg' %}" alt="Atención"/>
+                     <div class="caticon-wrap"><i class="fas fa-headset"></i></div>
                      <div class="catnm">Atención a Clientes</div>
                      <div class="catct">Call Center</div>
                   </div>
                </div>
+
             </div>
          </div>
       </section>

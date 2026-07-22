@@ -2,6 +2,10 @@
    liver talents styles
    ========================================================================== */
 
+/* ==========================================================================
+   Liver Talent Styles
+   ========================================================================== */
+
 :root {
   --liv-pink: #d25894;
   --liv-peach: #e99a82;
@@ -25,14 +29,32 @@
   --shadow-lg: 0 14px 38px rgba(0, 0, 0, 0.12);
 }
 
+/* ==========================================================================
+   RESET GLOBAL DE BORDES Y TAMAÑO (Elimina el marco exterior/padding)
+   ========================================================================== */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Desactiva paddings laterales no deseados de contenedores fluidos */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--secondary) var(--cream);
-}
-
-body {
-  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar,
@@ -86,8 +108,10 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 /* --- ESTILOS DE ESTRUCTURA Y FONDO --- */
-.auth-wrap { 
-  min-height: 100vh; 
+.auth-wrap {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* El panel de marca lateral original */
@@ -98,10 +122,11 @@ html::-webkit-scrollbar-thumb:hover {
   overflow: hidden;
 }
 
-/* Versión de fondo completo unificado (Para el Registro centrado que pediste) */
+/* Versión de fondo completo unificado */
 .auth-bg-full {
   background: linear-gradient(160deg, var(--liv-purple) 0%, var(--liv-magenta) 55%, var(--liv-pink) 100%);
   min-height: 100vh;
+  width: 100%;
   position: relative;
   overflow-x: hidden;
   display: flex;
@@ -179,7 +204,7 @@ a .blogo, a:hover .blogo {
   font-family: "Poppins", sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1a1a1a !important; /* Cambiado a negro/oscuro puro para que no se vea azul */
+  color: #1a1a1a !important; /* Negro/oscuro puro para que no se vea azul */
   line-height: 1.2;
 }
 
@@ -190,7 +215,7 @@ a .blogo, a:hover .blogo {
 
 .bsub {
   font-size: 0.8rem;
-  color: #888 !important; /* Se mantiene gris sutil */
+  color: #888 !important; /* Gris sutil */
 }
 
 /* --- CAMPOS DE ENTRADA (INPUTS) Y LABELS --- */
@@ -247,7 +272,7 @@ a .blogo, a:hover .blogo {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: var(--liv-magenta) !important; /* Forzamos el color base */
+  background-color: var(--liv-magenta) !important; /* Color base */
   border: 1px solid var(--liv-magenta) !important;
   color: #fff !important;
   padding: 0.5rem 1rem;
@@ -257,7 +282,7 @@ a .blogo, a:hover .blogo {
 }
 
 .btn.btn-pink:hover, .btn-pink:hover {
-  background-color: var(--liv-purple) !important; /* El morado que te gusta al pasar el cursor */
+  background-color: var(--liv-purple) !important; /* Morado al pasar el cursor */
   border-color: var(--liv-purple) !important;
   color: #fff !important;
 }
@@ -863,7 +888,7 @@ section {
   font-weight: 500;
   font-size: 1rem;
   box-shadow: 0 4px 15px rgba(209, 0, 116, 0.28);
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1187,113 +1212,226 @@ section {
 #category {
   background: var(--cream);
 }
+
 .catcard {
-  background: #fff;
-  border-radius: 15px;
-  padding: 22px 14px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 12px;
   text-align: center;
   cursor: pointer;
-  transition: 0.4s;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
   border: 2px solid transparent;
 }
-.catcard:hover,
-.catcard.active {
-  transform: translateY(-7px);
-  box-shadow: 0 14px 38px rgba(232, 40, 26, 0.14);
-}
-.catimg {
-  width: 86px;
-  height: 86px;
+
+/* Círculo contenedor del ícono */
+.caticon-wrap {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  object-fit: cover;
   margin: 0 auto 12px;
-  display: block;
-  transition: 0.4s;
-}
-.catcard:hover .catimg {
-  transform: scale(1.1) rotate(-4deg);
-}
-.catnm {
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 3px;
-}
-.catct {
-  font-size: 0.73rem;
-  color: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
 }
 
+/* Regla estricta para anular el negro de FontAwesome en TODOS los íconos */
+.catcard i, 
+.catcard i.fas, 
+.catcard .fas {
+  font-size: 2.2rem !important;
+  transition: color 0.3s ease;
+}
+
+.catnm {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+  transition: color 0.3s ease;
+}
+
+.catct {
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* =================================================================
+   1. ESTADO PASIVO (Sutil, con borde + fondo claro + icono a color)
+   ================================================================= */
+
+/* --- ALL (Magenta) --- */
+.catcard[data-filter="all"] {
+  border-color: var(--liv-magenta) !important;
+  background: rgba(209, 0, 116, 0.03);
+}
+.catcard[data-filter="all"] .caticon-wrap {
+  background: rgba(209, 0, 116, 0.12) !important;
+}
+.catcard[data-filter="all"] i,
+.catcard[data-filter="all"] i.fas {
+  color: var(--liv-magenta) !important;
+}
+.catcard[data-filter="all"] .catnm {
+  color: var(--liv-magenta);
+}
+.catcard[data-filter="all"] .catct {
+  color: #777777;
+}
+
+/* --- VENTAS (Rojo / Primary) --- */
+.catcard[data-filter="ventas"] {
+  border-color: var(--liv-lavender) !important;
+  background: rgba(232, 40, 26, 0.03);
+}
+.catcard[data-filter="ventas"] .caticon-wrap {
+  background: rgba(232, 40, 26, 0.12) !important;
+}
+.catcard[data-filter="ventas"] i,
+.catcard[data-filter="ventas"] i.fas {
+  color: var(--liv-lavender) !important;
+}
+.catcard[data-filter="ventas"] .catnm {
+  color: var(--liv-lavender);
+}
+.catcard[data-filter="ventas"] .catct {
+  color: #777777;
+}
+
+/* --- LOGÍSTICA (Naranja CEDIS) --- */
+.catcard[data-filter="logistica"] {
+  border-color: #f6a623 !important;
+  background: rgba(246, 166, 35, 0.03);
+}
+.catcard[data-filter="logistica"] .caticon-wrap {
+  background: rgba(246, 166, 35, 0.15) !important;
+}
+.catcard[data-filter="logistica"] i,
+.catcard[data-filter="logistica"] i.fas {
+  color: #d97706 !important;
+}
+.catcard[data-filter="logistica"] .catnm {
+  color: #d97706;
+}
+.catcard[data-filter="logistica"] .catct {
+  color: #777777;
+}
+
+/* --- TECNOLOGÍA (Morado Liver) --- */
+.catcard[data-filter="tecnologia"] {
+  border-color: var(--liv-purple) !important;
+  background: rgba(120, 37, 111, 0.03);
+}
+.catcard[data-filter="tecnologia"] .caticon-wrap {
+  background: rgba(120, 37, 111, 0.12) !important;
+}
+.catcard[data-filter="tecnologia"] i,
+.catcard[data-filter="tecnologia"] i.fas {
+  color: var(--liv-purple) !important;
+}
+.catcard[data-filter="tecnologia"] .catnm {
+  color: var(--liv-purple);
+}
+.catcard[data-filter="tecnologia"] .catct {
+  color: #777777;
+}
+
+/* --- CORPORATIVO (Azul Navy) --- */
+.catcard[data-filter="corporativo"] {
+  border-color: var(--liv-navy) !important;
+  background: rgba(74, 82, 138, 0.03);
+}
+.catcard[data-filter="corporativo"] .caticon-wrap {
+  background: rgba(74, 82, 138, 0.12) !important;
+}
+.catcard[data-filter="corporativo"] i,
+.catcard[data-filter="corporativo"] i.fas {
+  color: var(--liv-navy) !important;
+}
+.catcard[data-filter="corporativo"] .catnm {
+  color: var(--liv-navy);
+}
+.catcard[data-filter="corporativo"] .catct {
+  color: #777777;
+}
+
+/* --- ATENCIÓN (Durazno / Coral) --- */
+.catcard[data-filter="atencion"] {
+  border-color: var(--liv-peach) !important;
+  background: rgba(208, 137, 130, 0.03);
+}
+.catcard[data-filter="atencion"] .caticon-wrap {
+  background: rgba(208, 137, 130, 0.15) !important;
+}
+.catcard[data-filter="atencion"] i,
+.catcard[data-filter="atencion"] i.fas {
+  color: #c05621 !important;
+}
+.catcard[data-filter="atencion"] .catnm {
+  color: #c05621;
+}
+.catcard[data-filter="atencion"] .catct {
+  color: #777777;
+}
+
+
+/* =================================================================
+   2. ESTADO ACTIVO / HOVER (Inundación de color + elementos en blanco)
+   ================================================================= */
+
+.catcard:hover,
+.catcard.active {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Elevar y rotar círculo */
+.catcard:hover .caticon-wrap,
+.catcard.active .caticon-wrap {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Forzar letras e íconos a blanco en hover/active */
+.catcard:hover i, .catcard:hover i.fas,
+.catcard.active i, .catcard.active i.fas,
+.catcard:hover .catnm, .catcard.active .catnm,
+.catcard:hover .catct, .catcard.active .catct {
+  color: #ffffff !important;
+}
+
+/* Fondos sólidos de color según el área */
 .catcard[data-filter="all"]:hover,
 .catcard[data-filter="all"].active {
-  background: rgba(209, 0, 116, 0.06);
-  border-color: var(--liv-magenta);
+  background: var(--liv-magenta) !important;
 }
 
 .catcard[data-filter="ventas"]:hover,
 .catcard[data-filter="ventas"].active {
-  background: rgba(232, 40, 26, 0.06);
-  border-color: var(--liv-purple);
+  background: var(--liv-lavender) !important;
 }
 
 .catcard[data-filter="logistica"]:hover,
 .catcard[data-filter="logistica"].active {
-  background: rgba(246, 166, 35, 0.08);
-  border-color: var(--liv-navy);
+  background: #f6a623 !important;
 }
 
 .catcard[data-filter="tecnologia"]:hover,
 .catcard[data-filter="tecnologia"].active {
-  background: rgba(120, 37, 111, 0.07);
-  border-color: var(--liv-purple);
+  background: var(--liv-purple) !important;
 }
 
 .catcard[data-filter="corporativo"]:hover,
 .catcard[data-filter="corporativo"].active {
-  background: rgba(74, 82, 138, 0.07);
-  border-color: var(--liv-navy);
+  background: var(--liv-navy) !important;
 }
 
 .catcard[data-filter="atencion"]:hover,
 .catcard[data-filter="atencion"].active {
-  background: rgba(208, 137, 130, 0.08);
-  border-color: var(--liv-peach);
-}
-
-.catcard[data-filter]:hover .catnm,
-.catcard[data-filter].active .catnm {
-  color: var(--dark);
-}
-
-.catcard[data-filter="all"]:hover .catnm,
-.catcard[data-filter="all"].active .catnm {
-  color: var(--liv-magenta);
-}
-
-.catcard[data-filter="ventas"]:hover .catnm,
-.catcard[data-filter="ventas"].active .catnm {
-  color: var(--primary);
-}
-
-.catcard[data-filter="logistica"]:hover .catnm,
-.catcard[data-filter="logistica"].active .catnm {
-  color: var(--secondary);
-}
-
-.catcard[data-filter="tecnologia"]:hover .catnm,
-.catcard[data-filter="tecnologia"].active .catnm {
-  color: var(--liv-purple);
-}
-
-.catcard[data-filter="corporativo"]:hover .catnm,
-.catcard[data-filter="corporativo"].active .catnm {
-  color: var(--liv-navy);
-}
-
-.catcard[data-filter="atencion"]:hover .catnm,
-.catcard[data-filter="atencion"].active .catnm {
-  color: var(--liv-peach);
+  background: #c05621 !important;
 }
 
 /* ===================== ABOUT ===================== */

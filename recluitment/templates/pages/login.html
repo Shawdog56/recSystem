@@ -10,19 +10,19 @@
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
       <!-- Bootstrap 5.3 -->
       <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
-      <!-- all min css (Font Awesome) -->
+      <!-- Font Awesome -->
       <link rel="stylesheet" href="{% static 'css/all.min.css' %}"/>
       <!-- Style CSS -->
       <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-
    </head>
-   <body>
+   <body class="m-0 p-0">
 
-      <div class="container-fluid">
-         <div class="row auth-wrap">
+      <!-- Contenedor Maestro sin paddings laterales -->
+      <div class="auth-container-full p-0 m-0">
+         <div class="row auth-wrap g-0 m-0 min-vh-100">
 
-            <!-- Panel de marca -->
-            <div class="col-lg-6 d-none d-lg-flex auth-brand align-items-center justify-content-center p-5">
+            <!-- Panel de marca (Lado Izquierdo - Magenta completo) -->
+            <div class="col-lg-6 d-none d-lg-flex auth-brand align-items-center justify-content-center p-5 m-0">
                <div class="diamond-grid"></div>
                <div class="auth-content text-white" style="max-width:420px;">
                   <p class="text-uppercase small mb-2" style="letter-spacing:.15em; opacity:.85;">Bolsa de Trabajo</p>
@@ -41,9 +41,11 @@
                </div>
             </div>
 
-            <!-- Panel de formulario -->
-            <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
-               <div class="w-100 auth-form-wrap">
+            <!-- Panel de formulario (Lado Derecho - Blanco/Gris) -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center p-4 m-0 bg-light">
+               
+               <!-- TARJETA BLANCA -->
+               <div class="w-100 bg-white p-4 p-sm-5 rounded-4 shadow-lg border-0 auth-form-wrap" style="max-width: 480px;">
 
                   <a href="{% url 'hello_world' %}" class="d-inline-block mb-4 text-decoration-none">
                      <div class="blogo">
@@ -56,39 +58,42 @@
                   </a>
 
                   <h2 class="stitle text-start" style="font-size:1.6rem;">Inicia sesión</h2>
-                  <p class="sdesc mb-4">Accede para ver el tablero de vacantes y candidatos</p>
+                  <p class="sdesc mb-4 text-muted">Accede para ver el tablero de vacantes y candidatos</p>
 
                   <form action="{% url 'pages_login' %}" method="POST" novalidate>
+                     
                      {% if messages %}
                         {% for message in messages %}
-                           <div class="mb-3">
-                              <p style="color: red;">{{ message }}</p>                              
+                           <div class="alert alert-danger alert-dismissible fade show rounded-3 py-2 px-3 small mb-3" role="alert">
+                              <i class="fas fa-exclamation-circle me-1"></i> {{ message }}
+                              <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Close"></button>
                            </div>
                         {% endfor %}
                      {% endif %}
+                     
                      {% csrf_token %}
                      <div class="mb-3">
-                        <label for="email" class="flbl">Correo electrónico</label>
-                        <input type="text" class="fctrl" id="username" name="username"
+                        <label for="username" class="flbl form-label fw-medium">Correo electrónico</label>
+                        <input type="text" class="fctrl form-control rounded-3" id="username" name="username"
                                placeholder="nombre@correo.com" required autocomplete="username">
                      </div>
 
                      <div class="mb-3">
-                        <label for="password" class="flbl">Contraseña</label>
-                        <input type="password" class="fctrl" id="password" name="password"
+                        <label for="password" class="flbl form-label fw-medium">Contraseña</label>
+                        <input type="password" class="fctrl form-control rounded-3" id="password" name="password"
                                placeholder="••••••••" required autocomplete="current-password">
                      </div>
 
-                     <div class="d-flex justify-content-between align-items-center mb-4">
+                     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                         <div class="form-check">
                            <input class="form-check-input" type="checkbox" id="remember" name="remember">
-                           <label class="form-check-label small" for="remember">Recordarme</label>
+                           <label class="form-check-label small text-muted" for="remember">Recordarme</label>
                         </div>
-                        <a href="{% url 'pages_forgot_password' %}" class="small link-auth text-decoration-none">¿Olvidaste tu contraseña?</a>
+                        <a href="{% url 'pages_forgot_password' %}" class="small link-auth text-decoration-none fw-medium">¿Olvidaste tu contraseña?</a>
                      </div>
 
-                     <button type="submit" class="btn-red btn-pink w-100 justify-content-center">
-                        <i class="fas fa-sign-in-alt"></i>Entrar
+                     <button type="submit" class="btn btn-pink w-100 justify-content-center rounded-pill py-2 fw-semibold">
+                        <i class="fas fa-sign-in-alt me-2"></i>Entrar
                      </button>
 
                   </form>
@@ -98,14 +103,14 @@
                   </p>
 
                </div>
+
             </div>
 
          </div>
       </div>
 
-      <!-- jQuery -->
+      <!-- Scripts -->
       <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-      <!-- Bootstrap 5 -->
       <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
    </body>
 </html>
