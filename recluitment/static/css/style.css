@@ -1,8 +1,4 @@
 /* ==========================================================================
-   liver talents styles
-   ========================================================================== */
-
-/* ==========================================================================
    Liver Talent Styles
    ========================================================================== */
 
@@ -13,6 +9,7 @@
   --liv-purple: #78256f;
   --liv-magenta: #D10074;
   --liv-navy: #4A528A;
+  --liv-navy-dark: #0d1221;
   
   /* Clon de alta fidelidad para Liverpool Sans */
   --liv-font: 'Montserrat', sans-serif;
@@ -289,198 +286,169 @@ a .blogo, a:hover .blogo {
 
 /* /////////////////////////////////////////////////////////////// */
 /* /////////////////////////////////////////////////////////////// */
-/*                        INDEX                 */
+/*                        INDEX                                    */
 /* /////////////////////////////////////////////////////////////// */
 /* /////////////////////////////////////////////////////////////// */
 
-/* ===================== TOP BAR (Liver Talent) ===================== */
+/* ============================================================
+   1. HEADER FIJO EN PANTALLA (position: fixed)
+   ============================================================ */
 
-/* Limpieza Global para evitar el scroll horizontal */
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+/* Compensación de altura ajustada para el nuevo alto reducido */
+body {
+  padding-top: 82px !important;
 }
 
-/* Ajuste del Topbar para que sea fluido */
+/* Envoltorio principal anclado al viewport */
+.header-sticky-wrapper {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   2. TOP BAR (Altura reducida un 15% más)
+   ============================================================ */
+
 #topbar {
-    width: 100%;
-    overflow: hidden; /* Corta cualquier cosa que intente salirse */
-    white-space: nowrap; /* Mantiene el contenido en una línea sin saltos forzados */
+  width: 100%;
+  background-color: var(--liv-navy-dark, #0a0d17) !important;
+  padding: 2px 0 !important; /* -15% de altura */
+  font-size: 0.72rem;
+  line-height: 1;
 }
 
-/* Asegurar que el contenedor interno no empuje hacia afuera */
 #topbar .container {
-    padding-left: 15px;
-    padding-right: 15px;
-    max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100%;
 }
 
+/* Textos e Íconos */
 #topbar span {
-  color: rgba(255, 255, 255, 0.85);
-  margin-right: 16px;
-}
-
-#topbar span i {
-  color: var(--liv-pink); /* Rosa vibrante para los iconos */
-  margin-right: 6px;
-}
-
-#topbar .tsoc a {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 0.75rem;
-  margin-left: 6px;
-  transition: 0.3s;
-}
-
-#topbar .tsoc a:hover {
-  background: var(--liv-magenta); /* Rosa magenta al pasar el cursor */
-}
-
-/* Etiqueta de aviso (Free Delivery -> Oportunidad laboral) */
-.ttag {
-  background: var(--liv-magenta);
-  color: #fff;
-  padding: 3px 12px;
-  border-radius: 4px; /* Cambiado a un estilo más corporativo */
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* ===================== TOP BAR UNIFICADO ===================== */
-#topbar {
-  background: #111;
-  padding: 8px 0;
-  font-size: 0.82rem;
-  line-height: 1; /* Asegura que se alinee perfectamente al centro vertical */
-}
-
-#topbar span {
-  color: #aaa;
+  color: #ffffff !important;
+  margin-right: 12px;
   display: inline-flex;
   align-items: center;
 }
 
 #topbar span i {
-  color: var(--secondary);
-  margin-right: 6px; /* Espaciado corto controlado entre icono y texto */
+  color: var(--liv-pink, #e91e63);
+  margin-right: 4px;
+  font-size: 0.65rem;
 }
 
-/* Etiquetas especiales (Badge / Tag de vacantes) */
+/* Etiqueta / Badge de Vacantes */
 .ttag {
-  background: var(--primary);
-  color: #fff;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.7rem;
+  background: var(--liv-magenta, #d10074);
+  color: #ffffff !important;
+  padding: 1px 8px; /* Ajuste más estilizado */
+  border-radius: 10px;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
   display: inline-flex;
   align-items: center;
 }
 
 .ttag i {
-  color: #fff !important; /* Mantiene el icono del tag blanco */
+  color: #ffffff !important;
+  margin-right: 4px;
+  font-size: 0.6rem;
 }
 
-/* Contenedor de Redes Sociales */
+/* Redes Sociales del Topbar */
 #topbar .tsoc a {
-  width: 28px;
-  height: 28px;
+  width: 19px; /* Escala reducida un 15% */
+  height: 19px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #bbb;
-  font-size: 0.75rem;
+  color: #ffffff !important;
+  font-size: 0.62rem;
+  margin-left: 3px;
+  text-decoration: none;
   transition: all 0.3s ease;
-  text-decoration: none; /* Quita el subrayado por defecto de enlaces */
 }
 
 #topbar .tsoc a:hover {
-  background: var(--primary);
-  color: #fff;
-  transform: translateY(-1px); /* Efecto visual sutil de elevación */
+  background: var(--liv-magenta, #d10074);
+  color: #ffffff !important;
+  transform: translateY(-1px);
 }
 
-/* ===================== NAVBAR REFINADO ===================== */
+/* ============================================================
+   3. NAVBAR (Altura reducida un 15%)
+   ============================================================ */
+
 #nav {
-  background: #fff;
-  position: sticky !important;
-  top: 0;
-  left: 0;
+  background-color: #ffffff !important;
   width: 100%;
-  z-index: 990;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.07);
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
-#nav.scrolled {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.14);
+/* Ajuste del contenedor de Bootstrap dentro del Nav */
+#nav .container {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
 }
 
-/* Identidad Visual del Logo (LiverTalent) */
+/* Branding & Logo */
 .blogo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .bico {
-  width: 46px;
-  height: 46px;
+  width: 38px; /* Escala ajustada */
+  height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--primary, #e8281a), var(--secondary, #ff5722));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(232, 40, 26, 0.35);
+  font-size: 1.05rem;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(232, 40, 26, 0.3);
 }
 
 .bname {
   font-family: "Playfair Display", serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 900;
-  color: var(--dark);
-  line-height: 1.2;
+  color: var(--dark, #222);
+  line-height: 1;
 }
 
 .bname span {
-  color: var(--primary);
+  color: var(--primary, #e8281a);
 }
 
 .bsub {
-  font-size: 0.62rem;
+  font-size: 0.55rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #aaa;
+  letter-spacing: 1.5px;
+  color: #aaaaaa;
 }
 
-/* Enlaces del Menú de Navegación */
+/* Enlaces del Menú */
 .navbar-nav .nav-link {
-  font-size: 0.87rem;
+  font-size: 0.83rem;
   font-weight: 500;
-  color: #333 !important;
-  padding: 26px 13px !important;
+  color: #333333 !important;
+  padding: 10px 12px !important; /* Disminución vertical clave */
   position: relative;
   transition: color 0.3s ease;
 }
 
-/* Barra animada inferior en Hover y Active */
+/* Indicador Inferior Animatrónico */
 .navbar-nav .nav-link::after {
   content: "";
   position: absolute;
@@ -488,8 +456,8 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   width: 0;
-  height: 3px;
-  background: var(--primary);
+  height: 2.5px;
+  background: var(--primary, #e8281a);
   border-radius: 3px 3px 0 0;
   transition: width 0.3s ease;
 }
@@ -500,39 +468,38 @@ html, body {
 }
 
 .navbar-nav .nav-link:hover {
-  color: var(--primary) !important;
+  color: var(--primary, #e8281a) !important;
 }
 
-/* Botón CTA - Ingreso a Login (Estilo Corporativo) */
+/* Botón CTA - Ingreso */
 .nav-cta {
-  background-color: var(--liv-magenta) !important;
-  border: 1px solid var(--liv-magenta) !important;
-  color: #fff !important;
-  border-radius: 0.375rem;
-  padding: 0.5rem 1rem !important;
-  font-size: 0.84rem !important;
+  background-color: var(--liv-magenta, #d10074) !important;
+  border: 1px solid var(--liv-magenta, #d10074) !important;
+  color: #ffffff !important;
+  border-radius: 0.35rem;
+  padding: 0.38rem 0.85rem !important; /* Botón más compacto */
+  font-size: 0.8rem !important;
   font-weight: 500 !important;
-  box-shadow: 0 4px 15px rgba(209, 0, 116, 0.28);
+  box-shadow: 0 3px 10px rgba(209, 0, 116, 0.25);
   transition: all 0.3s ease !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   text-decoration: none;
-  font-family: var(--liv-font) !important;
 }
 
 .nav-cta::after {
-  display: none !important; /* Desactiva la barra inferior animada en este botón */
+  display: none !important;
 }
 
 .nav-cta:hover {
-  transform: translateY(-2px);
-  background-color: var(--liv-purple) !important;
-  border-color: var(--liv-purple) !important;
-  box-shadow: 0 8px 22px rgba(120, 37, 111, 0.28);
-  color: #fff !important;
+  transform: translateY(-1px);
+  background-color: var(--liv-purple, #78256f) !important;
+  border-color: var(--liv-purple, #78256f) !important;
+  color: #ffffff !important;
 }
+
 
 /* ===================== HERO LIVERPOOL TALENT ===================== */
 #hero {
@@ -542,6 +509,7 @@ html, body {
   align-items: center;
   position: relative;
   overflow: hidden;
+  padding-top: 45px !important;
 }
 
 /* Texto gigante decorativo de fondo */
@@ -557,6 +525,31 @@ html, body {
   pointer-events: none;
   white-space: nowrap;
   z-index: 0;
+}
+
+/* Estilo general para el título principal */
+.htitle {
+  font-family: var(--liv-font);
+  font-weight: 800;
+  font-size: 2rem; /* Tamaño ajustado para encuadrar perfectamente los 3 renglones */
+  line-height: 1.15;
+  color: #1a1a1a; /* Texto base "Construye tu" */
+  margin-bottom: 1.2rem;
+}
+
+/* Renglón 1: "Futuro" en rosa suave/magenta del root */
+.hl-futuro {
+  color: var(--liv-pink);
+}
+
+/* Renglón 2: "Profesional" en magenta intenso */
+.hl-profesional {
+  color: var(--liv-magenta);
+}
+
+/* Renglón 3: "con Nosotros" en el tono magenta de Liverpool */
+.hl-nosotros {
+  color: var(--liv-magenta);
 }
 
 /* Círculos con gradientes animados de fondo */
